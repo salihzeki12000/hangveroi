@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Html;
+use App\Http\Requests;
+use Illuminate\Http\Request;
+
+class AdminHomeController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $this->data['_header'] = Html::style('assets/css/plugins/simple-line-icons.css').Html::style('assets/css/plugins/animate.min.css').Html::style('assets/css/plugins/fullcalendar.min.css').Html::script('assets/js/plugins/fullcalendar.min.js').Html::script('assets/js/plugins/jquery.vmap.min.js').Html::script('assets/js/plugins/maps/jquery.vmap.world.js').Html::script('assets/js/plugins/jquery.vmap.sampledata.js').Html::script('assets/js/plugins/chart.min.js');
+
+        return view('admin.home')->with($this->data);
+    }
+
+    public function getLogout()
+    {
+        $this->auth->logout();
+        Session::flush();
+        return redirect('/');
+    }
+}

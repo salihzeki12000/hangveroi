@@ -1,0 +1,20 @@
+/**Modify**/
+#actions { display: block; overflow: hidden; margin: 40px 0; }
+div.table .file-row:nth-child(odd) {
+	background: #f9f9f9;
+}
+div.table .file-row {
+	display: table-row;
+}
+div.table .file-row > div {
+	display: table-cell;
+	vertical-align: top;
+	border-top: 1px solid #ddd;
+	padding: 8px;
+}
+div.table {
+	display: table;
+}
+.cmxform { margin-bottom: 20px; }
+.color-red { color: #e74c3c; }
+.box-type { margin-bottom: 20px; }
