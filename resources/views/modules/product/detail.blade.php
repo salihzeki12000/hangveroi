@@ -70,7 +70,7 @@
 						</div>
 						<div class="col-md-7">
 							<div class="product-name">{{ $articleItem['name'] }}</div>
-							<b class="price">50.000 vnđ</b>&nbsp;<i class="real-price">60.000 vnđ</i><br>
+							<b class="price">{{ product_price($articleItem['price']) }}</b><!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
 							<div class="boxcount-social">
 								<div class="fb-like" data-href="{{ Request::url() }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div> <br>
 								<div class="g-plusone" data-size="medium" data-annotation="inline"></div>
@@ -140,7 +140,7 @@
 								</div>
 							</div>
 							<div class="status">
-								<a class="btn btn-danger" href="#">Mua ngay</a>
+								<a data-id="{{ $articleItem['id'] }}" class="btn btn-danger addtocart" href="#">Mua ngay</a>
 							</div>
 						</div>
 					</div>
@@ -233,6 +233,68 @@
 
 <script>
 	$(document).ready(function(){
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+			}
+		});
+		$('.addtocart').on('click', function () {
+			var product_id = $(this).data('id');
+			$.ajax({
+				url: _base_url + "cart/addtocart",
+				type: 'post',
+				data: {
+					id: product_id
+				}
+			})
+			.done(function(html) {
+				console.log(html);
+				$('.cart-list').html(html);
+				location.reload();
+			})
+			.fail(function() {
+				console.log('error');
+			});
+
+			return false;
+
+			// var cart = $('.shopping-cart');
+			// var imgtodrag = $(this).closest('.product-item').find("img").eq(0);
+			// if (imgtodrag) {
+			// 	var imgclone = imgtodrag.clone()
+			// 	.offset({
+			// 		top: imgtodrag.offset().top,
+			// 		left: imgtodrag.offset().left
+			// 	})
+			// 	.css({
+			// 		'opacity': '0.5',
+			// 		'position': 'absolute',
+			// 		'height': '150px',
+			// 		'width': '150px',
+			// 		'z-index': '100'
+			// 	})
+			// 	.appendTo($('body'))
+			// 	.animate({
+			// 		'top': cart.offset().top + 10,
+			// 		'left': cart.offset().left + 10,
+			// 		'width': 75,
+			// 		'height': 75
+			// 	}, 1000, 'easeInOutExpo');
+
+			// 	setTimeout(function () {
+			// 		cart.effect("shake", {
+			// 			times: 2
+			// 		}, 200);
+			// 	}, 1500);
+
+			// 	imgclone.animate({
+			// 		'width': 0,
+			// 		'height': 0
+			// 	}, function () {
+			// 		$(this).detach()
+			// 	});
+			// }
+		});
 		$(".sendreview").click(function (){ 
 			var product_id = $("#product_id").val();
 			var name = $("#yourname").val();
