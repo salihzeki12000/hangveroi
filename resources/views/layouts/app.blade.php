@@ -47,7 +47,7 @@
               <span class="bottom"></span>
             </div>
             <a href="{{ URL::to('/admin') }}" class="navbar-brand"> 
-              <b>CUAHANGBANSI.COM</b>
+              <b>OHANGVEROI.COM</b>
             </a>
 
             <ul class="nav navbar-nav search-nav">

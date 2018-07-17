@@ -5,12 +5,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{{ isset($_title) ? $_title : '' }}</title>
-	
+	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favico.png') }}" />
 	<meta name="_token" content="{{ csrf_token() }}">	
 	
 	<meta property="og:url" content="{{ Request::url() }}" />
 	<meta property="og:type" content="" />
-	<meta property="og:title" content="" />
+	<meta property="og:title" content="{{ isset($_title) ? $_title : '' }}" />
 	<meta property="og:description" content="" />
 	<meta property="og:image" content="" />
 
@@ -52,7 +52,8 @@
 				<div class="container">
 					<div id="intro">
 						<div class="pull-left">
-							{{ App\Models\Setting::where('key', 'intro_text')->first()["value"] }}
+							{{-- App\Models\Setting::where('key', 'intro_text')->first()["value"] --}}
+							Đồ gia dụng tiện lợi giá rẻ - 0969 292 449
 						</div>
 						<div class="pull-right">
 							@if(Auth::check())
@@ -69,7 +70,6 @@
 						<div class="row">
 							<nav class="navbar navbar-inverse" role="navigation">
 								<div class="container-fluid">
-									<!-- Brand and toggle get grouped for better mobile display -->
 									<div class="navbar-header">
 										<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mnu-button">
 											<span class="sr-only">Toggle navigation</span>
@@ -81,14 +81,13 @@
 											<img src="{{ asset('assets/img/logo.png') }}" alt="">
 										</a>
 									</div>
-									<!-- Collect the nav links, forms, and other content for toggling -->
 									<div class="collapse navbar-collapse" id="mnu-button" data-hover="dropdown" data-animations="">
 										<ul class="nav navbar-nav">
 											<li>
 												<a href="{{ URL::to('') }}">Trang chủ</a>
 											</li>
-											<li class="dropdown">
-												<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown 1 <span class="caret"></span></a>
+											<!-- <li class="dropdown">
+												<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Đồ gia dụng<span class="caret"></span></a>
 												<ul class="dropdown-menu dropdownhover-bottom" role="menu" style="">
 													<li><a href="#">Action</a></li>
 													<li><a href="#">Another action</a></li>
@@ -147,6 +146,11 @@
 													<li class="divider"></li>
 													<li><a href="#">One more separated link</a></li>
 												</ul>
+											</li> -->
+											<li>
+												<a href="{{ URL::to('contact') }}">
+													Liên hệ
+												</a>
 											</li>
 										</ul>
 										<div class="cart-list">
@@ -184,14 +188,6 @@
 												</li>
 											</ul>
 										</div>
-										{{-- <ul class="nav navbar-nav navbar-right">
-											<li>
-												<form action="search?" method="get">
-													<input placeholder="Search..." type="text" name="k" class="search">
-													<input class="buttonSearch" type="submit" value="" />
-												</form>
-											</li>
-										</ul> --}}
 									</div><!-- /.navbar-collapse -->
 								</div><!-- /.container-fluid -->
 							</nav>
@@ -232,9 +228,9 @@
 										<div class="col-md-3">
 											<h4>Liên hệ</h4>
 											<ul class="list-link">
-												<li>Chuyên cung cấp các loại nước cho khách sạn, công ty du lịch.</li>
+												<li>Cung cấp sỉ và lẻ các sản phẩm gia dụng chất lượng cao.</li>
 												<li><i class="fa fa-map-marker" aria-hidden="true"></i> Hồ Chí Minh - Việt Nam</li>
-												<li><i class="fa fa-phone" aria-hidden="true"></i> 01682 219 209</li></li>
+												<li><i class="fa fa-phone" aria-hidden="true"></i> 0969 292 449</li></li>
 												<li><i class="fa fa-envelope-o" aria-hidden="true"></i> thebaoit@gmail.com</li>
 											</ul>
 										</div>
@@ -255,7 +251,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<span class="pull-left">Copyright @ 2016 by THEBAOIT</span>
+							<span class="pull-left">Copyright @ 2016 by Markwebgroup.com</span>
 							<span class="pull-right">
 								<a href="#"><i class="fa fa-cc-visa fa-2x" aria-hidden="true"></i> &nbsp; </a>
 								<a href="#"><i class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i> &nbsp; </a>

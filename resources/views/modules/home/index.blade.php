@@ -38,10 +38,9 @@
 					<div class="col-md-6">
 						<div class="box-promotion">
 							<div class="col-md-7">
-								<h2>Nước tinh khiết 24h</h2>
+								<h2>Đồ gia dụng tiện ích</h2>
 								<p>
-									Thương hiệu nước của chính cty bạn,
-									nhằm để quảng cáo sản phẩm và thương hiệu của bạn đến khách hàng của bạn....
+									Cung cấp sỉ và lẻ các sản phẩm liên quan đến gia dụng, nội thất. Hàng chính hãng 100%, giao hàng miễn phí...
 								</p>
 								<a href="#">Xem tiếp</a>
 							</div>
@@ -55,7 +54,7 @@
 							<div class="col-md-7">
 								<h2>Khuyến mãi - Ưu đãi</h2>
 								<p>
-									Mua "nước" tặng "website" khuyến mãi áp dụng cho hotel... và ưu đãi đặc biệt khác dành công ty du lịch...
+									Các chương trình khuyến mãi được áp dụng hàng tháng với từng ngành hàng riêng biệt. Giảm giá ưu đãi lên đến 50%.
 								</p>
 								<a href="#">Xem tiếp</a>
 							</div>
@@ -127,7 +126,7 @@
 							<div class="box1">
 								<i class="fa fa-truck" aria-hidden="true"></i>
 								<h3>Vận chuyển</h3>
-								<p>Giao hàng 24/24 với tất cả đơn hàng trên 50.000 đ.</p>
+								<p>Giao hàng 24/24 với tất cả đơn hàng chỉ từ 100.000 VNĐ.</p>
 							</div>
 						</div>
 						<div class="col-md-3">
