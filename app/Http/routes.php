@@ -26,10 +26,6 @@ foreach($pages as $page) {
 
 Route::post('/district_byID', 'HomeController@getDistrict');
 
-Route::get('test',function(){
-	return 'test';
-});
-
 /** API **/
 Route::group(['prefix' => 'api'], function () {
 	Route::post('/category', 'AdminCategoryController@create');
@@ -138,13 +134,3 @@ Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
 	Route::post('image/upload', 'AdminGalleryController@postImage');
 	Route::post('image/delete', 'AdminGalleryController@deleteImage');
 });
-
-
-
-
-
-
-
-
-
-
