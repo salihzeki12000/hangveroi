@@ -96,6 +96,7 @@ class AdminProductTypeController extends Controller
 
 		$id_product = $inputs['id'];
 		$articleItem->name = $inputs['name'];
+		$articleItem->slug = str_replace(" ", "-", strtolower(cleanVietnamese($inputs['name'])));
 		$articleItem->save();
 		$status = $inputs['status'];
 		if ($status == 0) { 
@@ -164,6 +165,7 @@ class AdminProductTypeController extends Controller
 	{	
 		$producttype = new ProductType();
 		$producttype->name = $request->name;
+		$producttype->slug = str_replace(" ", "-", strtolower(cleanVietnamese($request->name)));
 		if($producttype->save()) {
 			$items = ProductType::withTrashed()->orderBy('name', 'ASC')->get();
 			foreach ($items as $item) 

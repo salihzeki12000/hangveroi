@@ -308,7 +308,7 @@
 	        imageUploadURL: "{{ URL::to(Request::segment(1).'/image/upload') }}",
 	        // Additional upload params.
 	        imageUploadParams: { 
-	        	'tag': 'news',
+	        	'tag': 'products',
 	        	'_token': '{{ csrf_token() }}', 
 	        },
 	        // Set request type.

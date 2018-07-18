@@ -6,9 +6,8 @@
 			<div class="col-md-12">
 				<div class="breadcmenu">
 					<ol class="breadcrumb">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Library</a></li>
-						<li class="active">Data</li>
+						<li><a href="{{ URL::to('/') }}">Trang chủ</a></li>
+						{!! App\Models\Base::buildBreadcrumb(App\Models\Base::PRODUCT_BREADCRUMB, $articleItem['id']) !!}
 					</ol>
 				</div>
 			</div>
