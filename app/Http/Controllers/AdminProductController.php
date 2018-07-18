@@ -99,7 +99,7 @@ class AdminProductController extends Controller
             $this->data['status']               = $articleItem->trashed();
             if($articleItem->image_thumb != 0)
             {
-                if (empty(Gallery::find($articleItem->image_thumb))) {
+                if (!empty(Gallery::find($articleItem->image_thumb))) {
                     $this->data['image_thumb']  = Base::get_upload_url($articleItem->getImage->filename);
                 }
             }
