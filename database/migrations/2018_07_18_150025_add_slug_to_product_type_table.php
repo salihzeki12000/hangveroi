@@ -28,5 +28,4 @@ class AddSlugToProductTypeTable extends Migration
             $table->dropColumn('slug');
         });
     }
-}
-~       
+}      
