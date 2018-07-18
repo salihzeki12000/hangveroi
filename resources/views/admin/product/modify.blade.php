@@ -133,7 +133,6 @@
 													<script type="text/javascript">
 														function add_product_image(data, index)
 														{
-
 															$.ajax({
 																url: _base_url + "admin/product/image/get",
 																data: {
@@ -278,47 +277,51 @@
 			// Set page size.
 			imageManagerPageSize: 5,
 
-	        // Set a scroll offset (value in pixels).
-	        imageManagerScrollOffset: 5,
+			// Set a scroll offset (value in pixels).
+			imageManagerScrollOffset: 5,
 
-	        // Set the load images request URL.
-	        imageManagerLoadURL: "{{ URL::to(Request::segment(1).'/image') }}",
+			// Set the load images request URL.
+			imageManagerLoadURL: "{{ URL::to(Request::segment(1).'/image') }}",
 
-	        // Set the load images request type.
-	        imageManagerLoadMethod: "GET",
+			// Set the load images request type.
+			imageManagerLoadMethod: "GET",
 
-	        // Additional load params.
-	        imageManagerLoadParams: {user_id: {{ Auth::user()->id }} },
+			// Additional load params.
+			imageManagerLoadParams: {
+				'user_id': {{ Auth::user()->id }},
+				'tag': 'products.image',
+			},
 
 
-	        // Set the delete image request URL.
-	        imageManagerDeleteURL: "{{ URL::to(Request::segment(1).'/image/delete') }}",
+			// Set the delete image request URL.
+			imageManagerDeleteURL: "{{ URL::to(Request::segment(1).'/image/delete') }}",
 
-	        // Set the delete image request type.
-	        imageManagerDeleteMethod: "POST",
+			// Set the delete image request type.
+			imageManagerDeleteMethod: "POST",
 
-	        // Additional delete params.
-	        imageManagerDeleteParams: { 
-	        	'id': $(this).data("id"),
-	        	'_token': '{{ csrf_token() }}', 
-	        },
+			// Additional delete params.
+			imageManagerDeleteParams: { 
+				'id': $(this).data("id"),
+				'_token': '{{ csrf_token() }}', 
+			},
 
 
 			// Set the image upload parameter.
 			imageUploadParam: 'file_name',
-	        // Set the image upload URL.
-	        imageUploadURL: "{{ URL::to(Request::segment(1).'/image/upload') }}",
-	        // Additional upload params.
-	        imageUploadParams: { 
-	        	'_token': '{{ csrf_token() }}', 
-	        },
-	        // Set request type.
-	        imageUploadMethod: 'POST',
-	        // Set max image size to 5MB.
-	        imageMaxSize: 5 * 1024 * 1024,
-	        // Allow to upload PNG and JPG.
-	        imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif', 'bmp']
-	    });
+			// Set the image upload URL.
+			imageUploadURL: "{{ URL::to(Request::segment(1).'/image/upload') }}",
+			// Additional upload params.
+			imageUploadParams: {
+				'tag': 'news',
+				'_token': '{{ csrf_token() }}', 
+			},
+			// Set request type.
+			imageUploadMethod: 'POST',
+			// Set max image size to 5MB.
+			imageMaxSize: 5 * 1024 * 1024,
+			// Allow to upload PNG and JPG.
+			imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif', 'bmp']
+			});
 
 		$(".nav-tabs a").click(function (e) {
 			e.preventDefault();  

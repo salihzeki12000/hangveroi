@@ -32,5 +32,10 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Gallery', 'image_thumb', 'id');
     }
+
+    public function getProductType()
+    {
+        return $this->belongsTo('App\Models\ProductType', 'product_type', 'id');   
+    }
     
 }

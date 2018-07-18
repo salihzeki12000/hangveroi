@@ -3,10 +3,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
+use App\Models\Product;
+use App\Models\ProductType;
 
 class Base extends Model {
 
 	protected $table = 'gallery';
+	const PRODUCT_BREADCRUMB = 'product';
+	const NEWS_BREADCRUMB = 'news';
 
 	//Insert_item return new ID
 	public static function insert_item($model, $data) {
@@ -64,6 +68,21 @@ class Base extends Model {
 		}
 
 		return $url;
+	}
+
+	public static function buildBreadcrumb($type, $id)
+	{
+		$breadcrumb = "";
+		if ($type == self::PRODUCT_BREADCRUMB) {
+			$product = Product::find($id);
+			if(!empty($product)) {
+				$productType = ProductType::find($product->product_type);
+				if (!empty($productType)) {
+					$breadcrumb = '<li><a href="' . URL::to($productType["slug"] .'-'. $productType["id"]) . '" title="' . $productType['name'] . '">' . $productType['name'] .'</a></li><li class="active">' . $product['name'] .' </li>';
+				}
+			}
+		}
+		return $breadcrumb;
 	}
 
 	public static function get_table_name()
