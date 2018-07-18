@@ -153,18 +153,16 @@
 												</a>
 											</li>
 										</ul>
-										<div class="cart-list">
+										<div class="cart-list" id="cart-list">
 											<ul class="nav navbar-nav navbar-right">
-												<li class="{{ Cart::count() != 0 ? 'dropdown' : '' }}">
-													<a href="#" class="{{ Cart::count() != 0 ? 'dropdown-toggle' : '' }} shopping-cart">
-														@if(Cart::count() != 0)
+												<li class="dropdown">
+													<a href="#" class="dropdown-toggle shopping-cart">
 														<span class="quantity">{{ Cart::count() }}</span>
-														@endif
 														<i style="color: #fff" class="fa fa fa-shopping-cart" aria-hidden="true"></i>
 														Giỏ hàng
 													</a>
-													@if(Cart::count() != 0)
-													<ul class="dropdown-menu dropdownhover-bottom sub-cart" role="menu">
+													<ul class="dropdown-menu dropdownhover-bottom sub-cart" role="menu" id="sub-cart">
+														@if (Cart::count() > 0)
 														@foreach(Cart::content() as $c_item)
 														<li>
 															<a href="{{ URL::to('product/'.$c_item->options->slug.'-'.$c_item->id) }}">
@@ -181,10 +179,18 @@
 															</a>
 														</li>
 														@endforeach
+														@else
+														<li>
+															<a href="">
+																<div class="name">
+																	Không có sản phẩm nào trong giỏ
+																</div>
+															</a>
+														</li>
+														@endif
 														<li class="divider"></li>
 														<li><a style="color: #cc0000" href="{{ URL::to('cart/checkout/step-1') }}">Thanh toán <i class="fa fa-check fa-2x" aria-hidden="true"></i></a></li>
 													</ul>
-													@endif
 												</li>
 											</ul>
 										</div>

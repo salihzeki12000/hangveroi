@@ -46,8 +46,12 @@ class CartController extends Controller {
 					)
 				)
 			);
-		$this->data['cart'] = Cart::content();
-		return view('cart::list-cart-ajax');
+		return response()->json([
+			'cart' => Cart::content(), 
+			'total' => Cart::total(),
+			'totalQty' => Cart::count(),
+			'error' => false
+		]);
 	}
 
 	public function destroyCart(Request $request)

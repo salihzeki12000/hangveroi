@@ -65,9 +65,10 @@ a:hover { color: #073e00; text-decoration: none }
 .product-item { display: block; overflow: hidden; margin-bottom: 10px }
 .product-item .price { color: #e74c3c; font-size: 14px; }
 .product-item .real-price { color: #666; font-size: 12px; text-decoration: line-through }
-.product-item .product-name { font-size: 12px; color: #666; text-decoration: none; }
+.product-item .product-name { font-size: 12px; color: #666; text-decoration: none; height: 25px; }
 .product-item:hover .product-name { text-decoration: none color: #073e00; -webkit-transition: all 300ms ease-in-out; -moz-transition: all 300ms ease-in-out; -ms-transition: all 300ms ease-in-out; -o-transition: all 300ms ease-in-out; transition: all 300ms ease-in-out; }
 .addcart-absolute { position: absolute; top: 25%; left: 40%; display: none; }
+.addcart-fullwidth { width: 100%; }
 .product-item:hover .addcart-absolute { display: block; }
 
 .btn { border-radius: 0 }
