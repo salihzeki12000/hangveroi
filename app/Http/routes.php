@@ -39,6 +39,9 @@ Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
 
 	Route::get('/', 'AdminHomeController@index');
 
+	#Orders
+	Route::get('orders', 'AdminOrdersController@getOrders');
+
 	#Product
 	Route::get('/product', 'AdminProductController@getProduct');
 	Route::get('/product/create', 'AdminProductController@postProduct');

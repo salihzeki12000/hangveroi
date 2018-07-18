@@ -5,6 +5,9 @@ function admin_link_helper($type = "", $id = "")
 {
 	if($id != "") {
 		if(is_numeric($id)){
+			if($type == trim('view')) {
+				$url = URL::to(Request::segment(1).'/'.Request::segment(2).'/view/'.$id);
+			}
 			if($type == trim('edit')) {
 				$url = URL::to(Request::segment(1).'/'.Request::segment(2).'/edit/'.$id);
 			}
