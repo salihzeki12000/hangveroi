@@ -35,7 +35,8 @@ class HomeController extends Controller
 
 		$this->data['articleItem'] = $articleItem;
 
-		$this->data['_title'] = "Page";
+		$this->data['_title'] = $articleItem->name;
+		$this->data['_description'] = $articleItem->name;
 		return view('modules.page.detail')->with($this->data);
 	}
 

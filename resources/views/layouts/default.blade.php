@@ -102,8 +102,8 @@
 															<li class="divider"></li>
 															<li><a href="#">One more separated link</a></li>
 														</ul>
-													</li> -->
-													<!-- <li class="dropdown">
+													</li>
+													<li class="dropdown">
 														<a href="#">Another dropdown 2 <span class="caret"></span></a>
 														<ul class="dropdown-menu dropdownhover-right">
 															<li><a href="#">Action</a></li>
@@ -202,7 +202,6 @@
 				</div>
 			</header>
 			<div id="body">
-				<br><br><br><br><br><br>
 				<div class="row">
 					<div class="col-md-12">
 						@yield('content')
