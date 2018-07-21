@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('content')
-<div class="container">
+<div class="col-md-12">
 	<div class="row">
 		<div class="first-row">
 			<div class="col-md-12">
