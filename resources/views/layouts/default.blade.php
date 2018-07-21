@@ -86,12 +86,12 @@
 											<li>
 												<a href="{{ URL::to('') }}">Trang chủ</a>
 											</li>
-											<!-- <li class="dropdown">
+											<li class="dropdown">
 												<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Đồ gia dụng<span class="caret"></span></a>
 												<ul class="dropdown-menu dropdownhover-bottom" role="menu" style="">
-													<li><a href="#">Action</a></li>
-													<li><a href="#">Another action</a></li>
-													<li class="dropdown">
+													<li><a href="{{ URL::to('product/type/dung-cu-gia-dinh-5') }}">Dụng cụ gia đình</a></li>
+													<li><a href="{{ URL::to('product/type/dung-cu-lam-bep-10') }}">Dụng cụ làm bếp</a></li>
+													<!-- <li class="dropdown">
 														<a href="#">Another dropdown <span class="caret"></span></a>
 														<ul class="dropdown-menu dropdownhover-right">
 															<li><a href="#">Action</a></li>
@@ -102,8 +102,8 @@
 															<li class="divider"></li>
 															<li><a href="#">One more separated link</a></li>
 														</ul>
-													</li>
-													<li class="dropdown">
+													</li> -->
+													<!-- <li class="dropdown">
 														<a href="#">Another dropdown 2 <span class="caret"></span></a>
 														<ul class="dropdown-menu dropdownhover-right">
 															<li><a href="#">Action</a></li>
@@ -132,10 +132,10 @@
 													<li class="divider"></li>
 													<li><a href="#">Separated link</a></li>
 													<li class="divider"></li>
-													<li><a href="#">One more separated link</a></li>
+													<li><a href="#">One more separated link</a></li> -->
 												</ul>
 											</li>
-											<li class="dropdown">
+											<!-- <li class="dropdown">
 												<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown 2 <span class="caret"></span></a>
 												<ul class="dropdown-menu dropdownhover-bottom" role="menu">
 													<li><a href="#">Action</a></li>

@@ -63,7 +63,8 @@
 	</div>
 </div>
 <div class="col-md-12">
-	<?php echo Modules\Product\Http\Controllers\ProductController::listProduct(); ?>
+	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(1); ?>
+	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(9); ?>
 </div>
 <div class="col-md-12">
 	<div class="five-row">

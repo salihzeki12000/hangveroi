@@ -54,10 +54,66 @@ class ProductController extends Controller {
 		return view('product::detail')->with($this->data);
 	}
 
-	public static function listProduct()
+	public static function listProduct($type, array $colNum, $limitProduct, $location)
 	{
-		$_this->data['productTypes'] = ProductType::all();
+		$isChild = false;
+		$arrayTypes = array();
+		if (is_numeric($type)) {
+			$productType = ProductType::find($type);
+			if (!empty($productType)) {
+				if ($productType->parent == 0) {
+					$productTypeParents = ProductType::where('parent', $productType->id)->get();
+					if (empty($productTypeParents)) {
+						$arrayTypes[] =  $productType->id;
+					} else {
+						$arrayTypes[] =  $productType->id;
+						foreach ($productTypeParents as $productTypeParent) {
+							$arrayTypes[] = $productTypeParent->id;
+						}
+					}
+					$isChild = true;
+				} else {
+					$arrayTypes[] = $productType->id;
+					$isChild = false;
+				}
+				$productTypeName = $productType->name;
+				$_this->data['productTypeName'] = $productTypeName;
+			}
+		}
+		$_this->data['arrayTypes'] = $arrayTypes;
+		$_this->data['location'] = $location;
+		$_this->data['isChild'] = $isChild;
+		$_this->data['colNum'] = $colNum;
+		$_this->data['limitProduct'] = $limitProduct;
 		return view('product::listProduct')->with($_this->data);
+	}
+
+	public static function listProductByProductType($type)
+	{
+		$arrayTypes = array();
+		if (is_numeric($type)) {
+			$productType = ProductType::find($type);
+			if (!empty($productType)) {
+				if ($productType->parent == 0) {
+					$productTypeParents = ProductType::where('parent', $productType->id)->get();
+					if (empty($productTypeParents)) {
+						$arrayTypes[] =  $productType->id;
+					} else {
+						$arrayTypes[] =  $productType->id;
+						foreach ($productTypeParents as $productTypeParent) {
+							$arrayTypes[] = $productTypeParent->id;
+						}
+					}
+				} else {
+					$arrayTypes[] = $productType->id;
+				}
+				$productTypeName = $productType->name;
+				$_this->data['productTypeName'] = $productTypeName;
+			}
+		}
+		$_this->data['arrayTypes'] = $arrayTypes;
+		$_this->data['limitProduct'] = 12;
+		return view('product::listProductByType')->with($_this->data);
 	}
 
 	public function likeReview(Request $request)
@@ -81,4 +137,16 @@ class ProductController extends Controller {
 		return "ok";
 	}
 
+	public function getProductTypePage(Request $request)
+	{
+		$slug_array = explode("-", $request->segment(3));
+		$id = end($slug_array);
+		$productType = ProductType::find($id);
+		$productTypes = ProductType::where('parent', '0')->get();
+		$this->data['productType'] = $productType;
+		$this->data['productTypes'] = $productTypes;
+		$this->data['_title'] = $productType->name;
+		$this->data['_description'] = $productType->name;
+		return view('product::productTypePage')->with($this->data);
+	}
 }

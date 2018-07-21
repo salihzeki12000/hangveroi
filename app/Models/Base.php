@@ -10,6 +10,7 @@ class Base extends Model {
 
 	protected $table = 'gallery';
 	const PRODUCT_BREADCRUMB = 'product';
+	const PRODUCT_TYPE_BREADCRUMB = 'news';
 	const NEWS_BREADCRUMB = 'news';
 
 	//Insert_item return new ID
@@ -77,8 +78,52 @@ class Base extends Model {
 			$product = Product::find($id);
 			if(!empty($product)) {
 				$productType = ProductType::find($product->product_type);
-				if (!empty($productType)) {
-					$breadcrumb = '<li><a href="' . URL::to($productType["slug"] .'-'. $productType["id"]) . '" title="' . $productType['name'] . '">' . $productType['name'] .'</a></li><li class="active">' . $product['name'] .' </li>';
+				if(!empty($productType)) {
+					if ($productType->parent != 0) {
+						$productTypeParent = ProductType::find($productType->parent);
+						if (!empty($productTypeParent)) {
+							$breadcrumb = '
+							<li>
+								<a href="' . URL::to('product/type/'. $productTypeParent["slug"] .'-'. $productTypeParent["id"]) . '" title="' . $productTypeParent['name'] . '">' . $productTypeParent['name'] .'</a>
+							</li>
+							<li>
+								<a href="' . URL::to('product/type/'. $productType["slug"] .'-'. $productType["id"]) . '" title="' . $productType['name'] . '">' . $productType['name'] .'</a>
+							</li>
+							<li class="active">' . $product['name'] .' </li>';
+						} else {
+							$breadcrumb = '<li>
+								<a href="' . URL::to('product/type/'. $productType["slug"] .'-'. $productType["id"]) . '" title="' . $productType['name'] . '">' . $productType['name'] .'</a>
+							</li>
+							<li class="active">' . $product['name'] .' </li>';
+						}
+					} else {
+						$breadcrumb = '
+							<li>
+								<a href="' . URL::to('product/type/'. $productType["slug"] .'-'. $productType["id"]) . '" title="' . $productType['name'] . '">' . $productType['name'] .'</a>
+							</li>
+							<li class="active">' . $product['name'] .'
+							</li>';	
+					}
+				}
+			}
+		}
+		if ($type == self::PRODUCT_TYPE_BREADCRUMB) {
+			$productType = ProductType::find($id);
+			if(!empty($productType)) {
+				if ($productType->parent != 0) {
+					$productTypeParent = ProductType::find($productType->parent);
+					if (!empty($productTypeParent)) {
+						$breadcrumb = '
+						<li>
+							<a href="' . URL::to('product/type/'. $productTypeParent["slug"] .'-'. $productTypeParent["id"]) . '" title="' . $productTypeParent['name'] . '">' . $productTypeParent['name'] .'</a>
+						</li>
+						<li class="active">' . $productType['name'] .'
+						</li>';
+					} else {
+						$breadcrumb = '<li class="active">' . $productType['name'] .'</li>';
+					}
+				} else {
+					$breadcrumb = '<li class="active">' . $productType['name'] .'</li>';	
 				}
 			}
 		}
@@ -87,6 +132,6 @@ class Base extends Model {
 
 	public static function get_table_name()
 	{
-		 return $tables = DB::select(DB::raw("select table_name from information_schema.tables where table_schema = '".Config::get('database.connections.mysql.database')."'"));		
+		return $tables = DB::select(DB::raw("select table_name from information_schema.tables where table_schema = '".Config::get('database.connections.mysql.database')."'"));		
 	}
 }
