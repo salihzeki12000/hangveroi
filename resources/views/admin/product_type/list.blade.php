@@ -37,6 +37,7 @@
 									<tr>
 										<th>ID</th>
 										<th>Name</th>
+										<th>Child of</th>
 										<th>Date Added</th>
 										<th>Action</th>
 									</tr>
@@ -45,7 +46,8 @@
 									@foreach($articleItems as $item)
 									<tr id="article-{{ $item['id'] }}">
 										<td>{{ $item['id'] }}</td>
-										<td>{{ $item['name'] }}</td>
+										<td>{{ $item['parent'] != 0 ? '*** '.$item['name'] : $item['name'] }}</td>
+										<td>{{ $item['parent'] != 0 ? App\Models\ProductType::find($item['parent'])->name : 'No parent' }}</td>
 										<td>{{ $item['created_at'] }}</td>
 										<td>
 											<a class="changeStatus" data-segment1="{{ Request::segment(1) }}" data-segment2="{{ Request::segment(2) }}" data-name="{{ $item['name'] }}" data-token="{{ csrf_token() }}" data-id="{{ $item['id'] }}" href="{{ admin_link_helper('status', $item['id']) }}">

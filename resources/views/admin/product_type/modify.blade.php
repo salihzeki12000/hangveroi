@@ -46,6 +46,16 @@
 									<div id="tabsDemo4Content" class="tab-content tab-content-v3">
 										<div role="tabpanel" class="tab-pane fade active in" id="tabs-info" aria-labelledby="tabs-info">
 											<div class="col-md-12">
+												<div class="form-group form-animate-text" style="margin:40px 0 0 0 !important;">
+															<select name="parent" id="producttype_parent" class="selectpicker form-control">
+																<option value="0"> No parent </option>
+																@foreach ($productTypeParents as $productTypeParent)
+																<option {{ $productTypeParent->id == $parent ? 'selected' : '' }} value="{{ $productTypeParent->id }}">{{ $productTypeParent->name }}</option>
+																@endforeach
+															</select>
+												</div>
+											</div>
+											<div class="col-md-12">
 												<div class="form-group form-animate-text" style="margin:40px 0 !important;">
 													<input type="text" class="form-text" id="txt_name" value="{{ $name }}" name="name" required>
 													<span class="bar"></span>

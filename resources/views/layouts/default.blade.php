@@ -11,7 +11,7 @@
 	<meta property="og:url" content="{{ Request::url() }}" />
 	<meta property="og:type" content="" />
 	<meta property="og:title" content="{{ isset($_title) ? $_title : '' }}" />
-	<meta property="og:description" content="" />
+	<meta property="og:description" content="{{ isset($_description) ? $_description : '' }}" />
 	<meta property="og:image" content="" />
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -25,6 +25,7 @@
 
 	{{ Html::script('assets/js/bootstrap.min.js') }}
 	{{ Html::script('plugins/bootstrap-dropdown/js/bootstrap-dropdownhover.min.js') }}
+	{{ Html::script('plugins/bootstrap-notify/bootstrap-notify.js') }}
 
 	{{ Html::script('assets/js/top.js') }}
 
@@ -64,7 +65,6 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="wrap-menu">
 					<div class="container">
 						<div class="row">
@@ -194,8 +194,8 @@
 												</li>
 											</ul>
 										</div>
-									</div><!-- /.navbar-collapse -->
-								</div><!-- /.container-fluid -->
+									</div>
+								</div>
 							</nav>
 						</div>
 					</div>
@@ -203,11 +203,15 @@
 			</header>
 			<div id="body">
 				<br><br><br><br><br><br>
-				@yield('content')
+				<div class="row">
+					<div class="col-md-12">
+						@yield('content')
+					</div>
+				</div>
 			</div>
 			<footer>
-				<div class="container">
-					<div class="row">
+				<div class="row">
+					<div class="col-md-12">
 						<div class="footer-row">
 							<div class="col-md-12">
 								<div class="box-bg-red-footer">
@@ -255,7 +259,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
+					<div class="col-md-12">
 						<div class="col-md-12">
 							<span class="pull-left">Copyright @ 2016 by Markwebgroup.com</span>
 							<span class="pull-right">

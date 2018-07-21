@@ -22,7 +22,8 @@ class HomeController extends Controller
 		Html::style('plugins/owl-carousel/owl.theme.css').
 		Html::script('plugins/owl-carousel/owl.carousel.min.js');
 
-		$this->data['_title'] = "Home";
+		$this->data['_title'] = "Hàng Về Rồi - Đồ Gia Dụng Tiện Ích";
+		$this->data['_description'] = "Hàng Về Rồi - Đồ Gia Dụng Tiện Ích";
 
 		return view('modules.home.index')->with($this->data);
 	}

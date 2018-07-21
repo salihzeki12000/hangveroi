@@ -64,11 +64,13 @@ class AdminProductTypeController extends Controller
 			$id = 0;
 		}
 		$articleItem = ProductType::withTrashed()->where('id', $id)->first();
+		$productTypeParents = ProductType::withTrashed()->where('parent', 0)->get();
 
         //default value
 		$this->data['id']                       = Session::get('d_id', 0);
 		$this->data['name']                     = Session::get('d_name', '');
 		$this->data['status']                   = Session::get('d_status', 0);
+		$this->data['parent']                   = Session::get('d_parent', 0);
 
 		if (!is_null($articleItem)) {
 			$nav_title = "Modify";
@@ -76,8 +78,9 @@ class AdminProductTypeController extends Controller
 			$this->data['id']                   = $articleItem->id;
 			$this->data['name']                 = $articleItem->name;
 			$this->data['status']               = $articleItem->trashed();
+			$this->data['parent']               = $articleItem->parent;
 		}
-
+		$this->data['productTypeParents'] = $productTypeParents;
 		$title = trans('product.producttype') . ' > ' . $nav_title. " | AdminDashboard";
 		$this->data['_title'] = $title;
 		$this->data['_nav_title'] = trans('product.producttype') . ' > '.$nav_title;
@@ -97,6 +100,7 @@ class AdminProductTypeController extends Controller
 		$id_product = $inputs['id'];
 		$articleItem->name = $inputs['name'];
 		$articleItem->slug = str_replace(" ", "-", strtolower(cleanVietnamese($inputs['name'])));
+		$articleItem->parent = $inputs['parent'];
 		$articleItem->save();
 		$status = $inputs['status'];
 		if ($status == 0) { 

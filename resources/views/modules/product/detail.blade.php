@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('content')
-<div class="container">
+<div class="col-md-12">
 	<div class="row">
 		<div class="first-row">
 			<div class="col-md-12">
@@ -244,55 +244,32 @@
 				type: 'post',
 				data: {
 					id: product_id
-				}
-			})
-			.done(function(html) {
-				console.log(html);
-				$('.cart-list').html(html);
-				location.reload();
-			})
-			.fail(function() {
-				console.log('error');
+				},
+				success:(function(result) {
+					if (result.error == false) {
+						$.notify({
+							message: "Thêm sản phẩm vào giỏ hàng thành công!"
+						},{
+							type: 'success'
+						});
+						var cart = result.cart;
+						var html = '';
+						$('.quantity').html(result.totalQty);
+						for(var k in cart) {
+							html += '<li><a href="' + _base_url + 'product/' + cart[k].options.slug + '-' + cart[k].id +'"><div class="name">' + cart[k].name + '</div><div><img src="' + cart[k].options.image + '" alt="' + cart[k].name + '"><div class="price">Giá: ' + cart[k].price + ' <br>Số lượng: ' + cart[k].qty + '</div></div></a></li>';
+						}
+						html += '<li class="divider"></li><li><a style="color: #cc0000" href="' + _base_url + 'cart/checkout/step-1">Thanh toán <i class="fa fa-check fa-2x" aria-hidden="true"></i></a></li>';
+						$('.sub-cart').html(html);
+					} else {
+						$.notify({
+							message: "Thêm giỏ sản vào giỏ hàng không thành công!"
+						},{
+							type: 'danger'
+						});
+					}
+				})
 			});
-
 			return false;
-
-			// var cart = $('.shopping-cart');
-			// var imgtodrag = $(this).closest('.product-item').find("img").eq(0);
-			// if (imgtodrag) {
-			// 	var imgclone = imgtodrag.clone()
-			// 	.offset({
-			// 		top: imgtodrag.offset().top,
-			// 		left: imgtodrag.offset().left
-			// 	})
-			// 	.css({
-			// 		'opacity': '0.5',
-			// 		'position': 'absolute',
-			// 		'height': '150px',
-			// 		'width': '150px',
-			// 		'z-index': '100'
-			// 	})
-			// 	.appendTo($('body'))
-			// 	.animate({
-			// 		'top': cart.offset().top + 10,
-			// 		'left': cart.offset().left + 10,
-			// 		'width': 75,
-			// 		'height': 75
-			// 	}, 1000, 'easeInOutExpo');
-
-			// 	setTimeout(function () {
-			// 		cart.effect("shake", {
-			// 			times: 2
-			// 		}, 200);
-			// 	}, 1500);
-
-			// 	imgclone.animate({
-			// 		'width': 0,
-			// 		'height': 0
-			// 	}, function () {
-			// 		$(this).detach()
-			// 	});
-			// }
 		});
 		$(".sendreview").click(function (){ 
 			var product_id = $("#product_id").val();
@@ -300,6 +277,22 @@
 			var email = $("#youremail").val();
 			var content = $("#yourreview").val();
 			var review = $("#getreview").val();
+
+			if (name == null || name == '') {
+				alert("Vui lòng nhập tên của bạn.");
+				$("#yourname").focus();
+				return false;
+			}
+			if (email == null || email == '') {
+				alert("Vui lòng nhập email của bạn.");
+				$("#youremail").focus();
+				return false;
+			}
+			if (content == null || content == '') {
+				alert("Hãy cho chúng tôi biết đánh giá của bạn.");
+				$("#yourreview").focus();
+				return false;
+			}
 
 			$.ajax({
 				url: "{{ URL::to(Request::segment(1).'/create-review') }}",
@@ -320,6 +313,7 @@
 						title: 'Success',
 						message: 'Bài viết của bạn được tiếp nhận, chúng tôi sẽ duyệt trong vòng 24h. Xin cảm ơn!'
 					});
+					$('#createreview').modal('hide');
 				}
 			})
 			.fail(function() {

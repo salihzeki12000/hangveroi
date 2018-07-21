@@ -18,6 +18,7 @@ return [
 
 'producttype' => 'Product Type',
 'producttype_info' => 'Product Type Information',
+'producttype_parent' => 'Parent Type',
 
 'productmanufacturer' => 'Product Manufacturer',
 'productmanufacturer_info' => 'Product Manufacturer Information',
