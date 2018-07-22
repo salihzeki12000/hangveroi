@@ -12,6 +12,7 @@ use App\Models\OrderDetail;
 use Cart;
 use Redirect;
 use Auth;
+use Session;
 
 class CartController extends Controller {
 	
@@ -43,9 +44,9 @@ class CartController extends Controller {
 				'options'	=>array(
 					'image' => Base::get_upload_url($product->getImage->filename),
 					'slug' 	=> $product->slug,
-					)
 				)
-			);
+			)
+		);
 		return response()->json([
 			'cart' => Cart::content(), 
 			'total' => Cart::total(),
@@ -60,62 +61,30 @@ class CartController extends Controller {
 		Cart::destroy();
 	}
 
-	public function checkout(Request $request)
+	public function success(Request $request)
 	{
-		$this->data['_header'] =    
-		Html::style('plugins/bootstrap-select/css/bootstrap-select.min.css').
-		Html::script('plugins/bootstrap-select/js/bootstrap-select.min.js');
-
-		$segment = $request->segment(3);
-		$array_segment = explode('-', $segment);
-		$step = end($array_segment);
-		if($step == 1) {
-			if(Auth::check())
-			{
-				$request->session()->put('name', Auth::user()->name);
-				$request->session()->put('phone', Auth::user()->phone);
-				$request->session()->put('city', Auth::user()->city);
-				$request->session()->put('district', Auth::user()->district);
-				$request->session()->put('address', Auth::user()->address);
-			}
-			if($request->has('submit') == true)
-			{
-				$request->session()->put('name', $request->name);
-				$request->session()->put('phone', $request->phone);
-				$request->session()->put('city', $request->city);
-				$request->session()->put('district', $request->district);
-				$request->session()->put('address', $request->address);
-
-				return Redirect::to($request->segment(1)."/".$request->segment(2)."/step-2")->with($request->session);
-			}
-			$this->data['cityItems'] 		= City::orderBy('id', 'ASC')->get();
-			$this->data['districtItems'] 	= District::where('city_id', 79)->orderBy('name', 'ASC')->get();
-			$this->data['_title'] 			= 'Thông tin giao hàng';
-			return view('cart::info-user')->with($this->data);
-		} 
-		if($step == 2) {
-			$this->data['_title'] = 'Giỏ hàng của bạn';
-			return view('cart::list-cart')->with($this->data);
+		if (Cart::count() > 0) {
+			return redirect()->to('/cart/checkout/list');
+		} else {
+			Session::forget('customername');
+			Session::forget('customerphone');
+			Session::forget('customeraddress');
+			$this->data['_title'] = 'Đặt hàng thành công!';
+			$this->data['_description'] = 'Quý khách đã đặt hàng thành công trên website Ohangveroi.com. Cám ơn quý khách đã mua hàng của chúng tôi. Quý khách có thể liên hệ 0969 292 449 trong trường hợp cần thiết';
+			return view('cart::success')->with($this->data);
 		}
 	}
 
-	// public function Order(Request $request)
-	// {
-	// 	$this->data['_title'] = 'Hoàn tất đơn hàng';
-	// 	return view('cart::success')->with($this->data);
-	// }
-
 	public function doOrder(Request $request)
 	{
-		if($request->session()->has('name')) {
+		if ($request->submit) {
 			$order_item = new Order();
-			$order_item->user_id = $request->session()->has('name') ? $request->session()->has('name') : 0;
-			$order_item->cus_name = $request->session()->get('name');
-			$order_item->cus_phone = $request->session()->get('phone');
-			$order_item->cus_email = $request->session()->get('email');
-			$order_item->cus_address = $request->session()->get('address');
-			$order_item->city_id = $request->session()->get('city');
-			$order_item->district_id = $request->session()->get('district');
+			if (Auth::check()) {
+				$order_item->user_id = Auth::user()->id;	
+			}
+			$order_item->cus_name = $request->session()->get('customername');
+			$order_item->cus_phone = $request->session()->get('customerphone');
+			$order_item->cus_address = $request->session()->get('customeraddress');
 			$order_item->total_price = Cart::subtotal();
 			$order_item->qty = Cart::count();
 			if($order_item->save()) {
@@ -129,10 +98,8 @@ class CartController extends Controller {
 					$order_detail_item->save();
 				}
 				Cart::destroy();
-				return view('cart::success')->with($request->session()->flash('status', 'Đơn hàng của bạn đã được cập nhật thành công'));
+				return redirect()->to('/cart/checkout/success');
 			}
-		} else { 
-			return Redirect::to($request->segment(1)."/".$request->segment(2)."/step-1");
 		}
 	}
 
@@ -142,6 +109,29 @@ class CartController extends Controller {
 		$qty_product = $request->qty;
 		$rowid = $request->rowid;
 		Cart::update($rowid, $qty_product);
+	}
+
+	public function cartList(Request $request)
+	{
+		$this->data['_title'] = 'Giỏ hàng của bạn';
+		return view('account::my-cart')->with($this->data);
+	}
+
+	public function shippingStep(Request $request)
+	{
+		$this->data['_title'] = 'Thông tin giao hàng';
+		return view('cart::shipping')->with($this->data);
+	}
+
+	public function getCheckout(Request $request)
+	{
+		$this->data['_title'] = 'Đặt hàng';
+		if ($request->submit) {
+			$request->session()->set('customername', $request->name);
+			$request->session()->set('customeraddress', $request->address);
+			$request->session()->set('customerphone', $request->phone);
+		}
+		return view('cart::list-cart')->with($this->data);
 	}
 	
 }

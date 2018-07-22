@@ -24,6 +24,11 @@ class Authenticate
                 return redirect()->guest('login');
             }
         }
+        if (Auth::guard($guard)->check()) {
+            if (Auth::user()->type != 1) {
+                return redirect('/');
+            }
+        }
 
         return $next($request);
     }

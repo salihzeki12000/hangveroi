@@ -21,25 +21,25 @@
 				</div>
 				<div class="clearfix"></div>
 				<br>
-				<form method="post" action="{{ Request::url() }}">
+				<form id="register-form" method="post" action="{{ Request::url() }}">
 					{{ csrf_field() }}
 					<div class="form-group">
 						<label for="txt_name">Họ tên</label>
-						<input id="txt_name" class="form-control" type="text" name="name" value>	
+						<input id="txt_name" class="form-control" type="text" name="name" value required>	
 					</div>
 					<div class="form-group">
 						<label for="txt_email">Email</label>
-						<input id="txt_email" class="form-control" type="email" name="email" value>	
+						<input id="txt_email" class="form-control" type="email" name="email" value required>	
 					</div>
 					<div class="form-group">
 						<label for="txt_password">Mật khẩu</label>
-						<input id="txt_password" class="form-control" type="password" name="password" value>	
+						<input id="txt_password" class="form-control" type="password" name="password" value required>	
 					</div>
 					<div class="form-group">
 						<label for="txt_phone">Điện thoại di động</label>
-						<input id="txt_phone" class="form-control" type="text" name="phone" value>	
+						<input id="txt_phone" class="form-control" type="text" name="phone" value required>	
 					</div>
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<label for="txt_city">Tỉnh/Thành Phố</label>
 						<select class="selectpicker form-control cmbCity" name="city" id="txt_city">
 							@foreach($cityItems as $item)
@@ -56,14 +56,14 @@
 								@endforeach
 							</select>	
 						</div>
-					</div>
+					</div> -->
 					<div class="form-group">
 						<label for="txt_address">Địa chỉ</label>
-						<textarea id="txt_address" class="form-control" type="text" name="address"></textarea>	
+						<textarea id="txt_address" class="form-control" type="text" name="address" required></textarea>	
 					</div>
-					{{-- <div class="form-group">
+					<!-- <div class="form-group">
 						<div class="g-recaptcha" data-sitekey="6LcdFQsUAAAAAPUZDklP-5KrPh34Rr868RxBmqGa"></div>
-					</div> --}}
+					</div> -->
 					<div class="form-group text-right">
 						<input class="btn btn-default" name="reset" type="reset" value="Huỷ bỏ">
 						<input class="btn btn-danger" name="submit" type="submit" value="Đăng kí">

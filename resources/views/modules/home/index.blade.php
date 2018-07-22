@@ -63,8 +63,51 @@
 	</div>
 </div>
 <div class="col-md-12">
-	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(1); ?>
-	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(9); ?>
+	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(10); ?>
+	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(5); ?>
+	<script>
+		$(document).ready(function() {
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+				}
+			});
+			$('.addtocart').on('click', function () {
+				var product_id = $(this).data('id');
+				$.ajax({
+					url: _base_url + "cart/addtocart",
+					type: 'post',
+					data: {
+						id: product_id
+					},
+					success:(function(result) {
+						if (result.error == false) {
+							$.notify({
+								message: "Thêm sản phẩm vào giỏ hàng thành công!"
+							},{
+								type: 'success'
+							});
+							var cart = result.cart;
+							var html = '';
+							$('.quantity').html(result.totalQty);
+							for(var k in cart) {
+								html += '<li><a href="' + _base_url + 'product/' + cart[k].options.slug + '-' + cart[k].id +'"><div class="name">' + cart[k].name + '</div><div><img src="' + cart[k].options.image + '" alt="' + cart[k].name + '"><div class="price">Giá: ' + cart[k].price + ' <br>Số lượng: ' + cart[k].qty + '</div></div></a></li>';
+							}
+							html += '<li class="divider"></li><li><a style="color: #cc0000" href="' + _base_url + 'cart/checkout/list">Xem giỏ hàng <i class="fa fa-check fa-2x" aria-hidden="true"></i></a></li>';
+							$('.sub-cart').html(html);
+						} else {
+							$.notify({
+								message: "Thêm giỏ sản vào giỏ hàng không thành công!"
+							},{
+								type: 'danger'
+							});
+						}
+					})
+				})
+				return false;
+			});
+		});
+	</script>
 </div>
 <div class="col-md-12">
 	<div class="five-row">

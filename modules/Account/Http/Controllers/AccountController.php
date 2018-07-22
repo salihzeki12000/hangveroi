@@ -20,11 +20,15 @@ class AccountController extends Controller {
 
 	public function login()
 	{
+		$request = new Request();
 		$this->data['_header'] = 
 		Html::script("https://www.google.com/recaptcha/api.js").
 		Html::style('plugins/bootstrap-select/css/bootstrap-select.min.css').
 		Html::script('plugins/bootstrap-select/js/bootstrap-select.min.js');
 		$this->data['_title'] = 'Đăng nhập';
+		if(Auth::check()) {
+			return redirect()->to('/');
+		}
 		return view('account::login')->with($this->data);
 	}
 
@@ -32,7 +36,7 @@ class AccountController extends Controller {
 	{
 		$inputs = $request->all();
 		if (Auth::attempt(['email' => $inputs['email'], 'password' => $inputs['password']])) {
-			return redirect()->to('/');
+			return redirect()->back();
 		}
 	}
 
@@ -57,10 +61,14 @@ class AccountController extends Controller {
 		$userItem->type = 3;
 		$userItem->password = Hash::make($inputs['password']);
 		$userItem->phone = $inputs['phone'];
-		$userItem->city_id = $inputs['city'];
-		$userItem->district_id = $inputs['district'];
+		// $userItem->city_id = $inputs['city'];
+		// $userItem->district_id = $inputs['district'];
 		$userItem->address = $inputs['address'];
-		$userItem->save();
+		if ($userItem->save()) {
+			return redirect()->to('account/login');
+		} else {
+			return view('account::register');
+		}
 		// if($userItem->save())
 		// {
 		// 	$data_email = array(

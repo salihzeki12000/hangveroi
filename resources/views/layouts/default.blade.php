@@ -189,7 +189,7 @@
 														</li>
 														@endif
 														<li class="divider"></li>
-														<li><a style="color: #cc0000" href="{{ URL::to('cart/checkout/step-1') }}">Thanh toán <i class="fa fa-check fa-2x" aria-hidden="true"></i></a></li>
+														<li><a style="color: #cc0000" href="{{ URL::to('cart/checkout/list') }}">Xem giỏ hàng <i class="fa fa-check fa-2x" aria-hidden="true"></i></a></li>
 													</ul>
 												</li>
 											</ul>
