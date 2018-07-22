@@ -5,7 +5,11 @@ Route::group(['middleware' => 'web', 'prefix' => 'cart', 'namespace' => 'Modules
 	Route::get('/', 'CartController@index');
 	Route::get('/destroy', 'CartController@destroyCart');
 	Route::post('/addtocart', 'CartController@addCart');
-	Route::get('/checkout', 'CartController@doOrder');
+	Route::get('/checkout/list', 'CartController@cartList');
+	Route::get('/checkout/shipping', 'CartController@shippingStep');
+	Route::post('/getcheckout', 'CartController@getCheckout');
+	// Route::get('/checkout', 'CartController@getCheckout');
+	Route::get('/checkout/success', 'CartController@success');
 	Route::post('/checkout', 'CartController@doOrder');
 	Route::get('/checkout/step-{step}', 'CartController@checkout');
 	Route::post('/checkout/step-{step}', 'CartController@checkout');

