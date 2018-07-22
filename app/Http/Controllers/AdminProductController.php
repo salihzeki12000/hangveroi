@@ -82,7 +82,11 @@ class AdminProductController extends Controller
         $this->data['specifications']           = Session::get('d_specifications', '');
         $this->data['units_on_order']           = Session::get('d_units_on_order', 0);
         $this->data['product_type']             = Session::get('d_product_type', 0);
-        $this->data['product_manufacturer']     = Session::get('d_product_manufacturer', 0);
+        $this->data['product_manufacturer']     = Session::get('
+            d_product_manufacturer', 0);
+        $this->data['meta_title']               = Session::get('d_meta_title', '');
+        $this->data['meta_keyword']             = Session::get('d_meta_keyword', '');
+        $this->data['meta_description']         = Session::get('d_meta_description', '');
         $this->data['status']                   = Session::get('d_status', 0);
 
         if (!is_null($articleItem)) {
@@ -96,6 +100,9 @@ class AdminProductController extends Controller
             $this->data['units_on_order']       = $articleItem->units_on_order;
             $this->data['product_type']         = $articleItem->product_type;
             $this->data['product_manufacturer'] = $articleItem->product_manufacturer;
+            $this->data['meta_title']           = $articleItem->meta_title;
+            $this->data['meta_keyword']         = $articleItem->meta_keyword;
+            $this->data['meta_description']     = $articleItem->meta_description;
             $this->data['status']               = $articleItem->trashed();
             if($articleItem->image_thumb != 0)
             {
@@ -134,6 +141,9 @@ class AdminProductController extends Controller
         $articleItem->units_on_order = $inputs['units_on_order'];
         $articleItem->product_type = $inputs['product_type'];
         $articleItem->product_manufacturer = $inputs['product_manufacturer'];
+        $articleItem->meta_title = $inputs['meta_title'];
+        $articleItem->meta_keyword = $inputs['meta_keyword'];
+        $articleItem->meta_description = $inputs['meta_description'];
         if($request->hasFile('image_thumb')) {
             $files = $request->file('image_thumb');
             if (!is_null($files)) {
@@ -155,6 +165,9 @@ class AdminProductController extends Controller
                         'd_units_on_order' => $articleItem->units_on_order,
                         'd_product_type' => $articleItem->product_type,
                         'd_product_manufacturer' => $articleItem->product_manufacturer,
+                        'd_meta_title' => $articleItem->meta_title,
+                        'd_meta_keyword' => $articleItem->meta_keyword,
+                        'd_meta_description' => $articleItem->meta_description,
                         'd_status' => $inputs['status'] == 0 ? "false" : "true",
                         );
 
