@@ -7,12 +7,12 @@
 	<title>{{ isset($_title) ? $_title : '' }}</title>
 	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favico.png') }}" />
 	<meta name="_token" content="{{ csrf_token() }}">	
-	
+	<meta name="description" content="{{ isset($_description) ? $_description : '' }}">
 	<meta property="og:url" content="{{ Request::url() }}" />
-	<meta property="og:type" content="" />
+	<meta property="og:type" content="article" />
 	<meta property="og:title" content="{{ isset($_title) ? $_title : '' }}" />
 	<meta property="og:description" content="{{ isset($_description) ? $_description : '' }}" />
-	<meta property="og:image" content="" />
+	<meta property="og:image" content="{{ isset($_image) ? $_image : '' }}" />
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>   

@@ -6,6 +6,8 @@ use App\Models\Product;
 use App\Models\ProductType;
 use App\Models\ProductImage;
 use App\Models\ProductReview;
+use App\Models\Base;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
 use Cart;
 use StdClass;
@@ -48,9 +50,18 @@ class ProductController extends Controller {
 		$this->data['productReview'] = intval($avg_review/$numofproductReviews);
 		$this->data['articleItem'] = $articleItem;
 
-		$title = $articleItem->name;
+		$title = empty($articleItem->meta_title) ? $articleItem->name : $articleItem->meta_title;
+		$description = empty($articleItem->meta_title) ? $articleItem->description : $articleItem->meta_description;
+		$image = '';
+		if($articleItem->image_thumb != 0)
+		{
+			if (!empty(Gallery::find($articleItem->image_thumb))) {
+				$image  = Base::get_upload_url($articleItem->getImage->filename);
+			}
+		}
 		$this->data['_title'] = $title;
-		$this->data['_description'] = $articleItem->description;
+		$this->data['_description'] = $description;
+		$this->data['_image'] = $image;
 		return view('product::detail')->with($this->data);
 	}
 

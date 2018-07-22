@@ -75,6 +75,18 @@
 													<label style="font-size: 18px; padding: 5px;">{{ trans("product.descriptions") }}</label>
 													<textarea class="editor2" name="descriptions"><?php echo ($descriptions); ?></textarea>
 												</div>
+												<div class="form-group" style="margin-bottom:40px !important;">
+													<label style="font-size: 18px; padding: 5px;">Meta Title</label>
+													<textarea style="width: 100%" rows="2" name="meta_title" required><?php echo ($meta_title); ?></textarea>
+												</div>
+												<div class="form-group" style="margin-bottom:40px !important;">
+													<label style="font-size: 18px; padding: 5px;">Meta Keywords</label>
+													<textarea style="width: 100%" rows="2" name="meta_keyword" placeholder="keyword1, keyword2"  required><?php echo ($meta_keyword); ?></textarea>
+												</div>
+												<div class="form-group" style="margin-bottom:40px !important;">
+													<label style="font-size: 18px; padding: 5px;">Meta Description</label>
+													<textarea style="width: 100%" rows="4" name="meta_description" required><?php echo ($meta_description); ?></textarea>
+												</div>
 											</div>
 										</div>
 										<div role="tabpanel" class="tab-pane fade" id="tabs-image" aria-labelledby="tabs-image">
