@@ -15,7 +15,7 @@ class AddPhoneAddressToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->text('phone')->default(NULL);
             $table->text('address')->default(NULL);
-            $table->text('type')->default(3);
+            $table->integer('type')->default(3);
         });
     }
 
