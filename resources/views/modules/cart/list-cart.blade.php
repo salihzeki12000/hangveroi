@@ -1,52 +1,94 @@
 @extends('layouts.default')
 @section('content')
-<div class="container">
+<div class="col-md-12">
 	<div class="row">
 		<div class="first-row">
+			<div class="col-md-12">
+				<div class="breadcmenu">
+					<ol class="breadcrumb">
+						<li><a href="{{ URL::to('/') }}">Trang chủ</a></li>
+						<li><a href="{{ URL::to('/account') }}">Tài khoản</a></li>
+						<li class="active">Giỏ hàng của bạn</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="second-row">
+			<div class="col-xs-12">
+				<div class="progress border-radius-0">
+					<div class="progress-bar progress-bar-striped progress-bar-danger active" aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width:33.3%">
+						Giỏ hàng
+					</div>
+					<div class="progress-bar progress-bar-striped progress-bar-danger active" aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width:33.3%">
+						Cập nhật giao hàng
+					</div>
+					<div class="progress-bar progress-bar-striped progress-bar-danger active" aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width:33.3%">
+						Tiến hành đặt hàng
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
 			<form method="post" action="{{ URL::to('cart/checkout') }}">
 				{{ csrf_field() }}
 				<div class="col-md-8">
-					<h2 class="h2-title alert alert-danger">
-						<i class="fa fa-user" aria-hidden="true"></i> Giỏ hàng của bạn
-					</h2>
 					<div class="alert alert-warning">
 						<div class="row">
-							<div class="col-md-8">
+							<div class="col-md-8 col-xs-6">
 								Giỏ hàng có 	<b>{{ Cart::count() }}</b> sản phẩm
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-2 col-xs-3">
 								Giá mua
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-2 col-xs-3">
 								Số lượng
 							</div>
 						</div>
 					</div>
 					@foreach(Cart::content() as $item)
 					<div class="row">
-						<div class="col-md-2">
+						<div class="col-md-2 col-xs-6">
 							<img class="img-thumbnail img-responsive" style="width: 100%" src="{{ $item->options->image }}" alt="{{ $item->name }}">
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-6 col-xs-6">
 							<b>{{ $item->name }}</b>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-2 col-xs-6">
 							{{ product_price($item->price) }}
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-2 col-xs-6">
 							{{ $item->qty }}
 						</div>
 					</div>
 					<div class="clearfix"></div>
 					<hr>
 					@endforeach
-					<a class="btn btn-default pull-right" href="{{ URL::to('/') }}">Tiếp tục mua sắm</a>
+					<div class="row">
+						<div class="col-xs-12">
+							<a class="btn btn-default pull-right" href="{{ URL::to('/') }}">Tiếp tục mua sắm</a>
+						</div>
+					</div><br>
+					<div class="clearfix"></div>
 				</div>
 				<div class="col-md-4 small-right-position">
-					<h4>Địa chỉ giao hàng</h4>
-
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="alert alert-warning">
+								<h4 class="margin-0">Địa chỉ giao hàng</h4>
+							</div>
+							<h5>{{ Session::get('customername') }}</h5>
+							<p>{{ Session::get('customerphone') }}</p>
+							<p>{{ Session::get('customeraddress') }}</p>
+							<a class="btn btn-default pull-right" href="{{ URL::to('cart/checkout/shipping') }}">Sửa</a>
+						</div>
+					</div>
 					<hr>
-					Đơn hàng ({{ Cart::count() }} sản phẩm) <a class="btn btn-default pull-right" href="{{ URL::to('cart/checkout/list') }}">Sửa đơn hàng</a>
+					<div class="row">
+						<div class="col-xs-12">
+							Đơn hàng ({{ Cart::count() }} sản phẩm) <a class="btn btn-default pull-right" href="{{ URL::to('cart/checkout/list') }}">Sửa</a>
+						</div>
+					</div>
 					<hr>
 					@foreach(Cart::content() as $item)
 					<div class="row">
@@ -54,7 +96,7 @@
 							{{ $item->qty }} x 
 							<a class="linkInCard" target="_blank" href="{{ URL::to('product/'. $item->options->slug . '-' . $item->id) }}">{{ $item->name }}</a>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-4 text-right">
 							{{ product_price($item->price * $item->qty) }}
 						</div>
 					</div>
@@ -68,8 +110,9 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
-							Phương thức thanh toán:<br><br>
-							<input type="radio" class="payment1" id="payment1" name="paymentmethod" value="1" checked> Thanh toán tiền mặt khi nhận hàng. <!-- <br>
+							Phương thức thanh toán:<br>
+							<input type="radio" class="payment1" id="payment1" name="paymentmethod" value="1" checked> Thanh toán tiền mặt khi nhận hàng.
+							<br>
 							<input type="radio" class="payment2" id="payment2" name="paymentmethod" value="2"> Thanh toán qua chuyển khoản ngân hàng.<br><br>
 							<div class="bank_info alert alert-info">
 								<b>Ngân hàng: Vietcombank</b><br>
@@ -78,7 +121,7 @@
 								<b>Ngân hàng: Á Châu (ACB)</b><br>
 								Chủ tài khoản: Nguyễn Thế Bảo <br>
 								Số tài khoản: 174341219 <br>
-							</div> -->
+							</div>
 						</div>
 					</div>
 					<style>

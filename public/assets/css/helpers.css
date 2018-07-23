@@ -57,6 +57,7 @@
 .margin-bottom-0 { margin-bottom: 0px !important; }
 .margin-bottom-5 { margin-bottom: 5px !important; }
 .margin-bottom-10 { margin-bottom: 10px !important; }
+.margin-bottom-12 { margin-bottom: 12px !important; }
 .margin-bottom-15 { margin-bottom: 15px !important; }
 .margin-bottom-20 { margin-bottom: 20px !important; }
 .margin-bottom-25 { margin-bottom: 25px !important; }
@@ -402,3 +403,4 @@
 
 /* Z index */
 .z-100 { z-index: 100 !important; }
+.border-radius-0 { border-radius: 0 !important }

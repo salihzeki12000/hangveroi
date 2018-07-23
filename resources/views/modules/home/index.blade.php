@@ -1,32 +1,47 @@
 @extends('layouts.default')
 @section('content')
 <div class="col-md-12">
-	<div class="first-row">
-		<div class="main_slide">
-			<ul class="bxslider">
-				<li><img src="{{ asset('assets/img/temp/1.png') }}" alt=""></li>
-				<li><img src="{{ asset('assets/img/temp/2.jpg') }}" alt=""></li>
-				<li><img src="{{ asset('assets/img/temp/3.jpg') }}" alt=""></li>
-				<li><img src="{{ asset('assets/img/temp/4.png') }}" alt=""></li>
-				<li><img src="{{ asset('assets/img/temp/5.png') }}" alt=""></li>
-			</ul>
-			<script>
-				$(document).ready(function(){
-					$('.bxslider').bxSlider({
-						mode: 'fade',
-						captions: true,
-						pager: false,
-						randomStart: true,
-						auto: true,
-						speed: 500,
-					});
-				});
-			</script>
+	<div class="row">
+		<div class="first-row">
+			<div class="col-md-8">
+				<div class="main_slide">
+					<ul class="bxslider">
+						<li><img src="{{ asset('assets/img/temp/1.png') }}" alt=""></li>
+						<li><img src="{{ asset('assets/img/temp/2.jpg') }}" alt=""></li>
+						<li><img src="{{ asset('assets/img/temp/3.jpg') }}" alt=""></li>
+						<li><img src="{{ asset('assets/img/temp/4.png') }}" alt=""></li>
+						<li><img src="{{ asset('assets/img/temp/5.png') }}" alt=""></li>
+					</ul>
+					<script>
+						$(document).ready(function(){
+							$('.bxslider').bxSlider({
+								mode: 'fade',
+								captions: true,
+								pager: false,
+								randomStart: true,
+								auto: true,
+								speed: 500,
+							});
+						});
+					</script>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="row">
+					<div class="col-md-12 margin-bottom-12">
+						<a href="#">
+							<img class="img-responsive" src="{{ asset('assets/img/temp/2.jpg') }}" alt="">
+						</a>
+					</div>
+					<div class="col-md-12">
+						<a href="#">
+							<img class="img-responsive" src="{{ asset('assets/img/temp/3.jpg') }}" alt="">
+						</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<!-- <div class="col-md-4">
-		<?php echo Modules\Video\Http\Controllers\VideoController::topVideo(); ?>
-	</div> -->
 </div>
 <div class="col-md-12">
 	<div class="second-row">
@@ -63,6 +78,7 @@
 	</div>
 </div>
 <div class="col-md-12">
+	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(13); ?>
 	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(10); ?>
 	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(5); ?>
 	<script>
