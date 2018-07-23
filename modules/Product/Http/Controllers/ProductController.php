@@ -102,6 +102,7 @@ class ProductController extends Controller {
 	public static function listProductByProductType($type)
 	{
 		$arrayTypes = array();
+		$error = false;
 		if (is_numeric($type)) {
 			$productType = ProductType::find($type);
 			if (!empty($productType)) {
@@ -120,8 +121,12 @@ class ProductController extends Controller {
 				}
 				$productTypeName = $productType->name;
 				$_this->data['productTypeName'] = $productTypeName;
+				$error = false;
+			} else {
+				$error = true;
 			}
 		}
+		$_this->data['error'] = $error;
 		$_this->data['arrayTypes'] = $arrayTypes;
 		$_this->data['limitProduct'] = 12;
 		return view('product::listProductByType')->with($_this->data);

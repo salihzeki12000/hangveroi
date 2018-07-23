@@ -86,6 +86,9 @@
 											<li>
 												<a href="{{ URL::to('') }}">Trang chủ</a>
 											</li>
+											<li>
+												<a href="{{ URL::to('/product/type/do-dung-tien-ich-13') }}">Đồ dùng tiện ích</a>
+											</li>
 											<li class="dropdown">
 												<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Đồ gia dụng<span class="caret"></span></a>
 												<ul class="dropdown-menu dropdownhover-bottom" role="menu" style="">
@@ -156,7 +159,7 @@
 										<div class="cart-list" id="cart-list">
 											<ul class="nav navbar-nav navbar-right">
 												<li class="dropdown">
-													<a href="#" class="dropdown-toggle shopping-cart">
+													<a href="{{ URL::to('/cart/checkout/list') }}" class="dropdown-toggle shopping-cart">
 														<span class="quantity">{{ Cart::count() }}</span>
 														<i style="color: #fff" class="fa fa fa-shopping-cart" aria-hidden="true"></i>
 														Giỏ hàng

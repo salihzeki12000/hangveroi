@@ -33,32 +33,45 @@
 					</ul>
 				</div>
 			</div> -->
+			<div class="col-xs-12">
+				<div class="progress border-radius-0">
+					<div class="progress-bar progress-bar-striped progress-bar-danger active" aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width:33.3%">
+						Giỏ hàng
+					</div>
+					<div class="progress-bar" role="progressbar" style="width:33.3%; background: #f5f6f7; color: #666">
+						Cập nhật giao hàng
+					</div>
+					<div class="progress-bar" role="progressbar" style="width:33.3%; background: #f5f6f7; color: #666">
+						Tiến hành đặt hàng
+					</div>
+				</div>
+			</div>
 			<div class="col-md-9 right-position">
 				<div class="alert alert-warning myCard">
 					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-8 col-xs-6">
 							<b>Giỏ hàng có 	<b>{{ Cart::count() }}</b> sản phẩm</b>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-2 col-xs-3">
 							<b>Giá mua</b>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-2 col-xs-3">
 							<b>Số lượng</b>
 						</div>
 					</div>
 					<hr>
 					@foreach(Cart::content() as $item)
 					<div class="row">
-						<div class="col-md-2">
+						<div class="col-md-2 col-xs-6">
 							<img class="img-thumbnail img-responsive" style="width: 100%" src="{{ $item->options->image }}" alt="{{ $item->name }}">
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-6 col-xs-6">
 							<a class="linkInCard" target="_blank" href="{{ URL::to('product/'. $item->options->slug . '-' . $item->id) }}">{{ $item->name }}</a>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-2 col-xs-6">
 							{{ product_price($item->price) }}
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-2 col-xs-6">
 							<select name="quantity" id="quantity" data-rowid="{{ $item->rowId }}" data-id="{{ $item->id }}" data-segment1="{{ Request::segment(1) }}" class="quantity selectpicker form-control quantity_{{ $item->id }}">
 								@for( $i=1; $i <= 20; $i++ )
 								@if($i == $item->qty)
