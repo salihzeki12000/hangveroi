@@ -26,8 +26,8 @@ foreach($pages as $page) {
 
 Route::get('/update-admin', function () {
 	DB::table('users')
-		->where('email', 'thebaoit@gmail.com')
-		->update(['type' => 1]);
+	->where('email', 'thebaoit@gmail.com')
+	->update(['type' => 1]);
 });
 
 Route::post('/district_byID', 'HomeController@getDistrict');
@@ -142,4 +142,12 @@ Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
 	Route::get('image', 'AdminGalleryController@getImage');
 	Route::post('image/upload', 'AdminGalleryController@postImage');
 	Route::post('image/delete', 'AdminGalleryController@deleteImage');
+
+	Route::get('/setting/banner', 'AdminSettingController@bannerSetting');
+	Route::get('/setting/banner/create', 'AdminSettingController@addBanner');
+	Route::post('/setting/banner/create', 'AdminSettingController@doAddBanner');
+	Route::get('/setting/banner/edit/{id}', 'AdminSettingController@addBanner');
+	Route::post('/setting/banner/edit/{id}', 'AdminSettingController@doAddBanner');
+	Route::post('/setting/banner/delete', 'AdminSettingController@deleteBanner');
+	Route::post('/setting/banner/change', 'AdminSettingController@doUpdateStatusBanner');
 });

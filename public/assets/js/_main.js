@@ -4,11 +4,18 @@ $(document).ready(function(){
 		var id = $(this).data('id');
 		var segment1 = $(this).data('segment1');
 		var segment2 = $(this).data('segment2');
+		var segment3 = $(this).data('segment3');
 		var title = $(this).data('name');
 		var token = $(this).data('token');
 
+		if(typeof(segment3) == 'undefined') {
+			segment3 = '';
+		} else {
+			segment3 = '/' + segment3;
+		}
+
 		$.ajax({
-			url: _base_url + segment1 + "/" + segment2 + "/change",
+			url: _base_url + segment1 + "/" + segment2 + segment3 + "/change",
 			type: 'post',
 			data: {
 				id: id,
@@ -44,12 +51,19 @@ $(document).ready(function(){
 		var id = $(this).data('id');
 		var segment1 = $(this).data('segment1');
 		var segment2 = $(this).data('segment2');
+		var segment3 = $(this).data('segment3');
 		var title = $(this).data('name');
 		var token = $(this).data('token');
 
 		var x = Math.floor((Math.random() * 10) + 1);
 		var y = Math.floor((Math.random() * 10) + 1);
 		var message = "You are about to delete the article:\n" + title + "\n\n Are you sure?";
+
+		if(typeof(segment3) == 'undefined') {
+			segment3 = '';
+		} else {
+			segment3 = '/' + segment3;
+		}
 
 		BootstrapDialog.show({
 			title: 'Are you conscious?',
@@ -74,7 +88,7 @@ $(document).ready(function(){
 					BootstrapDialog.confirm(message, function(result) {
 						if (result) {
 							$.ajax({
-								url: _base_url + segment1 + "/" + segment2 + "/delete",
+								url: _base_url + segment1 + "/" + segment2 + segment3 + "/delete",
 								type: 'post',
 								data: {
 									id: id,

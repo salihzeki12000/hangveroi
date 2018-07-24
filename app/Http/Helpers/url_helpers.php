@@ -1,27 +1,27 @@
 <?php 
 use App\Models\Product;
 
-function admin_link_helper($type = "", $id = "")
+function admin_link_helper($type = "", $id = "", $link = "")
 {
 	if($id != "") {
 		if(is_numeric($id)){
 			if($type == trim('view')) {
-				$url = URL::to(Request::segment(1).'/'.Request::segment(2).'/view/'.$id);
+				$url = URL::to(Request::segment(1).'/'.Request::segment(2). $link .'/view/'.$id);
 			}
 			if($type == trim('edit')) {
-				$url = URL::to(Request::segment(1).'/'.Request::segment(2).'/edit/'.$id);
+				$url = URL::to(Request::segment(1).'/'.Request::segment(2). $link .'/edit/'.$id);
 			}
 			if($type == trim('delete')) {
-				$url = URL::to(Request::segment(1).'/'.Request::segment(2).'/delete/'.$id);
+				$url = URL::to(Request::segment(1).'/'.Request::segment(2). $link .'/delete/'.$id);
 			}
 			if($type == trim('status')) {
-				$url = URL::to(Request::segment(1).'/'.Request::segment(2).'/status/'.$id);
+				$url = URL::to(Request::segment(1).'/'.Request::segment(2). $link .'/status/'.$id);
 			}
 		} else {
 			$url = URL::to(Request::segment(1).'/404/');
 		}
 	} else {
-		$url = URL::to(Request::segment(1).'/'.Request::segment(2).'/create');
+		$url = URL::to(Request::segment(1).'/'.Request::segment(2). $link .'/create');
 	}
 	return $url;
 }

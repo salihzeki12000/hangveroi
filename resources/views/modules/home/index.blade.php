@@ -6,11 +6,17 @@
 			<div class="col-md-8">
 				<div class="main_slide">
 					<ul class="bxslider">
-						<li><img src="{{ asset('assets/img/temp/1.png') }}" alt=""></li>
-						<li><img src="{{ asset('assets/img/temp/2.jpg') }}" alt=""></li>
-						<li><img src="{{ asset('assets/img/temp/3.jpg') }}" alt=""></li>
-						<li><img src="{{ asset('assets/img/temp/4.png') }}" alt=""></li>
-						<li><img src="{{ asset('assets/img/temp/5.png') }}" alt=""></li>
+						@foreach ($main_sliders as $main_slider)
+						@if($main_slider->image != 0)
+						@if (!empty(App\Models\Gallery::find($main_slider->image)))
+						<li>
+							<a href="{{ $main_slider->url }}" title="{{ $main_slider->alt }}">
+								<img src="{{ App\Models\Base::get_upload_url($main_slider->getImage->filename) }}" alt="{{ $main_slider->alt }}">
+							</a>
+						</li>
+						@endif
+						@endif
+						@endforeach
 					</ul>
 					<script>
 						$(document).ready(function(){
@@ -28,16 +34,17 @@
 			</div>
 			<div class="col-md-4">
 				<div class="row">
+					@foreach ($right_indexs as $right_index)
+					@if($right_index->image != 0)
+					@if (!empty(App\Models\Gallery::find($right_index->image)))
 					<div class="col-md-12 margin-bottom-12">
-						<a href="#">
-							<img class="img-responsive" src="{{ asset('assets/img/temp/2.jpg') }}" alt="">
+						<a href="{{ $right_index->url }}" title="{{ $right_index->alt }}">
+							<img class="img-responsive" src="{{ App\Models\Base::get_upload_url($main_slider->getImage->filename) }}" alt="{{ $main_slider->alt }}">
 						</a>
 					</div>
-					<div class="col-md-12">
-						<a href="#">
-							<img class="img-responsive" src="{{ asset('assets/img/temp/3.jpg') }}" alt="">
-						</a>
-					</div>
+					@endif
+					@endif
+					@endforeach
 				</div>
 			</div>
 		</div>

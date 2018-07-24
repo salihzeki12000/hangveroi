@@ -80,6 +80,7 @@ class AdminProductTypeController extends Controller
 			$this->data['status']               = $articleItem->trashed();
 			$this->data['parent']               = $articleItem->parent;
 		}
+
 		$this->data['productTypeParents'] = $productTypeParents;
 		$title = trans('product.producttype') . ' > ' . $nav_title. " | AdminDashboard";
 		$this->data['_title'] = $title;
