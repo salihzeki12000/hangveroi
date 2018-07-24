@@ -47,6 +47,8 @@ Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
 
 	#Orders
 	Route::get('orders', 'AdminOrdersController@getOrders');
+	Route::get('orders/view/{id}', 'AdminOrdersController@viewOrder');
+	Route::post('orders/change', 'AdminOrdersController@changeStatus');
 
 	#Product
 	Route::get('/product', 'AdminProductController@getProduct');
