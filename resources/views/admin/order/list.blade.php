@@ -12,7 +12,7 @@
 						{{ $_nav_title }}
 					</p>
 				</div>
-				<div class="col-md-2">
+				{{-- <div class="col-md-2">
 					<a href="{{ admin_link_helper('create') }}">
 						<h3 class="animated fadeInLeft">
 							<button class="btn ripple btn-raised btn-danger">
@@ -23,7 +23,7 @@
 							</button>
 						</h3>
 					</a>
-				</div>
+				</div> --}}
 			</div>
 		</div>
 		<div class="col-md-12 top-20 padding-0">
@@ -41,6 +41,7 @@
 										<th>Quantity</th>
 										<th>Total Price</th>
 										<th>Date ordered</th>
+										<th>Status</th>
 										<th>Action</th>
 									</tr>
 								</thead>
@@ -53,6 +54,17 @@
 										<td>{{ $item['qty'] }}</td>
 										<td>{{ product_price(str_replace(',', '', $item['total_price'])) }}</td>
 										<td>{{ $item['created_at'] }}</td>
+										<td>
+											@if ($item->status == 'new')
+											<span class="label label-danger">Đơn hàng mới</span>
+											@elseif ($item->status == 'shipping')
+											<span class="label label-warning">Đang giao hàng</span>
+											@elseif ($item->status == 'cancel')
+											<span class="label label-default">Đã hủy</span>
+											@elseif ($item->status == 'success')
+											<span class="label label-success">Thành công</span>
+											@endif
+										</td>
 										<td>
 											<a href="{{ admin_link_helper('view', $item['id']) }}">
 												<span class="btn btn-outline btn-primary">View <span class="fa fa-eye"></span></span>
@@ -76,7 +88,7 @@
 
 		$(document).ready(function(){
 			$('#datatables-example').DataTable({
-				"order": [[ 5, "desc" ]]
+				"order": [[ 0, "desc" ]]
 			} );
 		});
 

@@ -385,6 +385,7 @@ class ComposerStaticInite8be30ba9338e9e0ac0208c01d853657
         'AddParentToProductTypes' => __DIR__ . '/../..' . '/database/migrations/2018_07_21_055147_add_parent_to_product_types.php',
         'AddPhoneAddressToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_22_081130_add_phone_address_to_users_table.php',
         'AddSlugToProductTypeTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_18_150025_add_slug_to_product_type_table.php',
+        'AddStatusToOrderTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_24_150807_add_status_to_order_table.php',
         'CreateBannersTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_24_070150_create_banners_table.php',
         'CreateImages' => __DIR__ . '/../..' . '/database/migrations/2015_08_07_125128_CreateImages.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
