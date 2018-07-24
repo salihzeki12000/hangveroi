@@ -64,6 +64,14 @@
                     <li><a href="{{ URL::to(Request::segment(1).'/page') }}">Pages</a></li>
                 </ul>
             </li>
+            <li class="ripple">
+                <a class="tree-toggle nav-header"><span class="fa-cubes fa"></span>Settings 
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                </a>
+                <ul class="nav nav-list tree">
+                    <li><a href="{{ URL::to(Request::segment(1).'/setting/banner') }}">Banner</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

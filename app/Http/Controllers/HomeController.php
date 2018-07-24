@@ -9,6 +9,7 @@ use Redirect;
 use App\Models\Product;
 use App\Models\Page;
 use App\Models\District;
+use App\Models\Banner;
 
 class HomeController extends Controller
 {
@@ -21,6 +22,9 @@ class HomeController extends Controller
 		Html::style('plugins/owl-carousel/owl.carousel.css').
 		Html::style('plugins/owl-carousel/owl.theme.css').
 		Html::script('plugins/owl-carousel/owl.carousel.min.js');
+
+		$this->data['main_sliders'] = Banner::where('location', 'main_slider')->limit(5)->get();
+		$this->data['right_indexs'] = Banner::where('location', 'right_index_page')->limit(2)->get();
 
 		$this->data['_title'] = "Hàng Về Rồi - Đồ Gia Dụng Tiện Ích";
 		$this->data['_description'] = "Hàng Về Rồi - Đồ Gia Dụng Tiện Ích";

@@ -68,7 +68,6 @@ class Gallery extends Model
 		if (!is_null($photo)) {
 			// is file exist?
 			if (File::exists($path.$photo->filename)) {
-
 				//URL info
 				$info = pathinfo($path.$photo->filename);
 
@@ -96,6 +95,13 @@ class Gallery extends Model
 					$result = File::delete($path.$photo->filename);
 				}
 
+			} else {
+				$imageName = explode('/', $photo->filename);
+				$imageName = end($imageName);
+				$nearlessFolder = explode('_', $imageName);
+				$nearlessFolder = $nearlessFolder[0];
+				$image = $path.$nearlessFolder."/".$imageName;
+				$result = File::delete($image);
 			}
 
 			//delete in database
