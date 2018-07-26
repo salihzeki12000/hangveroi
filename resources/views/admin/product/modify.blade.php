@@ -59,7 +59,7 @@
 													<label style="font-size: 18px; padding: 5px;">{{ trans("product.price") }}</label>
 													<div class="input-group">
 														<span class="input-group-addon">VND</span>
-														<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="price" value="{{ money_format('%!2n',floatval($price)) }}" required>
+														<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="price" value="{{ $price }}" required>
 													</div>
 												</div>
 												<div class="form-group form-animate-text" style="margin-bottom:40px !important;">

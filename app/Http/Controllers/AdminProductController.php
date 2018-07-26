@@ -148,7 +148,7 @@ class AdminProductController extends Controller
             $files = $request->file('image_thumb');
             if (!is_null($files)) {
                 $imgf = new ImageFactory();
-                $file_url_arr = $imgf->upload(array($files), 'products');
+                $file_url_arr = $imgf->upload(array($files), 'products', 'square');
                 $file_url = '';
                 if (count($file_url_arr) > 0) {
                     $file_url = $file_url_arr[0];

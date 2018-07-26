@@ -48,7 +48,13 @@
 									<tr id="article-{{ $item['id'] }}">
 										<td>{{ $item['id'] }}</td>
 										<td>{{ $item['name'] }}</td>
-										<td>{{ $item['image_thumb'] }}</td>
+										<td>
+											@if($item->image_thumb != 0)
+											@if (!empty(App\Models\Gallery::find($item->image_thumb)))
+											<img class="img-responsive img-thumbnail margin-bottom-5" style="width: 50px; height: auto;" src="{{ App\Models\Base::get_upload_url($item->getImage->filename) }}" alt="{{ $item['name'] }}">
+											@endif
+											@endif
+										</td>
 										<td>{{ $item['units_on_order'] }}</td>
 										<td>{{ $item['created_at'] }}</td>
 										<td>

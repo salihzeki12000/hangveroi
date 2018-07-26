@@ -10,6 +10,7 @@ return array(
     'dimensions' => array(
         'thumb' => array(250, 250, true, 80),
         'medium' => array(700, 525, false, 80),
+        'square' => array(800, 800, true, 100),
         'large' => array(910, 600, false, 80),
     ),
 );
