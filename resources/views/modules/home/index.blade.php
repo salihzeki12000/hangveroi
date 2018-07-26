@@ -39,7 +39,7 @@
 					@if (!empty(App\Models\Gallery::find($right_index->image)))
 					<div class="col-md-12 margin-bottom-12">
 						<a href="{{ $right_index->url }}" title="{{ $right_index->alt }}">
-							<img class="img-responsive" src="{{ App\Models\Base::get_upload_url($main_slider->getImage->filename) }}" alt="{{ $main_slider->alt }}">
+							<img class="img-responsive" src="{{ App\Models\Base::get_upload_url($right_index->getImage->filename) }}" alt="{{ $right_index->alt }}">
 						</a>
 					</div>
 					@endif
