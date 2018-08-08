@@ -19,7 +19,11 @@ if ($location == 'home') {
 				<div class="col-md-{{ $colNum[0] }} col-sm-{{ $colNum[1] }} col-xs-{{ $colNum[2] }}">
 					<a class="item" href="{{ URL::to('product/'.$productItem['slug'].'-'.$productItem['id']) }}">
 						<div class="product-item">
-							<img class="img-responsive img-thumbnail margin-bottom-5" style="height: 150px !important; width: 100% !important" src="{{ App\Models\Base::get_upload_url($productItem->getImage->filename) }}" alt="">
+							@if($productItem->image_thumb != 0)
+							@if (!empty(App\Models\Gallery::find($productItem->image_thumb)))
+							<img class="img-responsive img-thumbnail margin-bottom-5" style="width: 100%; height: auto;" src="{{ App\Models\Base::get_upload_url($productItem->getImage->filename) }}" alt="{{ $productItem['name'] }}">
+							@endif
+							@endif
 							<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItem['name'] }}</h3>
 							<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItem['price']) }}</b><!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
 							<div>
@@ -64,7 +68,11 @@ if ($location == 'home') {
 					<div class="col-md-{{ $colNum[0] }} col-sm-{{ $colNum[1] }} col-xs-{{ $colNum[2] }}">
 						<a class="item" href="{{ URL::to('product/'.$productItem['slug'].'-'.$productItem['id']) }}">
 							<div class="product-item">
-								<img class="img-responsive img-thumbnail margin-bottom-5" style="height: 150px !important; width: 100% !important" src="{{ App\Models\Base::get_upload_url($productItem->getImage->filename) }}" alt="">
+								@if($productItem->image_thumb != 0)
+								@if (!empty(App\Models\Gallery::find($productItem->image_thumb)))
+								<img class="img-responsive img-thumbnail margin-bottom-5" style="width: 100%; height: auto;" src="{{ App\Models\Base::get_upload_url($productItem->getImage->filename) }}" alt="{{ $productItem['name'] }}">
+								@endif
+								@endif
 								<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItem['name'] }}</h3>
 								<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItem['price']) }}</b><!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
 								<div>
