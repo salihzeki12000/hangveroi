@@ -13,6 +13,7 @@ use Cart;
 use Redirect;
 use Auth;
 use Session;
+use Mail;
 
 class CartController extends Controller {
 	
@@ -97,6 +98,17 @@ class CartController extends Controller {
 					$order_detail_item->order_id = $order_item->id;
 					$order_detail_item->save();
 				}
+				$data = array(
+					'carts' => Cart::content(),
+					'cus_name' => $request->session()->get('customername'),
+					'cus_phone' => $request->session()->get('customerphone'),
+					'cus_address' => $request->session()->get('customeraddress')
+				);
+				Mail::send('emails.new_order', $data, function ($message) use ($data) {
+                    $message->from('info@ohangveroi.com', 'Ohangveroi new Order')
+                        ->to('thebaoit@gmail.com', 'Nguyen The Bao')
+                        ->subject('[NEW ORDER] ' . $data['cus_name'] . ' - ' . $data['cus_phone']);
+                });
 				Cart::destroy();
 				return redirect()->to('/cart/checkout/success');
 			}
