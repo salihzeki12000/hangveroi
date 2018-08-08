@@ -26,7 +26,8 @@ if (!$error) {
 				<div class="box-products">
 					<div class="col-md-3">
 						<a class="item" href="{{ URL::to('product/'.$productItems[0]['slug'].'-'.$productItems[0]['id']) }}">
-							<div class="product-item">
+							<div class="product-item feature">
+								<img class="hot" src="{{ asset('assets/img/hot-item.png') }}" alt="Sản phẩm {{ $productItems[0]['name'] }} nổi bật">
 								@if($productItems[0]->image_thumb != 0)
 								@if (!empty(App\Models\Gallery::find($productItems[0]->image_thumb)))
 								<img class="img-responsive img-thumbnail margin-bottom-5" style="width: 100%; height: auto;" src="{{ App\Models\Base::get_upload_url($productItems[0]->getImage->filename) }}" alt="{{ $productItems[0]['name'] }}">
@@ -47,28 +48,30 @@ if (!$error) {
 						</a>
 					</div>
 					<div class="col-md-9">
-						@for($i = 1; $i < count($productItems); $i++)
-						<div class="col-md-3 col-sm-4 col-xs-6">
-							<a class="item" href="{{ URL::to('product/'.$productItems[$i]['slug'].'-'.$productItems[$i]['id']) }}">
-								<div class="product-item">
-									@if($productItems[$i]->image_thumb != 0)
-									@if (!empty(App\Models\Gallery::find($productItems[$i]->image_thumb)))
-									<img class="img-responsive img-thumbnail margin-bottom-5" style="width: 100%; height: auto;" src="{{ App\Models\Base::get_upload_url($productItems[$i]->getImage->filename) }}" alt="{{ $productItems[$i]['name'] }}">
-									@endif
-									@endif
-									<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItems[$i]['name'] }}</h3>
-									<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[$i]['price']) }}</b>
-									<div class="boxcount-social-top">
-										<div class="fb-like" data-href="{{ URL::to('product/'.$productItems[$i]['slug'].'-'.$productItems[$i]['id']) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
+						<div class="row">
+							@for($i = 1; $i < count($productItems); $i++)
+							<div class="col-md-3 col-sm-4 col-xs-6">
+								<a class="item" href="{{ URL::to('product/'.$productItems[$i]['slug'].'-'.$productItems[$i]['id']) }}">
+									<div class="product-item">
+										@if($productItems[$i]->image_thumb != 0)
+										@if (!empty(App\Models\Gallery::find($productItems[$i]->image_thumb)))
+										<img class="img-responsive img-thumbnail margin-bottom-5" style="width: 100%; height: auto;" src="{{ App\Models\Base::get_upload_url($productItems[$i]->getImage->filename) }}" alt="{{ $productItems[$i]['name'] }}">
+										@endif
+										@endif
+										<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItems[$i]['name'] }}</h3>
+										<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[$i]['price']) }}</b>
+										<div class="boxcount-social-top">
+											<div class="fb-like" data-href="{{ URL::to('product/'.$productItems[$i]['slug'].'-'.$productItems[$i]['id']) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
+										</div>
+										<!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
+										<div class="margin-top-10">
+											<button data-id="{{ $productItems[$i]['id'] }}" class="btn btn-outline btn-default pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Mua Ngay</button>
+										</div>
 									</div>
-									<!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
-									<div class="margin-top-10">
-										<button data-id="{{ $productItems[$i]['id'] }}" class="btn btn-outline btn-default pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Mua Ngay</button>
-									</div>
-								</div>
-							</a>
+								</a>
+							</div>
+							@endfor
 						</div>
-						@endfor
 					</div>
 				</div>
 			</div>

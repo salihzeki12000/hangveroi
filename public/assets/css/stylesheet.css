@@ -70,6 +70,8 @@ a:hover { color: #094e38; text-decoration: none }
 .addcart-absolute { position: absolute; top: 25%; left: 40%; display: none; }
 .addcart-fullwidth { width: 100%; }
 .product-item:hover .addcart-absolute { display: block; }
+.product-item.feature { padding: 10px; border: 1px solid #999; }
+.product-item.feature .hot { width: 100px; position: absolute; top: -10px; right: 0; }
 
 .btn { border-radius: 0 }
 .img-thumbnail { border-radius: 0 }
