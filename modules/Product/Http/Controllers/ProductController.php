@@ -128,7 +128,7 @@ class ProductController extends Controller {
 		}
 		$_this->data['error'] = $error;
 		$_this->data['arrayTypes'] = $arrayTypes;
-		$_this->data['limitProduct'] = 11;
+		$_this->data['limitProduct'] = 9;
 		return view('product::listProductByType')->with($_this->data);
 	}
 
