@@ -38,9 +38,11 @@ if (!$error) {
 									<div class="fb-like" data-href="{{ URL::to('product/'.$productItems[0]['slug'].'-'.$productItems[0]['id']) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
 								</div>
 								<!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
-								<div class="margin-top-10">
-									<button data-id="{{ $productItems[0]['id'] }}" class="btn btn-outline btn-default pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Mua Ngay</button>
+								<div>
+									<button data-id="{{ $productItems[0]['id'] }}" class="margin-top-10 margin-bottom-10 btn btn-outline btn-default pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Mua Ngay</button>
 								</div>
+								<div class="clearfix"></div>
+								<img class="img-responsive" src="{{ asset('assets/img/freeship.png') }}" alt="">
 							</div>
 						</a>
 					</div>
