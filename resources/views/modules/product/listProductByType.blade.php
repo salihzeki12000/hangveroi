@@ -24,7 +24,7 @@ if (!$error) {
 			</h2>
 			<div class="row">
 				<div class="box-products">
-					<div class="col-md-3">
+					<div class="col-md-4">
 						<a class="item" href="{{ URL::to('product/'.$productItems[0]['slug'].'-'.$productItems[0]['id']) }}">
 							<div class="product-item feature">
 								<img class="hot" src="{{ asset('assets/img/hot-item.png') }}" alt="Sản phẩm {{ $productItems[0]['name'] }} nổi bật">
@@ -47,7 +47,7 @@ if (!$error) {
 							</div>
 						</a>
 					</div>
-					<div class="col-md-9">
+					<div class="col-md-8">
 						<div class="row">
 							@for($i = 1; $i < count($productItems); $i++)
 							<div class="col-md-3 col-sm-4 col-xs-6">
