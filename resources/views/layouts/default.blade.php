@@ -250,7 +250,7 @@
 											<h4>Mạng xã hội</h4>
 											<ul class="list-link">
 												<li>Tìm chúng tôi qua</li>
-												<li><a class="link-footer" href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i>&nbsp; Facebook</a></li>
+												<li><a class="link-footer" target="_blank" title="Facebook Hàng về rồi ! Giao hàng miễn phí" href="https://www.facebook.com/hangveroihcm/"><i class="fa fa-facebook-square" aria-hidden="true"></i>&nbsp; Facebook</a></li>
 												<li><a class="link-footer" href="#"><i class="fa fa-youtube-square" aria-hidden="true"></i>&nbsp; Youtube</a></li>
 												<li><a class="link-footer" href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i>&nbsp; Twitter</a></li>
 												<li><a class="link-footer" href="#"><i class="fa fa-google-plus-square" aria-hidden="true"></i>&nbsp; Google +</a></li>
