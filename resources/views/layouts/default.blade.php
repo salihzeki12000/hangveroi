@@ -216,7 +216,7 @@
 					<div class="col-md-12">
 						<div class="footer-row">
 							<div class="col-md-12">
-								<div class="box-bg-red-footer">
+								<div class="box-bg-default-footer">
 									<div class="footer-box">
 										<div class="col-md-3">
 											<h4>Chăm sóc khách hàng</h4>

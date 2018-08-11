@@ -85,6 +85,7 @@
 	</div>
 </div>
 <div class="col-md-12">
+	<?php echo Modules\Product\Http\Controllers\ProductController::getFeatureProductTop(); ?>
 	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(13); ?>
 	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(10); ?>
 	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(5); ?>
@@ -132,7 +133,7 @@
 		});
 	</script>
 </div>
-<div class="col-md-12">
+<!-- <div class="col-md-12">
 	<div class="five-row">
 		<div class="box-border-xam">
 			<div id="owl-demo">
@@ -174,7 +175,7 @@
 			<img class="img-responsive" width="100%" src="{{ asset('assets/img/temp/banner_footer.png') }}" alt="">
 		</a>
 	</div>
-</div>
+</div> -->
 <div class="col-md-12">
 	<div class="third-row">
 		<div class="row">

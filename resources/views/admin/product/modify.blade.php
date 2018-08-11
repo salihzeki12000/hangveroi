@@ -67,6 +67,11 @@
 													<span class="bar"></span>
 													<label>{{ trans("product.units") }}</label>
 												</div>
+												<div class="form-group">
+													<p><label style="font-size: 18px; padding: 5px;">Is Feature?</label></p>
+													<input type="radio" id="rdo" name="is_feature" value="0" {{ $is_feature == 0 ? 'checked' : '' }}> No &nbsp;&nbsp;&nbsp;
+													<input type="radio" id="rdo" name="is_feature" value="1" {{ $is_feature == 1 ? 'checked' : '' }}> Yes
+												</div>
 												<div class="form-group" style="margin-bottom:40px !important;">
 													<label style="font-size: 18px; padding: 5px;">{{ trans("product.specifications") }}</label>
 													<textarea class="editor1" name="specifications"><?php echo ($specifications); ?></textarea>

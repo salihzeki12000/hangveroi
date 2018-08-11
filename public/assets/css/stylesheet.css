@@ -72,11 +72,24 @@ a:hover { color: #094e38; text-decoration: none }
 .product-item:hover .addcart-absolute { display: block; }
 .product-item.feature { padding: 10px; border: 1px solid #999; }
 .product-item.feature .hot { width: 100px; position: absolute; top: -10px; right: 0; }
-
+.product-item.feature .feature-item { position: absolute; width: 100px; }
 .btn { border-radius: 0 }
+.feature .price { color: #e74c3c; font-size: 30px; }
+.feature .product-name { font-size: 18px; color: #696969; text-decoration: none; height: 25px; }
+.btn-feature { border-radius: 5px; }
+.hover-feature:hover .product-item {
+	background: #f5f6f7;
+	border-color: #f5f6f7;
+	-webkit-transition: all 500ms ease-in-out;
+	-moz-transition: all 500ms ease-in-out;
+	-ms-transition: all 500ms ease-in-out;
+	-o-transition: all 500ms ease-in-out;
+	transition: all 500ms ease-in-out;
+}
 .img-thumbnail { border-radius: 0 }
 .box-border-xam { display: block; overflow: hidden; border: 1px solid #f5f6f7; padding: 15px 0; }
 .box-bg-red-footer { display: block; overflow: hidden; background: #e74c3c; padding: 15px 0 0 0; }
+.box-bg-default-footer { display: block; overflow: hidden; background: #0c5f44; padding: 15px 0 0 0; }
 .breadcmenu { display: block; overflow: hidden; }
 .breadcmenu >.breadcrumb { border-radius: 0; margin-bottom: 0 }
 .box-content { display: block; overflow: hidden; padding: 10px; border: 1px solid #dedede; webkit-box-shadow: 0 1px 3px #d3d3d3; box-shadow: 0 1px 3px #d3d3d3; }

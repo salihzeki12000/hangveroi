@@ -87,6 +87,7 @@ class AdminProductController extends Controller
         $this->data['meta_title']               = Session::get('d_meta_title', '');
         $this->data['meta_keyword']             = Session::get('d_meta_keyword', '');
         $this->data['meta_description']         = Session::get('d_meta_description', '');
+        $this->data['is_feature']               = Session::get('d_is_feature', 0);
         $this->data['status']                   = Session::get('d_status', 0);
 
         if (!is_null($articleItem)) {
@@ -103,6 +104,7 @@ class AdminProductController extends Controller
             $this->data['meta_title']           = $articleItem->meta_title;
             $this->data['meta_keyword']         = $articleItem->meta_keyword;
             $this->data['meta_description']     = $articleItem->meta_description;
+            $this->data['is_feature']           = $articleItem->is_feature;
             $this->data['status']               = $articleItem->trashed();
             if($articleItem->image_thumb != 0)
             {
@@ -144,6 +146,7 @@ class AdminProductController extends Controller
         $articleItem->meta_title = $inputs['meta_title'];
         $articleItem->meta_keyword = $inputs['meta_keyword'];
         $articleItem->meta_description = $inputs['meta_description'];
+        $articleItem->is_feature = $inputs['is_feature'];
         if($request->hasFile('image_thumb')) {
             $files = $request->file('image_thumb');
             if (!is_null($files)) {
@@ -156,7 +159,6 @@ class AdminProductController extends Controller
                 if (count($file_url_arr) == 0 || $file_url == '') {
                     $data = array(
                         'message' => 'Invalid image',
-
                         'd_id' => $articleItem->id,
                         'd_name' => $articleItem->name,
                         'd_price' => $articleItem->price,
@@ -168,6 +170,7 @@ class AdminProductController extends Controller
                         'd_meta_title' => $articleItem->meta_title,
                         'd_meta_keyword' => $articleItem->meta_keyword,
                         'd_meta_description' => $articleItem->meta_description,
+                        'd_is_feature' => $articleItem->is_feature,
                         'd_status' => $inputs['status'] == 0 ? "false" : "true",
                         );
 

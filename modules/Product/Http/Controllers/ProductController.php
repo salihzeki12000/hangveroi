@@ -165,4 +165,11 @@ class ProductController extends Controller {
 		$this->data['_description'] = $productType->name;
 		return view('product::productTypePage')->with($this->data);
 	}
+
+	public static function getFeatureProductTop()
+	{
+		$featureProducts = Product::where('is_feature', 1)->orderByRaw('RAND()')->limit(3)->get();
+		$_this->data['featureProducts'] = $featureProducts;
+		return view('product::listFeatureProduct')->with($_this->data);
+	}
 }
