@@ -86,6 +86,14 @@
 </div>
 <div class="col-md-12">
 	<?php echo Modules\Product\Http\Controllers\ProductController::getFeatureProductTop(); ?>
+</div>
+<div class="col-md-12">
+	<a href="{{ URL::to('product/type/do-dung-gia-dinh-5') }}" title="Đồ gia dụng giá rẻ tại Ohangveroi.com">
+		<img class="img-reponsive" src="{{ asset('assets/img/muahanggiare.png') }}" alt="Mua hàng giá rẻ tại tp hcm">
+	</a>
+	<hr>
+</div>
+<div class="col-md-12">
 	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(13); ?>
 	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(10); ?>
 	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(5); ?>
