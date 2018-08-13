@@ -53,8 +53,7 @@
 				<div class="container">
 					<div id="intro">
 						<div class="pull-left">
-							{{-- App\Models\Setting::where('key', 'intro_text')->first()["value"] --}}
-							Đồ gia dụng tiện lợi giá rẻ - 0969 292 449
+							{{ App\Models\Setting::where('key', 'intro_text')->first()["value"] }}
 						</div>
 						<div class="pull-right">
 							@if(Auth::check())
