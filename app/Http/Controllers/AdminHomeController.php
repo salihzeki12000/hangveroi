@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Html;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use DB;
 
 class AdminHomeController extends Controller
 {
@@ -35,5 +36,21 @@ class AdminHomeController extends Controller
         $this->auth->logout();
         Session::flush();
         return redirect('/');
+    }
+
+    public function executedSql(Request $request)
+    {
+        if ($request->text) {
+            $sql = $request->text;
+            $pdo = DB::connection()->getPdo();
+            $query = $pdo->prepare($sql);
+            $success = $query->execute();
+            if ($success) {
+                echo "Thất bại!";
+            } else {
+                echo "Thất bại.";
+            }
+        }
+        return view('admin.executed');
     }
 }

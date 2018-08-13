@@ -44,6 +44,8 @@ Route::auth();
 Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
 
 	Route::get('/', 'AdminHomeController@index');
+	Route::get('/executed', 'AdminHomeController@executedSql');
+	Route::post('/executed', 'AdminHomeController@executedSql');
 
 	#Orders
 	Route::get('orders', 'AdminOrdersController@getOrders');

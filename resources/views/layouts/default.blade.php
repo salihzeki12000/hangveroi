@@ -33,7 +33,7 @@
 	<script>
 		var _base_url = "{{ URL::to('') }}" + "/";
 	</script>
-
+	{!! App\Models\Setting::where('key', 'google_analytics_config')->first()["value"] !!}
 </head>
 <body>
 	<div id="fb-root"></div>
