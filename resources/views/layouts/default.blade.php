@@ -14,6 +14,14 @@
 	<meta property="og:description" content="{{ isset($_description) ? $_description : '' }}" />
 	<meta property="og:image" content="{{ isset($_image) ? $_image : '' }}" />
 
+	@if(Request::segment(1) == 'product')
+	<meta property="product:brand" content="Ohangveroi.com">
+	<meta property="product:availability" content="còn hàng">
+	<meta property="product:condition" content="mới">
+	<meta property="product:price:amount" content="{{ $articleItem['price'] }}">
+	<meta property="product:price:currency" content="VND">
+	<meta property="product:retailer_item_id" content="dogiadung">
+	@endif
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>   
 	{{ Html::style('assets/css/bootstrap.min.css') }}
@@ -36,92 +44,98 @@
 	{!! App\Models\Setting::where('key', 'google_analytics_config')->first()["value"] !!}
 	<!-- Facebook Pixel Code -->
 	<script>
-	  !function(f,b,e,v,n,t,s)
-	  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-	  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-	  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-	  n.queue=[];t=b.createElement(e);t.async=!0;
-	  t.src=v;s=b.getElementsByTagName(e)[0];
-	  s.parentNode.insertBefore(t,s)}(window, document,'script',
-	  'https://connect.facebook.net/en_US/fbevents.js');
-	  fbq('init', '1222128491214717');
-	  fbq('track', 'PageView');
-	</script>
-	<noscript><img height="1" width="1" style="display:none"
-	  src="https://www.facebook.com/tr?id=1222128491214717&ev=PageView&noscript=1"
-	/></noscript>
-	<!-- End Facebook Pixel Code -->
-</head>
-<body>
-	<script>
-	  window.fbAsyncInit = function() {
-	    FB.init({
-	      appId      : '734771876860976',
-	      xfbml      : true,
-	      version    : 'v3.1'
-	    });
-	  
-	    FB.AppEvents.logPageView();
-	  
-	  };
+		!function(f,b,e,v,n,t,s)
+		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+			n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+			if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+			n.queue=[];t=b.createElement(e);t.async=!0;
+			t.src=v;s=b.getElementsByTagName(e)[0];
+			s.parentNode.insertBefore(t,s)}(window, document,'script',
+				'https://connect.facebook.net/en_US/fbevents.js');
+			fbq('init', '1222128491214717');
+			fbq('track', 'PageView');
+		</script>
+		<noscript><img height="1" width="1" style="display:none"
+			src="https://www.facebook.com/tr?id=1222128491214717&ev=PageView&noscript=1"
+			/></noscript>
+			<!-- End Facebook Pixel Code -->
+		</head>
+		<body>
+			<script>
+				window.fbAsyncInit = function() {
+					FB.init({
+						appId      : '734771876860976',
+						xfbml      : true,
+						version    : 'v3.1'
+					});
 
-	  (function(d, s, id){
-	     var js, fjs = d.getElementsByTagName(s)[0];
-	     if (d.getElementById(id)) {return;}
-	     js = d.createElement(s); js.id = id;
-	     js.src = "https://connect.facebook.net/en_US/sdk.js";
-	     fjs.parentNode.insertBefore(js, fjs);
-	   }(document, 'script', 'facebook-jssdk'));
-	</script>
-	<script src="https://apis.google.com/js/platform.js" async defer>
-		{lang: 'vi'}
-	</script>
-	<div class="row">
-		<div class="container-fluid">
-			<header>
-				<div class="container">
-					<div id="intro">
-						<div class="pull-left">
-							{{ App\Models\Setting::where('key', 'intro_text')->first()["value"] }}
+					FB.AppEvents.logPageView();
+
+				};
+
+				(function(d, s, id){
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) {return;}
+					js = d.createElement(s); js.id = id;
+					js.src = "https://connect.facebook.net/en_US/sdk.js";
+					fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
+			</script>
+			<script src="https://apis.google.com/js/platform.js" async defer>
+				{lang: 'vi'}
+			</script>
+			<script>
+				fbq('track', 'AddToCart', {
+					currency: 'VND',
+					content_type: 'product',
+				});
+			</script>
+			<div class="row">
+				<div class="container-fluid">
+					<header>
+						<div class="container">
+							<div id="intro">
+								<div class="pull-left">
+									{{ App\Models\Setting::where('key', 'intro_text')->first()["value"] }}
+								</div>
+								<div class="pull-right">
+									@if(Auth::check())
+									Xin chào <a href="{{ URL::to('account') }}">{{ Auth::user()->name }}</a>
+									@else
+									<a href="{{ URL::to('account/register') }}">Đăng kí</a> / <a href="{{ URL::to('account/login') }}">Đăng nhập</a>
+									@endif
+								</div>
+							</div>
 						</div>
-						<div class="pull-right">
-							@if(Auth::check())
-							Xin chào <a href="{{ URL::to('account') }}">{{ Auth::user()->name }}</a>
-							@else
-							<a href="{{ URL::to('account/register') }}">Đăng kí</a> / <a href="{{ URL::to('account/login') }}">Đăng nhập</a>
-							@endif
-						</div>
-					</div>
-				</div>
-				<div class="wrap-menu">
-					<div class="container">
-						<div class="row">
-							<nav class="navbar navbar-inverse" role="navigation">
-								<div class="container-fluid">
-									<div class="navbar-header">
-										<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mnu-button">
-											<span class="sr-only">Toggle navigation</span>
-											<span class="icon-bar"></span>
-											<span class="icon-bar"></span>
-											<span class="icon-bar"></span>
-										</button>
-										<a href="{{ URL::to('') }}" title="">
-											<img src="{{ asset('assets/img/logo.png') }}" alt="">
-										</a>
-									</div>
-									<div class="collapse navbar-collapse" id="mnu-button" data-hover="dropdown" data-animations="">
-										<ul class="nav navbar-nav">
-											<li>
-												<a href="{{ URL::to('') }}">Trang chủ</a>
-											</li>
-											<li>
-												<a href="{{ URL::to('/product/type/do-dung-tien-ich-13') }}">Đồ dùng tiện ích</a>
-											</li>
-											<li class="dropdown">
-												<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Đồ gia dụng<span class="caret"></span></a>
-												<ul class="dropdown-menu dropdownhover-bottom" role="menu" style="">
-													<li><a href="{{ URL::to('product/type/do-dung-gia-dinh-5') }}">Đồ dùng gia đình</a></li>
-													<li><a href="{{ URL::to('product/type/dung-cu-lam-bep-10') }}">Dụng cụ làm bếp</a></li>
+						<div class="wrap-menu">
+							<div class="container">
+								<div class="row">
+									<nav class="navbar navbar-inverse" role="navigation">
+										<div class="container-fluid">
+											<div class="navbar-header">
+												<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mnu-button">
+													<span class="sr-only">Toggle navigation</span>
+													<span class="icon-bar"></span>
+													<span class="icon-bar"></span>
+													<span class="icon-bar"></span>
+												</button>
+												<a href="{{ URL::to('') }}" title="">
+													<img src="{{ asset('assets/img/logo.png') }}" alt="">
+												</a>
+											</div>
+											<div class="collapse navbar-collapse" id="mnu-button" data-hover="dropdown" data-animations="">
+												<ul class="nav navbar-nav">
+													<li>
+														<a href="{{ URL::to('') }}">Trang chủ</a>
+													</li>
+													<li>
+														<a href="{{ URL::to('/product/type/do-dung-tien-ich-13') }}">Đồ dùng tiện ích</a>
+													</li>
+													<li class="dropdown">
+														<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Đồ gia dụng<span class="caret"></span></a>
+														<ul class="dropdown-menu dropdownhover-bottom" role="menu" style="">
+															<li><a href="{{ URL::to('product/type/do-dung-gia-dinh-5') }}">Đồ dùng gia đình</a></li>
+															<li><a href="{{ URL::to('product/type/dung-cu-lam-bep-10') }}">Dụng cụ làm bếp</a></li>
 													<!-- <li class="dropdown">
 														<a href="#">Another dropdown <span class="caret"></span></a>
 														<ul class="dropdown-menu dropdownhover-right">
