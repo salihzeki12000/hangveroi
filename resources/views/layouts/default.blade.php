@@ -14,7 +14,7 @@
 	<meta property="og:description" content="{{ isset($_description) ? $_description : '' }}" />
 	<meta property="og:image" content="{{ isset($_image) ? $_image : '' }}" />
 
-	@if(Request::segment(1) == 'product')
+	@if(Request::segment(1) == 'product' && Request::segment(2) != 'type')
 	<meta property="product:brand" content="Ohangveroi.com">
 	<meta property="product:availability" content="còn hàng">
 	<meta property="product:condition" content="mới">
@@ -84,12 +84,15 @@
 			<script src="https://apis.google.com/js/platform.js" async defer>
 				{lang: 'vi'}
 			</script>
+			@if(Request::segment(1) == 'product' && Request::segment(2) != 'type')
 			<script>
-				fbq('track', 'AddToCart', {
+				fbq('track', 'ViewContent', {
 					currency: 'VND',
 					content_type: 'product',
+					content_ids: '{{ $articleItem["id"] }}'
 				});
 			</script>
+			@endif
 			<div class="row">
 				<div class="container-fluid">
 					<header>
