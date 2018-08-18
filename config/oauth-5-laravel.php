@@ -19,8 +19,8 @@ return [
 	'consumers' => [
 
 	'Facebook' => [
-	'client_id'     => '624101920982827',
-	'client_secret' => 'aad8fbcdf836603df0094b02a849386d',
+	'client_id'     => '734771876860976',
+	'client_secret' => '31c45a1bdf8de8873d15d72a0260f705',
 	'scope'         => [],
 	],
 

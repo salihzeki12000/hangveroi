@@ -12,5 +12,6 @@ Route::group(['middleware' => 'web', 'prefix' => 'account', 'namespace' => 'Modu
 
 	Route::get('/logout', 'AccountController@logout');
 	Route::get('/login-with-facebook', 'AccountController@loginWithFacebook');
+	Route::get('/testFB', 'AccountController@doLoginWithFacebook');
 	Route::get('/login-with-google', 'AccountController@loginWithGoogle');
 });
