@@ -15,8 +15,8 @@
         "gloudemans/shoppingcart": "^2.2",
         "oriceon/oauth-5-laravel": "dev-master",
         "facebook/php-business-sdk": "^3.1",
-	"facebook/graph-sdk" : "~5.0",
-	"facebook/php-ads-sdk": "2.8.*"
+	    "facebook/graph-sdk" : "~5.0",
+	    "facebook/php-ads-sdk": "2.8.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

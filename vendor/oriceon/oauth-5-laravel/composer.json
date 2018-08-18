@@ -19,12 +19,22 @@
     ],
     "require": {
         "php": ">=5.4",
-        "lusitanian/oauth": "~0.3"
+        "lusitanian/oauth": "*"
     },
     "require-dev": {
         "illuminate/support": "~5"
     },    
     "require-all": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Artdarek\\OAuth\\OAuthServiceProvider"
+            ],
+            "aliases": {
+                "OAuth" : "Artdarek\\OAuth\\Facade\\OAuth"
+            }
+        }
+    },
     "autoload": {    
         "psr-0": {
             "Artdarek\\OAuth": "src/"
