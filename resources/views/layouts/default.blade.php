@@ -96,6 +96,9 @@
 				});
 			</script>
 			@endif
+			<script>
+				fbq('track', 'Lead');
+			</script>
 			<div class="row">
 				<div class="container-fluid">
 					<header>
