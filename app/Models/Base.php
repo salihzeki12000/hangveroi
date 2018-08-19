@@ -33,38 +33,20 @@ class Base extends Model {
 	}
 
 	//get URL from filename
-	public static function get_upload_url($url, $dir = "/")
+	public static function get_upload_url($filename, $dir = "/")
 	{
-		$pos = strpos($url, 'http');
-		if (strlen($url) > 0) {
-			if ($pos === false) {
-				$prefix = 'https://';
-				if (substr_compare($url, $prefix, 0, 7) != 0) {
-					return URL::to('assets/uploads').$dir.$url;
-				}
-			} else {
-				$pattern = '/http[s]*:\/\/[\/a-zA-Z0-9:_\-.]*poste[\/a-zA-Z0-9:_\-.]*uploads\/[0-9a-zA-Z_.\/-]+\.[a-zA-Z]+/i';
-
-				if(preg_match($pattern, $url, $matches))
-				{
-					foreach($matches as $key => $match)
-					{
-						$str = explode('/', $match);
-
-						$dir = $str[count($str) - 2];
-						$filename = end($str);
-
-						if ($dir == 'uploads') {
-							return $filename;
-						}
-
-						return $dir.'/'.$filename;
-					}
-				}
+		if (strlen($filename) > 0) {
+			$prefix = 'http://';
+			if (substr_compare($filename, $prefix, 0, 7) != 0) {
+				return URL::to('assets/uploads').$dir.$filename;
 			}
-
-			return $url;
 		}
+		// remove 3 lines below when https expire
+		$filenameArray = explode(':', $filename);
+		if ($filenameArray[0] == 'http') {
+			$filename = str_replace("http", "https", $filename);
+		}
+		return $filename;
 	}
 
 	// get filename from URL
@@ -107,25 +89,25 @@ class Base extends Model {
 						if (!empty($productTypeParent)) {
 							$breadcrumb = '
 							<li>
-							<a href="' . URL::to('product/type/'. $productTypeParent["slug"] .'-'. $productTypeParent["id"]) . '" title="' . $productTypeParent['name'] . '">' . $productTypeParent['name'] .'</a>
+								<a href="' . URL::to('product/type/'. $productTypeParent["slug"] .'-'. $productTypeParent["id"]) . '" title="' . $productTypeParent['name'] . '">' . $productTypeParent['name'] .'</a>
 							</li>
 							<li>
-							<a href="' . URL::to('product/type/'. $productType["slug"] .'-'. $productType["id"]) . '" title="' . $productType['name'] . '">' . $productType['name'] .'</a>
+								<a href="' . URL::to('product/type/'. $productType["slug"] .'-'. $productType["id"]) . '" title="' . $productType['name'] . '">' . $productType['name'] .'</a>
 							</li>
 							<li class="active">' . $product['name'] .' </li>';
 						} else {
 							$breadcrumb = '<li>
-							<a href="' . URL::to('product/type/'. $productType["slug"] .'-'. $productType["id"]) . '" title="' . $productType['name'] . '">' . $productType['name'] .'</a>
+								<a href="' . URL::to('product/type/'. $productType["slug"] .'-'. $productType["id"]) . '" title="' . $productType['name'] . '">' . $productType['name'] .'</a>
 							</li>
 							<li class="active">' . $product['name'] .' </li>';
 						}
 					} else {
 						$breadcrumb = '
-						<li>
-						<a href="' . URL::to('product/type/'. $productType["slug"] .'-'. $productType["id"]) . '" title="' . $productType['name'] . '">' . $productType['name'] .'</a>
-						</li>
-						<li class="active">' . $product['name'] .'
-						</li>';	
+							<li>
+								<a href="' . URL::to('product/type/'. $productType["slug"] .'-'. $productType["id"]) . '" title="' . $productType['name'] . '">' . $productType['name'] .'</a>
+							</li>
+							<li class="active">' . $product['name'] .'
+							</li>';	
 					}
 				}
 			}
@@ -138,7 +120,7 @@ class Base extends Model {
 					if (!empty($productTypeParent)) {
 						$breadcrumb = '
 						<li>
-						<a href="' . URL::to('product/type/'. $productTypeParent["slug"] .'-'. $productTypeParent["id"]) . '" title="' . $productTypeParent['name'] . '">' . $productTypeParent['name'] .'</a>
+							<a href="' . URL::to('product/type/'. $productTypeParent["slug"] .'-'. $productTypeParent["id"]) . '" title="' . $productTypeParent['name'] . '">' . $productTypeParent['name'] .'</a>
 						</li>
 						<li class="active">' . $productType['name'] .'
 						</li>';
