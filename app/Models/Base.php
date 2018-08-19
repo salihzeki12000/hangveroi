@@ -36,7 +36,7 @@ class Base extends Model {
 	public static function get_upload_url($filename, $dir = "/")
 	{
 		if (strlen($filename) > 0) {
-			$prefix = 'http://';
+			$prefix = 'https://';
 			if (substr_compare($filename, $prefix, 0, 7) != 0) {
 				return URL::to('assets/uploads').$dir.$filename;
 			}
