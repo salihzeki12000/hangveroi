@@ -106,6 +106,10 @@
 			});
 			$('.addtocart').on('click', function () {
 				var product_id = $(this).data('id');
+				var product_name = $(this).data('name');
+				var product_category = $(this).data('category');
+				var product_price = $(this).data('price'); 
+
 				$.ajax({
 					url: _base_url + "cart/addtocart",
 					type: 'post',
@@ -127,6 +131,14 @@
 							}
 							html += '<li class="divider"></li><li><a style="color: #cc0000" href="' + _base_url + 'cart/checkout/list">Xem giỏ hàng <i class="fa fa-check fa-2x" aria-hidden="true"></i></a></li>';
 							$('.sub-cart').html(html);
+							fbq('track', 'AddToCart', {
+								content_name: product_name, 
+								content_category: product_category,
+								content_ids: [product_id],
+								content_type: 'product',
+								value: product_price,
+								currency: 'VND' 
+							});
 						} else {
 							$.notify({
 								message: "Thêm giỏ sản vào giỏ hàng không thành công!"
@@ -141,49 +153,6 @@
 		});
 	</script>
 </div>
-<!-- <div class="col-md-12">
-	<div class="five-row">
-		<div class="box-border-xam">
-			<div id="owl-demo">
-				<div class="item"><img class="img-thumbnail" src="{{ asset('assets/img/temp/logo-cus.jpg') }}"></div>
-				<div class="item"><img class="img-thumbnail" src="{{ asset('assets/img/temp/logo-cus.jpg') }}"></div>
-				<div class="item"><img class="img-thumbnail" src="{{ asset('assets/img/temp/logo-cus.jpg') }}"></div>
-				<div class="item"><img class="img-thumbnail" src="{{ asset('assets/img/temp/logo-cus.jpg') }}"></div>
-				<div class="item"><img class="img-thumbnail" src="{{ asset('assets/img/temp/logo-cus.jpg') }}"></div>
-				<div class="item"><img class="img-thumbnail" src="{{ asset('assets/img/temp/logo-cus.jpg') }}"></div>
-				<div class="item"><img class="img-thumbnail" src="{{ asset('assets/img/temp/logo-cus.jpg') }}"></div>
-				<div class="item"><img class="img-thumbnail" src="{{ asset('assets/img/temp/logo-cus.jpg') }}"></div>
-				<div class="item"><img class="img-thumbnail" src="{{ asset('assets/img/temp/logo-cus.jpg') }}"></div>
-			</div>
-			<style>
-			#owl-demo .item{
-				margin: 5px;
-			}
-			#owl-demo .item img{
-				display: block;
-				width: 100%;
-				height: auto;
-			}
-		</style>
-		<script>
-			$(document).ready(function() {
-				$("#owl-demo").owlCarousel({
-					autoPlay: 3000,
-					items : 5,
-					pagination: false
-				});
-			});
-		</script>
-	</div>
-</div>
-</div>
-<div class="col-md-12">
-	<div class="five-row">
-		<a href="#" class="banner-footer">
-			<img class="img-responsive" width="100%" src="{{ asset('assets/img/temp/banner_footer.png') }}" alt="">
-		</a>
-	</div>
-</div> -->
 <div class="col-md-12">
 	<div class="third-row">
 		<div class="row">

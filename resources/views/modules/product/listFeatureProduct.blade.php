@@ -18,7 +18,7 @@
 						<h3 class="product-name margin-top-0 margin-bottom-5">{{ $featureProduct['name'] }}</h3>
 						<b class="price margin-top-0 margin-bottom-5">{{ product_price($featureProduct['price']) }}</b>
 						<div>
-							<button data-id="{{ $featureProduct['id'] }}" class="margin-top-10 margin-bottom-10 btn btn-outline btn-info btn-feature pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Cho vào giỏ hàng</button>
+							<button id="addCart_{{ $featureProduct['id'] }}" data-id="{{ $featureProduct['id'] }}" data-name="{{ $featureProduct['name'] }}" data-price="{{ $featureProduct['price'] }}" data-category="{{ $featureProduct->getProductType->name }}" class="margin-top-10 margin-bottom-10 btn btn-outline btn-info btn-feature pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Cho vào giỏ hàng</button>
 						</div>
 					</div>
 				</a>

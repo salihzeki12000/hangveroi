@@ -40,7 +40,7 @@ if (!$error) {
 								</div>
 								<!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
 								<div>
-									<button data-id="{{ $productItems[0]['id'] }}" class="margin-top-10 margin-bottom-10 btn btn-outline btn-default pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Mua Ngay</button>
+									<button data-id="{{ $productItems[0]['id'] }}" data-name="{{ $productItems[0]['name'] }}" data-price="{{ $productItems[0]['price'] }}" data-category="{{ $productItems[0]->getProductType->name }}" class="margin-top-10 margin-bottom-10 btn btn-outline btn-default pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Mua Ngay</button>
 								</div>
 								<div class="clearfix"></div>
 								<img class="img-responsive" src="{{ asset('assets/img/freeship.png') }}" alt="">
@@ -65,7 +65,7 @@ if (!$error) {
 										</div>
 										<!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
 										<div class="margin-top-10">
-											<button data-id="{{ $productItems[$i]['id'] }}" class="btn btn-outline btn-default pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Mua Ngay</button>
+											<button data-id="{{ $productItems[$i]['id'] }}" data-name="{{ $productItems[$i]['name'] }}" data-price="{{ $productItems[$i]['price'] }}" data-category="{{ $productItems[$i]->getProductType->name }}" class="btn btn-outline btn-default pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Mua Ngay</button>
 										</div>
 									</div>
 								</a>
