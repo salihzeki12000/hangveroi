@@ -31,7 +31,7 @@
 			</div>
 			@if(!Auth::check())
 			<div class="col-md-5 left-position">
-				<div class="wrapbox">
+				<div class="wrapbox border-radius-5">
 					<!-- <h4 class="h2-title alert alert-info">
 						<i class="fa fa-user" aria-hidden="true"></i>&nbsp;Thông tin giao hàng
 					</h4> -->
@@ -56,7 +56,7 @@
 				</div>
 			</div>
 			<div class="col-md-4 left-position">
-				<div class="wrapbox">
+				<div class="wrapbox border-radius-5">
 					<h4 class="h2-title alert alert-info">
 						<i classhipping-user" aria-hidden="true"></i>&nbsp;Đăng nhập
 					</h4>
@@ -78,7 +78,7 @@
 			</div>
 			@else
 			<div class="col-md-9 left-position">
-				<div class="wrapbox">
+				<div class="wrapbox border-radius-5">
 					<!-- <h4 class="h2-title alert alert-info">
 						<i class="fa fa-user" aria-hidden="true"></i>&nbsp;Thông tin giao hàng
 					</h4> -->
@@ -97,7 +97,7 @@
 							<input id="txt_phone" class="form-control" type="text" name="phone" value="{{ Auth::user()->phone ? Auth::user()->phone : Session::get('customerphone') }}" required>	
 						</div>
 						<div class="form-group text-right">
-							<input class="btn btn-danger" name="submit" type="submit" value="Giao hàng địa chỉ này">
+							<input class="btn btn-danger border-radius-5 font-size-20" name="submit" type="submit" value="Giao hàng địa chỉ này">
 						</div>
 					</form>
 				</div>
@@ -123,7 +123,7 @@
 				<div class="clearfix"></div>
 				<hr>
 				@endforeach
-				<div class="alert alert-success">
+				<div class="alert alert-success border-radius-5">
 					Tạm tính: <span class="total_money text-right pull-right">{{ Cart::subtotal() }}đ</span><br>
 					<hr>
 					Thành tiền: <span class="final_money text-right pull-right">{{ Cart::subtotal() }}đ</span><br>

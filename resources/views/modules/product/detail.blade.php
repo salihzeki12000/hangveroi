@@ -61,173 +61,168 @@
 									});
 								</script>
 								<style>
-									#imgF img{border:2px solid white;}
-									.active img{border:2px solid #333 !important;}
-								</style>
-								@endif
-							</div>
+								#imgF img{border:2px solid white;}
+								.active img{border:2px solid #333 !important;}
+							</style>
+							@endif
 						</div>
-						<div class="col-md-7">
-							<div class="product-name">{{ $articleItem['name'] }}</div>
-							<b class="price">{{ product_price($articleItem['price']) }}</b><!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
-							<div class="boxcount-social">
-								<div class="fb-like" data-href="{{ Request::url() }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div> <br>
-								<div class="g-plusone" data-size="medium" data-annotation="inline"></div>
-							</div>
-							<div class="status"><b>Tình trạng:</b> Còn hàng</div>
-							<div class="status">
-								<b>Đánh giá:</b> <br/>
-								@for($i = 0; $i < $productReview; $i++)
-								<i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i>
-								@endfor
-								<i>({{ count($productReviews) }} đánh giá)</i> / <a href="#" data-toggle="modal" data-target="#createreview">Viết đánh giá</a>
-								<div class="modal fade" id="createreview" tabindex="-1" role="dialog" aria-labelledby="Viết đánh giá">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-												<h4 class="modal-title" id="Viết đánh giá">Viết đánh giá</h4>
+					</div>
+					<div class="col-md-7">
+						<div class="product-name">{{ $articleItem['name'] }}</div>
+						<b class="price">{{ product_price($articleItem['price']) }}</b><!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
+						<div class="boxcount-social">
+							<div class="fb-like" data-href="{{ Request::url() }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div> <br>
+							<div class="g-plusone" data-size="medium" data-annotation="inline"></div>
+						</div>
+						<div class="status"><b>Tình trạng:</b> {{ $articleItem['units_on_order'] > 0 ? 'Còn hàng' : 'Hết hàng' }}</div>
+						<div class="status">
+							<b>Đánh giá:</b> <br/>
+							@for($i = 0; $i < $productReview; $i++)
+							<i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i>
+							@endfor
+							<i>({{ count($productReviews) }} đánh giá)</i> / <a href="#" data-toggle="modal" data-target="#createreview">Viết đánh giá</a>
+							<div class="modal fade" id="createreview" tabindex="-1" role="dialog" aria-labelledby="Viết đánh giá">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="Viết đánh giá">Viết đánh giá</h4>
+										</div>
+										<div class="modal-body">
+											<input type="hidden" class="form-control" id="product_id" value="{{ $articleItem['id'] }}" name="product_id">
+											<div class="form-group">
+												<label>Tên của bạn</label>
+												<input type="text" class="form-control" id="yourname" value="" name="yourname">
 											</div>
-											<div class="modal-body">
-												<input type="hidden" class="form-control" id="product_id" value="{{ $articleItem['id'] }}" name="product_id">
-												<div class="form-group">
-													<label>Tên của bạn</label>
-													<input type="text" class="form-control" id="yourname" value="" name="yourname">
+											<div class="form-group">
+												<label>Email của bạn</label>
+												<input type="email" class="form-control" id="youremail" value="" name="youremail">
+											</div>
+											<div class="form-group">
+												<label>Đánh giá của bạn</label>
+												<textarea class="form-control" name="yourreview" id="yourreview" cols="30" rows="10"></textarea>
+											</div>
+											<div class="form-group">
+												<div class="checkbox">
+													<label>
+														<input checked name="getreview" id="getreview" type="radio" value=5> <i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i><i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i><i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i><i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i><i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i>
+													</label>
 												</div>
-												<div class="form-group">
-													<label>Email của bạn</label>
-													<input type="email" class="form-control" id="youremail" value="" name="youremail">
+												<div class="checkbox">
+													<label>
+														<input name="getreview" id="getreview" type="radio" value=4> <i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i><i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i><i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i><i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i>
+													</label>
 												</div>
-												<div class="form-group">
-													<label>Đánh giá của bạn</label>
-													<textarea class="form-control" name="yourreview" id="yourreview" cols="30" rows="10"></textarea>
+												<div class="checkbox">
+													<label>
+														<input name="getreview" id="getreview" type="radio" value=3> <i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i><i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i><i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i>
+													</label>
 												</div>
-												<div class="form-group">
-													<div class="checkbox">
-														<label>
-															<input checked name="getreview" id="getreview" type="radio" value=5> <i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i><i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i><i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i><i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i><i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i>
-														</label>
-													</div>
-													<div class="checkbox">
-														<label>
-															<input name="getreview" id="getreview" type="radio" value=4> <i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i><i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i><i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i><i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i>
-														</label>
-													</div>
-													<div class="checkbox">
-														<label>
-															<input name="getreview" id="getreview" type="radio" value=3> <i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i><i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i><i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i>
-														</label>
-													</div>
-													<div class="checkbox">
-														<label>
-															<input name="getreview" id="getreview" type="radio" value=2> <i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i><i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i>
-														</label>
-													</div>
-													<div class="checkbox">
-														<label>
-															<input name="getreview" id="getreview" type="radio" value=1> <i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i>
-														</label>
-													</div>
+												<div class="checkbox">
+													<label>
+														<input name="getreview" id="getreview" type="radio" value=2> <i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i><i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i>
+													</label>
+												</div>
+												<div class="checkbox">
+													<label>
+														<input name="getreview" id="getreview" type="radio" value=1> <i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i>
+													</label>
 												</div>
 											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Huỷ</button>
-												<button type="button" class="btn sendreview btn-danger">Gửi đi</button>
-											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Huỷ</button>
+											<button type="button" class="btn sendreview btn-danger">Gửi đi</button>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="status">
-								<a data-id="{{ $articleItem['id'] }}" class="btn btn-danger addtocart" href="#">Mua ngay</a>
-							</div>
+						</div>
+						<div class="status">
+							<a data-id="{{ $articleItem['id'] }}" data-name="{{ $articleItem['name'] }}" data-price="{{ $articleItem['price'] }}" data-category="{{ $articleItem->getProductType->name }}" class="btn btn-danger addtocart border-radius-5 font-size-20" href="#">Mua ngay</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="third-row">
-			<div class="col-md-12">
-				<div class="box-detail-review">
-					<ul class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Mô tả</a></li>
-						<li role="presentation"><a href="#reviewbox" aria-controls="reviewbox" role="tab" data-toggle="tab">Đánh giá</a></li>
-					</ul>
-					<div class="tab-content">
-						<div role="tabpanel" class="tab-pane active" id="description">
-							<b>Giới thiệu ngắn</b><br>
-							<?php echo $articleItem['specifications']; ?>
-							<br>
-							---------------------------------------------------
-							<br><br>
-							<b>Mô tả</b><br>
-							<?php echo $articleItem['descriptions']; ?>
-						</div>
-						<div role="tabpanel" class="tab-pane" id="reviewbox">
-							@if(!is_null($productReviews))
-							@foreach( $productReviews as $pv_item )
-							<div class="each-review">
-								<div class="media">
-									<div class="media-left">
-										<span class="showlike_{{ $pv_item['id'] }}">
-											@if($pv_item['like'] != 0)
-											{{ $pv_item['like'] }} likes
-											@else
-											{{ $pv_item['like'] }} like
-											@endif
-										</span>
-									</div>
-									<div class="media-body">
-										<h4 class="media-heading">{{ $pv_item['name'] }}</h4>
-										@for($i = 0; $i < $pv_item['review']; $i++)
-										<i style="color: #cc0000" class="fa fa-star" aria-hidden="true"></i>
-										@endfor
-										<p>
-											{{ $pv_item['content'] }}
-										</p>
-										<a data-id="{{ $pv_item['id'] }}" class="like_{{ $pv_item['id'] }} likepro" href="#">Like</a>
-									</div>
+</div>
+<div class="row">
+	<div class="third-row">
+		<div class="col-md-12">
+			<div class="box-detail-review">
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Mô tả</a></li>
+					<li role="presentation"><a href="#reviewbox" aria-controls="reviewbox" role="tab" data-toggle="tab">Đánh giá</a></li>
+				</ul>
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="description">
+						<b>Giới thiệu ngắn</b><br>
+						<?php echo $articleItem['specifications']; ?>
+						<br>
+						---------------------------------------------------
+						<br><br>
+						<b>Mô tả</b><br>
+						<?php echo $articleItem['descriptions']; ?>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="reviewbox">
+						@if(count($productReviews) > 0)
+						@foreach( $productReviews as $pv_item )
+						<div class="each-review">
+							<div class="media">
+								<div class="media-left">
+									<span class="showlike_{{ $pv_item['id'] }}">
+										@if($pv_item['like'] != 0)
+										{{ $pv_item['like'] }} likes
+										@else
+										{{ $pv_item['like'] }} like
+										@endif
+									</span>
+								</div>
+								<div class="media-body">
+									<h4 class="media-heading">{{ $pv_item['name'] }}</h4>
+									@for($i = 0; $i < $pv_item['review']; $i++)
+									<i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i>
+									@endfor
+									<p>
+										{{ $pv_item['content'] }}
+									</p>
+									<a data-id="{{ $pv_item['id'] }}" class="like_{{ $pv_item['id'] }} likepro" href="#">Like</a>
 								</div>
 							</div>
-							<script>
-								$('.like_{{ $pv_item['id'] }}').click(function(){ 
-									var review_id = $(this).data('id');
-									$.ajax({
-										url: "{{ URL::to(Request::segment(1).'/plus-like') }}",
-										type: 'post',
-										data: {
-											id: review_id,
-											_token: "{{ csrf_token() }}"
-										}
-									})
-									.done(function(html) {
-										$('.showlike_{{ $pv_item['id'] }}').html(html);
-									})
-									.fail(function() {
-										console.log('Error');
-									});	
-									return false;
-								});
-							</script>
-							@endforeach 
-							@endif
 						</div>
+						<script>
+							$('.like_{{ $pv_item['id'] }}').click(function(){ 
+								var review_id = $(this).data('id');
+								$.ajax({
+									url: "{{ URL::to(Request::segment(1).'/plus-like') }}",
+									type: 'post',
+									data: {
+										id: review_id,
+										_token: "{{ csrf_token() }}"
+									}
+								})
+								.done(function(html) {
+									$('.showlike_{{ $pv_item['id'] }}').html(html);
+								})
+								.fail(function() {
+									console.log('Error');
+								});	
+								return false;
+							});
+						</script>
+						@endforeach 
+						@else
+						<br>
+						Sản phẩm vẫn chưa được đánh giá, hãy là người đầu tiên đánh giá sản phẩm này. Xin cảm ơn bạn!
+						<br>
+						<br>
+						@endif
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	{{-- <div class="row">
-		<div class="four-row">
-			<div class="col-md-12">
-				<div class="box-tags">
-					<b>Tags:</b> <a href="#">cho</a>, <a href="#">meo</a>, <a href="#">ga</a>
-				</div>
-			</div>
-		</div>
-	</div> --}}
 </div>
 
 <script>
@@ -239,6 +234,10 @@
 		});
 		$('.addtocart').on('click', function () {
 			var product_id = $(this).data('id');
+			var product_name = $(this).data('name');
+			var product_category = $(this).data('category');
+			var product_price = $(this).data('price');
+
 			$.ajax({
 				url: _base_url + "cart/addtocart",
 				type: 'post',
@@ -258,8 +257,16 @@
 						for(var k in cart) {
 							html += '<li><a href="' + _base_url + 'product/' + cart[k].options.slug + '-' + cart[k].id +'"><div class="name">' + cart[k].name + '</div><div><img src="' + cart[k].options.image + '" alt="' + cart[k].name + '"><div class="price">Giá: ' + cart[k].price + ' <br>Số lượng: ' + cart[k].qty + '</div></div></a></li>';
 						}
-						html += '<li class="divider"></li><li><a style="color: #cc0000" href="' + _base_url + 'cart/checkout/list">Xem giỏ hàng <i class="fa fa-check fa-2x" aria-hidden="true"></i></a></li>';
+						html += '<li class="divider"></li><li><a style="color: #fff004" href="' + _base_url + 'cart/checkout/list">Xem giỏ hàng <i class="fa fa-check fa-2x" aria-hidden="true"></i></a></li>';
 						$('.sub-cart').html(html);
+						fbq('track', 'AddToCart', {
+							content_name: product_name, 
+							content_category: product_category,
+							content_ids: [product_id],
+							content_type: 'product',
+							value: product_price,
+							currency: 'VND' 
+						});
 					} else {
 						$.notify({
 							message: "Thêm giỏ sản vào giỏ hàng không thành công!"

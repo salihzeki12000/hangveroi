@@ -66,7 +66,7 @@
 					@endforeach
 					<div class="row">
 						<div class="col-xs-12">
-							<a class="btn btn-default pull-right" href="{{ URL::to('/') }}">Tiếp tục mua sắm</a>
+							<a class="btn btn-default pull-right border-radius-5" href="{{ URL::to('/') }}">Tiếp tục mua sắm</a>
 						</div>
 					</div><br>
 					<div class="clearfix"></div>
@@ -139,7 +139,7 @@
 						}
 					});
 				</script><hr>
-				<input style="width:100%" type="submit" name="submit" class="btn btn-danger" value="Tiến hành đặt hàng">
+				<input style="width:100%" type="submit" name="submit" class="btn btn-danger border-radius-5 font-size-20" value="Tiến hành đặt hàng">
 			</form>
 		</div>
 	</div>

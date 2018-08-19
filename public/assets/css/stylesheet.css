@@ -145,6 +145,7 @@ a:hover { color: #094e38; text-decoration: none }
 .small-right-position { font-size: 12px; }
 .linkInCard { color: green; }
 .boxcount-social-top { display: inline; float: right; }
+.final_money { color: red; font-size: 20px; }
 
 
 .footer-box { color: #fff }

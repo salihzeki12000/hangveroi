@@ -34,7 +34,7 @@
 				</div>
 			</div> -->
 			<div class="col-xs-12">
-				<div class="progress border-radius-0">
+				<div class="progress border-radius-5">
 					<div class="progress-bar progress-bar-striped progress-bar-danger active" aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width:33.3%">
 						Giỏ hàng
 					</div>
@@ -47,7 +47,7 @@
 				</div>
 			</div>
 			<div class="col-md-9 right-position">
-				<div class="alert alert-warning myCard">
+				<div class="alert alert-warning myCard border-radius-5">
 					<div class="row">
 						<div class="col-md-8 col-xs-6">
 							<b>Giỏ hàng có 	<b>{{ Cart::count() }}</b> sản phẩm</b>
@@ -72,30 +72,22 @@
 							{{ product_price($item->price) }}
 						</div>
 						<div class="col-md-2 col-xs-6">
-							<select name="quantity" id="quantity" data-rowid="{{ $item->rowId }}" data-id="{{ $item->id }}" data-segment1="{{ Request::segment(1) }}" class="quantity selectpicker form-control quantity_{{ $item->id }}">
-								@for( $i=1; $i <= 20; $i++ )
-								@if($i == $item->qty)
-								<option selected value="{{ $i }}">{{ $i }}</option>
-								@else
-								<option value="{{ $i }}">{{ $i }}</option>
-								@endif
-								@endfor
-							</select>
+							<input type="number" name="quantity" id="quantity" data-rowid="{{ $item->rowId }}" data-id="{{ $item->id }}" data-segment1="{{ Request::segment(1) }}" class="quantity selectpicker form-control quantity_{{ $item->id }}" value="{{ $item->qty }}">
 						</div>
 					</div>
 					<div class="clearfix"></div>
 					<hr>
 					@endforeach
 				</div>
-				<a class="btn btn-default pull-right" href="{{ URL::to('/') }}">Tiếp tục mua sắm</a>
+				<a class="btn btn-default pull-right border-radius-5" href="{{ URL::to('/') }}">Tiếp tục mua sắm</a>
 			</div>
 			<div class="col-md-3">
-				<div class="alert alert-success">
+				<div class="alert alert-success border-radius-5">
 					Tạm tính: <span class="total_money text-right pull-right">{{ Cart::subtotal() }}đ</span><br>
 					<hr>
 					Thành tiền: <span class="final_money text-right pull-right">{{ Cart::subtotal() }}đ</span><br>
 				</div>
-				<a style="width:100%" href="{{ URL::to('cart/checkout/shipping') }}" class="btn btn-danger">Mua hàng</a>
+				<a style="width:100%" href="{{ URL::to('cart/checkout/shipping') }}" class="btn btn-danger border-radius-5 font-size-20">Mua hàng</a>
 			</div>
 		</div>
 	</div>
