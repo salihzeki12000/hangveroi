@@ -4,14 +4,14 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{ isset($_title) ? $_title : '' }}</title>
+	<title>{!! isset($_title) ? $_title : '' !!}</title>
 	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favico.png') }}" />
 	<meta name="_token" content="{{ csrf_token() }}">	
-	<meta name="description" content="{{ isset($_description) ? $_description : '' }}">
+	<meta name="description" content="{!! isset($_description) ? $_description : '' !!}">
 	<meta property="og:url" content="{{ Request::url() }}" />
 	<meta property="og:type" content="article" />
-	<meta property="og:title" content="{{ isset($_title) ? $_title : '' }}" />
-	<meta property="og:description" content="{{ isset($_description) ? $_description : '' }}" />
+	<meta property="og:title" content="{!! isset($_title) ? $_title : '' !!}" />
+	<meta property="og:description" content="{!! isset($_description) ? $_description : '' !!}" />
 	<meta property="og:image" content="{{ isset($_image) ? $_image : '' }}" />
 
 	@if(Request::segment(1) == 'product' && Request::segment(2) != 'type')
@@ -45,31 +45,31 @@
 	<!-- Facebook Pixel Code -->
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-M8VV393');</script>
-	<!-- End Google Tag Manager -->
-	<script>
-		!function(f,b,e,v,n,t,s)
-		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-			n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-			if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-			n.queue=[];t=b.createElement(e);t.async=!0;
-			t.src=v;s=b.getElementsByTagName(e)[0];
-			s.parentNode.insertBefore(t,s)}(window, document,'script',
-				'https://connect.facebook.net/en_US/fbevents.js');
-			fbq('init', '1222128491214717');
-			fbq('track', 'PageView');
-		</script>
-		<noscript><img height="1" width="1" style="display:none"
-			src="https://www.facebook.com/tr?id=1222128491214717&ev=PageView&noscript=1"
-			/></noscript>
-			<!-- End Facebook Pixel Code -->
-		</head>
-		<body>
-			<!-- Google Tag Manager (noscript) -->
-			<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8VV393"
+})(window,document,'script','dataLayer','GTM-M8VV393');</script>
+<!-- End Google Tag Manager -->
+<script>
+	!function(f,b,e,v,n,t,s)
+	{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		n.queue=[];t=b.createElement(e);t.async=!0;
+		t.src=v;s=b.getElementsByTagName(e)[0];
+		s.parentNode.insertBefore(t,s)}(window, document,'script',
+			'https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', '1222128491214717');
+		fbq('track', 'PageView');
+	</script>
+	<noscript><img height="1" width="1" style="display:none"
+		src="https://www.facebook.com/tr?id=1222128491214717&ev=PageView&noscript=1"
+		/></noscript>
+		<!-- End Facebook Pixel Code -->
+	</head>
+	<body>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8VV393"
 			height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<!-- End Google Tag Manager (noscript) -->
 			<script>
@@ -101,9 +101,9 @@
 					currency: 'VND',
 					content_type: 'product',
 					content_ids: ['{{ $articleItem["id"] }}'],
-					content_name: '{{ $articleItem["name"] }}',
+					content_name: '{!! $articleItem["name"] !!}',
 					value: '{{ $articleItem["price"] }}',
-					content_category: '{{ $articleItem->getProductType->name }}'
+					content_category: '{!! $articleItem->getProductType->name !!}'
 				});
 			</script>
 			@endif
@@ -264,6 +264,21 @@
 							</nav>
 						</div>
 					</div>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+								<form action="{{ URL::to('/search?') }}" method="GET">
+									<div class="input-group box-outline">
+										<input type="hidden" name="_token" value={{ csrf_token() }}>
+										<input type="text" name="keyword" class="form-control border-radius-top-bottom-left-5" placeholder="Tìm kiếm trên Ô hàng về rồi">
+										<span class="input-group-btn">
+											<button class="btn btn-default border-radius-top-bottom-right-5" type="submit"><i class="fa fa-search"></i> Tìm ngay!</button>
+										</span>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
 				</div>
 			</header>
 			<div id="body">
@@ -325,7 +340,7 @@
 					</div>
 					<div class="col-md-12">
 						<div class="col-md-12">
-							<span class="pull-left">Copyright @ 2016 by Markwebgroup.com</span>
+							<span class="pull-left">Copyright @ 2018 by Markwebgroup.com</span>
 							<span class="pull-right">
 								<a href="#"><i class="fa fa-cc-visa fa-2x" aria-hidden="true"></i> &nbsp; </a>
 								<a href="#"><i class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i> &nbsp; </a>

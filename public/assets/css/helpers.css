@@ -405,3 +405,19 @@
 .z-100 { z-index: 100 !important; }
 .border-radius-0 { border-radius: 0 !important }
 .border-radius-5 { border-radius: 5px !important }
+.border-radius-top-bottom-left-5 { 
+	-webkit-border-top-left-radius: 5px !important;
+	-webkit-border-bottom-left-radius: 5px !important;
+	-moz-border-radius-topleft: 5px !important;
+	-moz-border-radius-bottomleft: 5px !important;
+	border-top-left-radius: 5px !important;
+	border-bottom-left-radius: 5px !important; 
+}
+.border-radius-top-bottom-right-5 { 
+	-webkit-border-top-right-radius: 5px !important;
+	-webkit-border-bottom-right-radius: 5px !important;
+	-moz-border-radius-topright: 5px !important;
+	-moz-border-radius-bottomright: 5px !important;
+	border-top-right-radius: 5px !important;
+	border-bottom-right-radius: 5px !important; 
+}

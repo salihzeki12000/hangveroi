@@ -54,4 +54,17 @@ class HomeController extends Controller
 		}
 		echo '</select>';
 	}
+	public function searchAction(Request $request)
+	{
+		$keywords = $request->keyword;
+		if ($keywords=="") {
+			$this->data['_title'] = "Bạn cần tìm kiếm gì trên Ohangveroi.com?";
+			$this->data['_description'] = "Bạn cần tìm kiếm gì trên Ohangveroi.com?";
+		} else {
+			$products = Product::where('name', 'LIKE', "%".$keywords."%")->orWhere('descriptions', 'LIKE', "%".$keywords."%")->orWhere('specifications', 'LIKE', "%".$keywords."%")->orderBy('created_at', 'DESC')->get();
+			$this->data['productItems'] = $products;
+			$this->data['_title'] = "Kết quả cho " . $keywords;
+		}
+		return view('modules.home.search')->with($this->data);
+	}
 }

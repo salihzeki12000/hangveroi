@@ -11,7 +11,7 @@
 		</div>
 		<div class="second-row">
 			<div class="col-md-8 col-md-offset-2">
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-md-6">
 						<a class="btn btn-100 btn-danger" href="{{ URL::to(Request::segment(1).'/login-with-google') }}">Login by Google</a>
 					</div>
@@ -20,7 +20,7 @@
 					</div>
 				</div>
 				<div class="clearfix"></div>
-				<br>
+				<br> -->
 				<form id="register-form" method="post" action="{{ Request::url() }}">
 					{{ csrf_field() }}
 					<div class="form-group">

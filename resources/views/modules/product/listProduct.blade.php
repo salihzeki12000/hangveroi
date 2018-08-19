@@ -76,7 +76,7 @@ if ($location == 'home') {
 								<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItem['name'] }}</h3>
 								<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItem['price']) }}</b><!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
 								<div>
-									<button data-id="{{ $productItem['id'] }}" class="btn btn-outline btn-danger pull-right addtocart addcart-fullwidth <!--addcart-absolute-->">Mua Ngay<!--<i class="fa fa-cart-plus" aria-hidden="true"></i>--></button>
+									<button data-id="{{ $productItem['id'] }}" data-name="{{ $productItem['name'] }}" data-price="{{ $productItem['price'] }}" data-category="{{ $productItem->getProductType->name }}" class="btn btn-outline btn-danger pull-right addtocart addcart-fullwidth <!--addcart-absolute-->">Mua Ngay<!--<i class="fa fa-cart-plus" aria-hidden="true"></i>--></button>
 								</div>
 							</div>
 						</a>
@@ -103,6 +103,10 @@ if ($location == 'home') {
 		});
 		$('.addtocart').on('click', function () {
 			var product_id = $(this).data('id');
+			var product_name = $(this).data('name');
+			var product_category = $(this).data('category');
+			var product_price = $(this).data('price');
+			
 			$.ajax({
 				url: _base_url + "cart/addtocart",
 				type: 'post',
@@ -124,6 +128,14 @@ if ($location == 'home') {
 						}
 						html += '<li class="divider"></li><li><a style="color: #cc0000" href="' + _base_url + 'cart/checkout/list">Xem giỏ hàng <i class="fa fa-check fa-2x" aria-hidden="true"></i></a></li>';
 						$('.sub-cart').html(html);
+						fbq('track', 'AddToCart', {
+							content_name: product_name, 
+							content_category: product_category,
+							content_ids: [product_id],
+							content_type: 'product',
+							value: product_price,
+							currency: 'VND' 
+						});
 					} else {
 						$.notify({
 							message: "Thêm giỏ sản vào giỏ hàng không thành công!"

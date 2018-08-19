@@ -39,6 +39,8 @@ Route::group(['prefix' => 'api'], function () {
 	Route::post('/product-manufacturer', 'AdminProductManufacturerController@create');
 });
 
+Route::get('search', 'HomeController@searchAction');
+
 Route::auth();
 
 Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
