@@ -283,70 +283,72 @@
 			</header>
 			<div id="body">
 				<div class="row">
-					<div class="col-md-12">
-						@yield('content')
+					<div class="container">
+						<div class="col-md-12">
+							@yield('content')
+						</div>
 					</div>
 				</div>
 			</div>
 			<footer>
 				<div class="row">
-					<div class="col-md-12">
-						<div class="footer-row">
-							<div class="col-md-12">
-								<div class="box-bg-default-footer">
-									<div class="footer-box">
-										<div class="col-md-3">
-											<h4>Chăm sóc khách hàng</h4>
-											<ul class="list-link">
-												<li><a class="link-footer" href="#">Liên hệ</a></li>
-												<li><a class="link-footer" href="#">Trả hàng</a></li>
-												<li><a class="link-footer" href="#">Sơ đồ trang</a></li>
-												<li><a class="link-footer" href="#">Khuyến mãi</a></li>
-												<li><a class="link-footer" href="#">Hậu mãi</a></li>
-											</ul>
-										</div>
-										<div class="col-md-3">
-											<h4>Tài khoản của tôi</h4>
-											<ul class="list-link">
-												<li><a class="link-footer" href="#">Tài khoản</a></li>
-												<li><a class="link-footer" href="#">Lịch sử mua hàng</a></li>
-												<li><a class="link-footer" href="#">Danh sách yêu thích</a></li>
-												<li><a class="link-footer" href="#">Hộp thư</a></li>
-											</ul>
-										</div>
-										<div class="col-md-3">
-											<h4>Liên hệ</h4>
-											<ul class="list-link">
-												<li>Cung cấp sỉ và lẻ các sản phẩm gia dụng chất lượng cao.</li>
-												<li><i class="fa fa-map-marker" aria-hidden="true"></i> Hồ Chí Minh - Việt Nam</li>
-												<li><i class="fa fa-phone" aria-hidden="true"></i> 0969 292 449</li></li>
-												<li><i class="fa fa-envelope-o" aria-hidden="true"></i> thebaoit@gmail.com</li>
-											</ul>
-										</div>
-										<div class="col-md-3">
-											<h4>Mạng xã hội</h4>
-											<ul class="list-link">
-												<li>Tìm chúng tôi qua</li>
-												<li><a class="link-footer" target="_blank" title="Facebook Hàng về rồi ! Giao hàng miễn phí" href="https://www.facebook.com/hangveroihcm/"><i class="fa fa-facebook-square" aria-hidden="true"></i>&nbsp; Facebook</a></li>
-												<li><a class="link-footer" href="#"><i class="fa fa-youtube-square" aria-hidden="true"></i>&nbsp; Youtube</a></li>
-												<li><a class="link-footer" href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i>&nbsp; Twitter</a></li>
-												<li><a class="link-footer" href="#"><i class="fa fa-google-plus-square" aria-hidden="true"></i>&nbsp; Google +</a></li>
-											</ul>
-										</div>
+					<div class="footer-row">
+						<div class="col-md-12">
+							<div class="box-bg-default-footer">
+								<div class="footer-box container">
+									<div class="col-md-3">
+										<h4>Chăm sóc khách hàng</h4>
+										<ul class="list-link">
+											<li><a class="link-footer" href="#">Liên hệ</a></li>
+											<li><a class="link-footer" href="#">Trả hàng</a></li>
+											<li><a class="link-footer" href="#">Sơ đồ trang</a></li>
+											<li><a class="link-footer" href="#">Khuyến mãi</a></li>
+											<li><a class="link-footer" href="#">Hậu mãi</a></li>
+										</ul>
 									</div>
-								</div>	
-							</div>
+									<div class="col-md-3">
+										<h4>Tài khoản của tôi</h4>
+										<ul class="list-link">
+											<li><a class="link-footer" href="#">Tài khoản</a></li>
+											<li><a class="link-footer" href="#">Lịch sử mua hàng</a></li>
+											<li><a class="link-footer" href="#">Danh sách yêu thích</a></li>
+											<li><a class="link-footer" href="#">Hộp thư</a></li>
+										</ul>
+									</div>
+									<div class="col-md-3">
+										<h4>Liên hệ</h4>
+										<ul class="list-link">
+											<li>Cung cấp sỉ và lẻ các sản phẩm gia dụng chất lượng cao.</li>
+											<li><i class="fa fa-map-marker" aria-hidden="true"></i> Hồ Chí Minh - Việt Nam</li>
+											<li><i class="fa fa-phone" aria-hidden="true"></i> 0969 292 449</li></li>
+											<li><i class="fa fa-envelope-o" aria-hidden="true"></i> thebaoit@gmail.com</li>
+										</ul>
+									</div>
+									<div class="col-md-3">
+										<h4>Mạng xã hội</h4>
+										<ul class="list-link">
+											<li>Tìm chúng tôi qua</li>
+											<li><a class="link-footer" target="_blank" title="Facebook Hàng về rồi ! Giao hàng miễn phí" href="https://www.facebook.com/hangveroihcm/"><i class="fa fa-facebook-square" aria-hidden="true"></i>&nbsp; Facebook</a></li>
+											<li><a class="link-footer" href="#"><i class="fa fa-youtube-square" aria-hidden="true"></i>&nbsp; Youtube</a></li>
+											<li><a class="link-footer" href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i>&nbsp; Twitter</a></li>
+											<li><a class="link-footer" href="#"><i class="fa fa-google-plus-square" aria-hidden="true"></i>&nbsp; Google +</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>	
 						</div>
 					</div>
 					<div class="col-md-12">
-						<div class="col-md-12">
-							<span class="pull-left">Copyright @ 2018 by Markwebgroup.com</span>
-							<span class="pull-right">
-								<a href="#"><i class="fa fa-cc-visa fa-2x" aria-hidden="true"></i> &nbsp; </a>
-								<a href="#"><i class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i> &nbsp; </a>
-								<a href="#"><i class="fa fa-cc-mastercard fa-2x" aria-hidden="true"></i></a>
-							</span>
-							<br><br>
+						<div class="container">
+							<div class="col-md-12">
+								<span class="pull-left">Copyright @ 2018 by Markwebgroup.com</span>
+								<span class="pull-right">
+									<a href="#"><i class="fa fa-cc-visa fa-2x" aria-hidden="true"></i> &nbsp; </a>
+									<a href="#"><i class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i> &nbsp; </a>
+									<a href="#"><i class="fa fa-cc-mastercard fa-2x" aria-hidden="true"></i></a>
+								</span>
+								<br><br>
+							</div>
 						</div>
 					</div>
 				</div>
