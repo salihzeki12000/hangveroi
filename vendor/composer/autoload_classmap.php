@@ -14,6 +14,7 @@ return array(
     'AddStatusToOrderTable' => $baseDir . '/database/migrations/2018_07_24_150807_add_status_to_order_table.php',
     'CreateBannersTable' => $baseDir . '/database/migrations/2018_07_24_070150_create_banners_table.php',
     'CreateImages' => $baseDir . '/database/migrations/2015_08_07_125128_CreateImages.php',
+    'CreateOrderNotesTable' => $baseDir . '/database/migrations/2018_08_20_111735_create_order_notes_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',

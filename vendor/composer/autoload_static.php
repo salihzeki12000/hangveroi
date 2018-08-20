@@ -387,6 +387,7 @@ class ComposerStaticInite8be30ba9338e9e0ac0208c01d853657
         'AddStatusToOrderTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_24_150807_add_status_to_order_table.php',
         'CreateBannersTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_24_070150_create_banners_table.php',
         'CreateImages' => __DIR__ . '/../..' . '/database/migrations/2015_08_07_125128_CreateImages.php',
+        'CreateOrderNotesTable' => __DIR__ . '/../..' . '/database/migrations/2018_08_20_111735_create_order_notes_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',

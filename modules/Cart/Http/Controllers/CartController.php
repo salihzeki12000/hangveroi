@@ -86,6 +86,7 @@ class CartController extends Controller {
 			$order_item->cus_name = $request->session()->get('customername');
 			$order_item->cus_phone = $request->session()->get('customerphone');
 			$order_item->cus_address = $request->session()->get('customeraddress');
+			$order_item->cus_email = $request->session()->get('customeremail');
 			$order_item->total_price = Cart::subtotal();
 			$order_item->qty = Cart::count();
 			if($order_item->save()) {

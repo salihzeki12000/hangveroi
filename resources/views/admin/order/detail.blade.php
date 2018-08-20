@@ -38,29 +38,63 @@
 										</td>
 										<td>
 											@foreach($orderItemDetails as $item)
-											{{ $item->product_qty }} x {{ $item->product_name }} ({{ number_format($item->product_price) }} VNĐ)
+											{{ $item->product_qty }} x {{ $item->product_name }} ({{ number_format($item->product_price) }} VNĐ) <br>
 											@endforeach
 										</td>
 										<td>{{ $articleItem->total_price }} VNĐ</td>
 										<td>
-											<select class="changeOrderStatus" name="status" class="selectpicker form-control" data-id="{{ $articleItem->id }}" data-name="{{ $articleItem->cus_name }}" data-token="{{ csrf_token() }}" data-segment1="{{ Request::segment(1) }}">
-												<option {{ $articleItem->status == 'new' ? 'selected' : '' }} value="new">Đơn hàng mới</option>
-												<option {{ $articleItem->status == 'shipping' ? 'selected' : '' }} value="shipping">Đang giao hàng</option>
-												<option {{ $articleItem->status == 'cancel' ? 'selected' : '' }} value="cancel">Đã hủy</option>
-												<option {{ $articleItem->status == 'success' ? 'selected' : '' }} value="success">Thành công</option>
-											</select>
+											{{ $articleItem->status }}
 										</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
+						<form action="" method="POST">
+							<input type="hidden" name="order_id" value="{{ $articleItem->id }}">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<div class="form-group" style="margin-bottom:40px !important;">
+								<textarea class="editor1" name="note"><?php  ?></textarea>
+							</div>
+							<select name="status" class="selectpicker form-control" data-id="{{ $articleItem->id }}" data-name="{{ $articleItem->cus_name }}" data-token="{{ csrf_token() }}" data-segment1="{{ Request::segment(1) }}">
+								<option {{ $articleItem->status == 'new' ? 'selected' : '' }} value="new">Đơn hàng mới</option>
+								<option {{ $articleItem->status == 'shipping' ? 'selected' : '' }} value="shipping">Đang giao hàng</option>
+								<option {{ $articleItem->status == 'cancel' ? 'selected' : '' }} value="cancel">Đã hủy</option>
+								<option {{ $articleItem->status == 'success' ? 'selected' : '' }} value="success">Thành công</option>
+							</select>
+							<div class="form-group" style="margin-top: 20px !important;">
+								<input class="submit btn btn-danger" type="submit" value="Update Order">
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<script src={{ URL::to('plugins/froala_editor/js/plugins/align.min.js') }}></script>
+<script src={{ URL::to('plugins/froala_editor/js/plugins/quote.min.js') }}></script>
+<script src={{ URL::to('plugins/froala_editor/js/plugins/link.min.js') }}></script>
+<link rel="stylesheet" href={{ URL::to('plugins/froala_editor/css/plugins/emoticons.min.css') }} />
+<script src={{ URL::to('plugins/froala_editor/js/plugins/emoticons.min.js') }}></script>
+<link rel="stylesheet" href={{ URL::to('plugins/froala_editor/css/plugins/colors.min.css') }} />
+<script src={{ URL::to('plugins/froala_editor/js/plugins/colors.min.js') }}></script>
+<script src={{ URL::to('plugins/froala_editor/js/plugins/font_size.min.js') }}></script>
+<script src={{ URL::to('plugins/froala_editor/js/plugins/font_family.min.js') }}></script>
+<link rel="stylesheet" href={{ URL::to('plugins/froala_editor/css/plugins/table.min.css') }} />
+<script src={{ URL::to('plugins/froala_editor/js/plugins/table.min.js') }}></script>
+<link rel="stylesheet" href={{ URL::to('plugins/froala_editor/css/plugins/video.min.css') }} />
+<script src={{ URL::to('plugins/froala_editor/js/plugins/video.min.js') }}></script>
+<link rel="stylesheet" href={{ URL::to('plugins/froala_editor/css/plugins/image.min.css') }} />
+<script src={{ URL::to('plugins/froala_editor/js/plugins/image.min.js') }}></script>
+<link rel="stylesheet" href={{ URL::to('plugins/froala_editor/css/plugins/image_manager.min.css') }} />
+<script src={{ URL::to('plugins/froala_editor/js/plugins/image_manager.min.js') }}></script>
 <script type="text/javascript">
+	$(document).ready(function(){
+		$('.editor1').froalaEditor({
+			height: 200,
+			toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', '|', 'color', 'emoticons', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'insertHR', '-', 'insertLink', 'insertTable', 'undo', 'redo', 'clearFormatting', 'html']
+		});
+	});
 	$(".changeOrderStatus").change(function() {
 		var that = $(this);
 		var id = $(this).data('id');
@@ -103,4 +137,4 @@
 		return false;
 	});
 </script>
-@stop
+@endsection

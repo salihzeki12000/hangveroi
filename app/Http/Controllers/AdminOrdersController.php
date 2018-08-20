@@ -29,12 +29,34 @@ class AdminOrdersController extends Controller
 
         public function viewOrder(Request $request)
         {
-                $this->data['_header'] =    Html::style('assets/css/plugins/datatables.bootstrap.min.css').
+                $this->data['_header'] =    Html::style('assets/css/plugins/select2.min.css').
+                Html::style('assets/css/plugins/ionrangeslider/ion.rangeSlider.css').
+                Html::style('assets/css/plugins/ionrangeslider/ion.rangeSlider.skinFlat.css').
+                Html::style('assets/css/plugins/bootstrap-material-datetimepicker.css').
+                Html::style('assets/css/plugins/mediaelementplayer.css').
+                Html::style('assets/css/plugins/animate.min.css').
+                Html::style('assets/css/plugins/dropzone.css').
+                Html::style('plugins/uploadify/uploadify.css').
+                Html::style('plugins/froala_editor/css/froala_editor.min.css').
+
                 Html::script('assets/js/plugins/jquery.datatables.min.js').
                 Html::script('assets/js/plugins/datatables.bootstrap.min.js').
+                Html::script('assets/js/plugins/jquery.knob.js').
+                Html::script('assets/js/plugins/ion.rangeSlider.min.js').
+                Html::script('assets/js/plugins/bootstrap-material-datetimepicker.js').
+                Html::script('assets/js/plugins/jquery.mask.min.js').
+                Html::script('assets/js/plugins/select2.full.min.js').
+                Html::script('assets/js/plugins/nouislider.min.js').
+                Html::script('plugins/uploadify/jquery.uploadify.min.js').
+                Html::script('plugins/froala_editor/js/froala_editor.min.js').
+                Html::script('assets/js/plugins/dropzone.js').
+                Html::script('assets/js/plugins/jquery.validate.min.js').
 
                 Html::style('plugins/bootstrap-dialog/css/bootstrap-dialog.min.css').
-                Html::script('plugins/bootstrap-dialog/js/bootstrap-dialog.min.js');
+                Html::script('plugins/bootstrap-dialog/js/bootstrap-dialog.min.js').
+
+                Html::style('plugins/bootstrap-select/css/bootstrap-select.min.css').
+                Html::script('plugins/bootstrap-select/js/bootstrap-select.min.js');
 
                 $orderItem = Order::withTrashed()->where('id', $request->segment(4))->first();
                 $orderDetails = OrderDetail::where('order_id', $request->segment(4))->get();
