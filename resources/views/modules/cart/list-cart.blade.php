@@ -78,6 +78,9 @@
 								<h4 class="margin-0">Địa chỉ giao hàng</h4>
 							</div>
 							<h5>{{ Session::get('customername') }}</h5>
+							@if (Session::get('customeremail') != "")
+							<p>{{ Session::get('customeremail') }}</p>
+							@endif
 							<p>{{ Session::get('customerphone') }}</p>
 							<p>{{ Session::get('customeraddress') }}</p>
 							<a class="btn btn-default pull-right" href="{{ URL::to('cart/checkout/shipping') }}">Sửa</a>
@@ -114,7 +117,7 @@
 							<input type="radio" class="payment1" id="payment1" name="paymentmethod" value="1" checked> Thanh toán tiền mặt khi nhận hàng.
 							<br>
 							<input type="radio" class="payment2" id="payment2" name="paymentmethod" value="2"> Thanh toán qua chuyển khoản ngân hàng.<br><br>
-							<div class="bank_info alert alert-info">
+							<div class="bank_info alert alert-info border-radius-5">
 								<b>Ngân hàng: Vietcombank</b><br>
 								Chủ tài khoản: Nguyễn Thế Bảo <br>
 								Số tài khoản: 0071005586830 <br><br>

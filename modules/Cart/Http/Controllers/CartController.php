@@ -100,15 +100,27 @@ class CartController extends Controller {
 				}
 				$data = array(
 					'carts' => Cart::content(),
+					'cart_total_price' => Cart::subtotal(),
 					'cus_name' => $request->session()->get('customername'),
 					'cus_phone' => $request->session()->get('customerphone'),
-					'cus_address' => $request->session()->get('customeraddress')
+					'cus_address' => $request->session()->get('customeraddress'),
+					'cus_email' => $request->session()->get('customeremail'),
+					'order_id' => $order_item->id
 				);
+				// send to Admin
 				Mail::send('emails.new_order', $data, function ($message) use ($data) {
-                    $message->from('info@ohangveroi.com', 'Ohangveroi new Order')
+                    $message->from('info@ohangveroi.com', 'Ohangveroi.com')
                         ->to('thebaoit@gmail.com', 'Nguyen The Bao')
                         ->subject('[NEW ORDER] ' . $data['cus_name'] . ' - ' . $data['cus_phone']);
                 });
+                // send to Customer
+                if ($request->session()->get('customeremail') != "") {
+                	Mail::send('emails.new_order_customer', $data, function ($message) use ($data) {
+	                    $message->from('info@ohangveroi.com', 'Ohangveroi.com')
+	                        ->to($data['cus_email'], $data['cus_name'])
+	                        ->subject('Xác nhận đơn hàng #' . $data['order_id']);
+	                });
+                }
 				Cart::destroy();
 				return redirect()->to('/cart/checkout/success');
 			}
@@ -142,6 +154,7 @@ class CartController extends Controller {
 			$request->session()->set('customername', $request->name);
 			$request->session()->set('customeraddress', $request->address);
 			$request->session()->set('customerphone', $request->phone);
+			$request->session()->set('customeremail', $request->email);
 		}
 		return view('cart::list-cart')->with($this->data);
 	}

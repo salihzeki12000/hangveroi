@@ -32,9 +32,6 @@
 			@if(!Auth::check())
 			<div class="col-md-5 left-position">
 				<div class="wrapbox border-radius-5">
-					<!-- <h4 class="h2-title alert alert-info">
-						<i class="fa fa-user" aria-hidden="true"></i>&nbsp;Thông tin giao hàng
-					</h4> -->
 					<form method="post" action="{{ URL::to('cart/getcheckout') }}">
 						{{ csrf_field() }}
 						<div class="form-group">
@@ -42,11 +39,15 @@
 							<input id="txt_name" class="form-control" type="text" name="name" value="" required>	
 						</div>
 						<div class="form-group">
-							<label for="txt_name">Địa chỉ giao hàng</label>
+							<label for="txt_email">Email</label>
+							<input id="txt_email" class="form-control" type="text" name="email" value="">	
+						</div>
+						<div class="form-group">
+							<label for="txt_address">Địa chỉ giao hàng</label>
 							<input id="txt_address" class="form-control" type="text" name="address" value="" required>	
 						</div>
 						<div class="form-group">
-							<label for="txt_name">Số điện thoại</label>
+							<label for="txt_phone">Số điện thoại</label>
 							<input id="txt_phone" class="form-control" type="text" name="phone" value="" required>	
 						</div>
 						<div class="form-group text-right">
@@ -57,9 +58,6 @@
 			</div>
 			<div class="col-md-4 left-position">
 				<div class="wrapbox border-radius-5">
-					<h4 class="h2-title alert alert-info">
-						<i classhipping-user" aria-hidden="true"></i>&nbsp;Đăng nhập
-					</h4>
 					<form method="post" action="{{ URL::to('account/login') }}">
 						{{ csrf_field() }}
 						<div class="form-group">
@@ -79,9 +77,6 @@
 			@else
 			<div class="col-md-9 left-position">
 				<div class="wrapbox border-radius-5">
-					<!-- <h4 class="h2-title alert alert-info">
-						<i class="fa fa-user" aria-hidden="true"></i>&nbsp;Thông tin giao hàng
-					</h4> -->
 					<form method="post" action="{{ URL::to('cart/getcheckout') }}">
 						{{ csrf_field() }}
 						<div class="form-group">
@@ -89,11 +84,15 @@
 							<input id="txt_name" class="form-control" type="text" name="name" value="{{ Auth::user()->name ? Auth::user()->name : Session::get('customername') }}" required>	
 						</div>
 						<div class="form-group">
-							<label for="txt_name">Địa chỉ giao hàng</label>
+							<label for="txt_email">Email</label>
+							<input id="txt_email" class="form-control" type="text" name="email" value="{{ Auth::user()->name ? Auth::user()->email : Session::get('customeremail') }}">	
+						</div>
+						<div class="form-group">
+							<label for="txt_address">Địa chỉ giao hàng</label>
 							<input id="txt_address" class="form-control" type="text" name="address" value="{{ Auth::user()->address ? Auth::user()->address : Session::get('customeraddress') }}" required>	
 						</div>
 						<div class="form-group">
-							<label for="txt_name">Số điện thoại</label>
+							<label for="txt_phone">Số điện thoại</label>
 							<input id="txt_phone" class="form-control" type="text" name="phone" value="{{ Auth::user()->phone ? Auth::user()->phone : Session::get('customerphone') }}" required>	
 						</div>
 						<div class="form-group text-right">
