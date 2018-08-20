@@ -79,11 +79,11 @@
 				</tr>
 				<tr>
 					<td colspan="3" style="text-align: right;padding: 5px;">Phí vận chuyển</td>
-					<td style="text-align: right;">20.000 ₫</td>
+					<td style="text-align: right;">20,000 ₫</td>
 				</tr>
 				<tr>
 					<td colspan="3" style="text-align: right;padding: 5px;">Tổng giá trị đơn hàng</td>
-					<td style="text-align: right;">{{ ((int)$cart_total_price + 20000)  . ' ₫'}}</td>
+					<td style="text-align: right;">{{ number_format(str_replace(",", "", Cart::total()) + 20000)  . ' ₫'}}</td>
 				</tr>
 			</tbody>
 		</table>
