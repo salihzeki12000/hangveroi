@@ -1,7 +1,7 @@
 <?php 
 if (!$error) {
 	$productItems = App\Models\Product::whereIn('product_type', $arrayTypes)
-	->orderBy('updated_at', 'DESC')
+	->orderBy('created_at', 'DESC')
 	->limit($limitProduct)->get();
 	if (empty($productItems)) {
 		?>

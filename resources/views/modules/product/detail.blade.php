@@ -21,7 +21,7 @@
 			<div class="col-md-12">
 				<div class="box-content">
 					<div class="row">
-						<div class="col-md-5">
+						<div class="col-md-4">
 							<div class="bigImage">
 								@if(count(App\Models\Gallery::find($articleItem->image_thumb)) != 0)
 								<img id="imgF" style="width: 100%" src="{{ App\Models\Base::get_upload_url($articleItem->getImage->filename) }}" data-zoom-image="{{ App\Models\Base::get_upload_url($articleItem->getImage->filename) }}"/>
@@ -67,7 +67,7 @@
 							@endif
 						</div>
 					</div>
-					<div class="col-md-7">
+					<div class="col-md-5">
 						<div class="product-name">{{ $articleItem['name'] }}</div>
 						<b class="price">{{ product_price($articleItem['price']) }}</b><!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
 						<div class="boxcount-social">
@@ -140,6 +140,18 @@
 						</div>
 						<div class="status">
 							<a data-id="{{ $articleItem['id'] }}" data-name="{{ $articleItem['name'] }}" data-price="{{ $articleItem['price'] }}" data-category="{{ $articleItem->getProductType->name }}" class="btn btn-danger addtocart border-radius-5 font-size-20" href="#">Mua ngay</a>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="hotlines border-radius-5">
+							<i class="fa fa-exchange"></i> Đổi trả trực tiếp <br>
+							<i class="fa fa-hourglass-start"></i> Sáng đặt hàng - chiều nhận ngay
+							<hr>
+							<i class="fa fa-phone"></i> Hotline đặt hàng 0969 292 449 <br>
+							<i>(8h00 - 21h cả T7, CN)</i><br>
+							<i class="fa fa-envelope"></i> <a href="mailto:hotro@ohangveroi.com">hotro@ohangveroi.com</a>
+							<hr>
+							<p>Ohangveroi.com | Nhanh chư chớp</p>
 						</div>
 					</div>
 				</div>

@@ -6,7 +6,7 @@ if ($location == 'home') {
 		<?php 
 		$productItems = App\Models\Product::where('product_type', $productType->id)
 		->limit($limitProduct)
-		->orderBy('updated_at', 'DESC')
+		->orderBy('created_at', 'DESC')
 		->get();
 		?>
 		@if(count($productItems)!=0)
@@ -41,7 +41,7 @@ if ($location == 'home') {
 	<?php
 } elseif ($location == 'list') {
 	$productItems = App\Models\Product::whereIn('product_type', $arrayTypes)
-	->orderBy('updated_at', 'DESC')
+	->orderBy('created_at', 'DESC')
 	->paginate($limitProduct);
 	if ($productItems->total() < 1) {
 		?>

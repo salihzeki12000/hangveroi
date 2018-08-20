@@ -97,6 +97,15 @@ class CartController extends Controller {
 					$order_detail_item->product_qty = $item->qty;
 					$order_detail_item->order_id = $order_item->id;
 					$order_detail_item->save();
+
+
+					$productUpdate = Product::find($item->id);
+					$unitsOnOrder = $productUpdate->units_on_order - $item->qty;
+					if ($unitsOnOrder < 0) {
+						$unitsOnOrder = 0;
+					}
+					$productUpdate->units_on_order = $unitsOnOrder;
+					$productUpdate->save();
 				}
 				$data = array(
 					'carts' => Cart::content(),
