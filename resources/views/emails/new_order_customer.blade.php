@@ -47,7 +47,9 @@
 				<td colspan="2" style="padding: 5px;">
 					<b>Phương thức thanh toán:</b> Tiền mặt khi nhận hàng <br>
 					<b>Thời gian giao hàng dự kiến:</b> dự kiến giao hàng trước 19:00 {{ date('H') <= 12 ? ' hôm nay.' : ' ngày ' . date('d-m-Y', strtotime(' +1 day')) }} <br>
-					<b>Phí vận chuyển:</b> 20.000 ₫ <br>
+					@if (str_replace(",", "", $cart_total_price) < 100000)
+					Phí vận chuyển: <span class="total_money text-right pull-right">20,000 đ</span>
+					@endif
 				</td>
 			</tr>
 		</tbody>
@@ -79,11 +81,13 @@
 				</tr>
 				<tr>
 					<td colspan="3" style="text-align: right;padding: 5px;">Phí vận chuyển</td>
-					<td style="text-align: right;">20,000 ₫</td>
+					<td style="text-align: right;">
+						{{ (str_replace(",", "", $cart_total_price) < 100000) ? '20,000 đ' : 'Miễn phí' }}
+					</td>
 				</tr>
 				<tr>
 					<td colspan="3" style="text-align: right;padding: 5px;">Tổng giá trị đơn hàng</td>
-					<td style="text-align: right;">{{ number_format(str_replace(",", "", $cart_total_price) + 20000)  . ' ₫'}}</td>
+					<td style="text-align: right;">{{ (str_replace(",", "", $cart_total_price) < 100000) ? number_format(str_replace(",", "", $cart_total_price) + 20000)  . ' ₫' : $cart_total_price . ' đ'}}</td>
 				</tr>
 			</tbody>
 		</table>

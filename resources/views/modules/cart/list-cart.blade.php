@@ -108,14 +108,17 @@
 					@endforeach
 					<div class="alert alert-success">
 						Tạm tính: <span class="total_money text-right pull-right">{{ Cart::subtotal() }}đ</span><br>
+						@if (str_replace(",", "", Cart::subtotal()) < 100000)
+						Phí vận chuyển: <span class="total_money text-right pull-right">20,000đ</span>
+						@endif
 						<hr>
-						Thành tiền: <span class="final_money text-right pull-right">{{ Cart::subtotal() }}đ</span><br>
+						Thành tiền: <span class="final_money text-right pull-right">{{ (str_replace(",", "", Cart::subtotal()) < 100000) ? number_format(str_replace(",", "", Cart::subtotal()) + 20000) : Cart::subtotal() }}đ</span><br>
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
 							Phương thức thanh toán:<br>
 							<input type="radio" class="payment1" id="payment1" name="paymentmethod" value="1" checked> Thanh toán tiền mặt khi nhận hàng.
-							<br>
+							{{-- <br>
 							<input type="radio" class="payment2" id="payment2" name="paymentmethod" value="2"> Thanh toán qua chuyển khoản ngân hàng.<br><br>
 							<div class="bank_info alert alert-info border-radius-5">
 								<b>Ngân hàng: Vietcombank</b><br>
@@ -124,7 +127,7 @@
 								<b>Ngân hàng: Á Châu (ACB)</b><br>
 								Chủ tài khoản: Nguyễn Thế Bảo <br>
 								Số tài khoản: 174341219 <br>
-							</div>
+							</div> --}}
 						</div>
 					</div>
 					<style>

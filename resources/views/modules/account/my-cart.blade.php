@@ -86,8 +86,11 @@
 			<div class="col-md-3">
 				<div class="alert alert-success border-radius-5">
 					Tạm tính: <span class="total_money text-right pull-right">{{ Cart::subtotal() }}đ</span><br>
+					@if (str_replace(",", "", Cart::subtotal()) < 100000)
+					Phí vận chuyển: <span class="total_money text-right pull-right">20,000đ</span>
+					@endif
 					<hr>
-					Thành tiền: <span class="final_money text-right pull-right">{{ Cart::subtotal() }}đ</span><br>
+					Thành tiền: <span class="final_money text-right pull-right">{{ (str_replace(",", "", Cart::subtotal()) < 100000) ? number_format(str_replace(",", "", Cart::subtotal()) + 20000) : Cart::subtotal() }}đ</span><br>
 				</div>
 				<a style="width:100%" href="{{ URL::to('cart/checkout/shipping') }}" class="btn btn-danger border-radius-5 font-size-20">Mua hàng</a>
 			</div>

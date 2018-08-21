@@ -1,1 +1,108 @@
-Bạn có 1 đơn hàng mới, vui lòng kiểm tra trong admin
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body style="width: 600px; font-family: Arial; font-size: 12px; border: 1px solid #666;">
+	<?php date_default_timezone_set('Asia/Ho_Chi_Minh'); ?>
+	<table style="width: 100%">
+		<thead>
+			<tr>
+				<th colspan="2">
+					<div style="background: #0c5f44; width: 100%; display: block; overflow: hidden;">
+						<a href="http://ohangveroi.com">
+							<img style="width: 200px; float: left; padding: 10px" src="https://ohangveroi.com/assets/img/logo.png">
+						</a>
+					</div>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td colspan="2" style="padding: 5px;">
+					<b><p>Xin chào Admin,</p></b>
+					<p>Bạn có đơn hàng mới (#{{ $order_id }}) từ khách hàng {{ $cus_name }}. Xem chi tiết bên dưới:</p>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="padding: 5px;">
+					<b style="color: #0c5f44"><p style="margin: 0;">THÔNG TIN ĐƠN HÀNG #{{ $order_id }} <i>{{ 'Ngày ' . date('d') . ' tháng ' . date('m') . ' năm ' . date('Y') }}</i></p></b>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding: 5px;">
+					<b><p style="margin: 0;">Thông tin thanh toán</p></b>
+					{{ $cus_name }} <br>
+					{{ $cus_email }} <br>
+					{{ $cus_phone }} <br>
+				</td>
+				<td style="padding: 5px;">
+					<b><p style="margin: 0;">Địa chỉ giao hàng</p></b>
+					{{ $cus_name }} <br>
+					{{ $cus_email }} <br>
+					{{ $cus_address }} <br>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="padding: 5px;">
+					<b>Phương thức thanh toán:</b> Tiền mặt khi nhận hàng <br>
+					<b>Thời gian giao hàng dự kiến:</b> dự kiến giao hàng trước 19:00 {{ date('H') <= 12 ? ' hôm nay.' : ' ngày ' . date('d-m-Y', strtotime(' +1 day')) }} <br>
+					@if (str_replace(",", "", $cart_total_price) < 100000)
+					Phí vận chuyển: <span class="total_money text-right pull-right">20,000 đ</span>
+					@endif
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<hr>
+	<p style="margin: 0; padding: 5px;"><b>CHI TIẾT ĐƠN HÀNG</b></p>
+	<div style="padding: 5px;">
+		<table style="width: 100%; border-color: #f5f6f7;" border="1" cellspacing="0" cellpadding="0">
+			<thead>
+				<tr style="background: #0c5f44; color: #fff;">
+					<th style="padding: 5px 0">Sản phẩm</th>
+					<th style="padding: 5px 0">Đơn giá</th>
+					<th style="padding: 5px 0">Số lượng</th>
+					<th style="padding: 5px 0">Tổng tạm</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach($carts as $cart)
+				<tr>
+					<td style="padding: 5px;">{{ $cart->name }}</td>
+					<td style="padding: 5px;">{{ number_format($cart->price) . ' ₫' }}</td>
+					<td style="padding: 5px;">{{ $cart->qty }}</td>
+					<td style="text-align: right;">{{ number_format($cart->price * $cart->qty) . ' ₫' }}</td>
+				</tr>
+				@endforeach
+				<tr>
+					<td colspan="3" style="text-align: right;padding: 5px;">Tổng tạm tính</td>
+					<td style="text-align: right;">{{ $cart_total_price . ' ₫' }}</td>
+				</tr>
+				<tr>
+					<td colspan="3" style="text-align: right;padding: 5px;">Phí vận chuyển</td>
+					<td style="text-align: right;">
+						{{ (str_replace(",", "", $cart_total_price) < 100000) ? '20,000 đ' : 'Miễn phí' }}
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" style="text-align: right;padding: 5px;">Tổng giá trị đơn hàng</td>
+					<td style="text-align: right;">{{ (str_replace(",", "", $cart_total_price) < 100000) ? number_format(str_replace(",", "", $cart_total_price) + 20000)  . ' ₫' : $cart_total_price . ' đ'}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<hr>
+	<table style="width: 100%;">
+		<thead>
+			<tr>
+				<th colspan="2">
+					<div style="background: #0c5f44; width: 100%; display: block; overflow: hidden; color: #fff; text-align: left;">
+						<p style="padding: 0 5px;">Vui lòng liên hệ khách hàng nhanh nhất có thể.</p>
+					</div>
+				</th>
+			</tr>
+		</thead>
+	</table>
+</body>
+</html>
