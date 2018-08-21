@@ -14,4 +14,6 @@ Route::group(['middleware' => 'web', 'prefix' => 'cart', 'namespace' => 'Modules
 	Route::get('/checkout/step-{step}', 'CartController@checkout');
 	Route::post('/checkout/step-{step}', 'CartController@checkout');
 	Route::post('/update-quantity-product', 'CartController@updateQuantityProduct');
+	Route::get('/remove/{rowId}', 'CartController@removeItem');
+	Route::post('/remove/{rowId}', 'CartController@removeItem');
 });

@@ -14,6 +14,7 @@ use Redirect;
 use Auth;
 use Session;
 use Mail;
+use URL;
 
 class CartController extends Controller {
 	
@@ -45,6 +46,7 @@ class CartController extends Controller {
 				'options'	=>array(
 					'image' => Base::get_upload_url($product->getImage->filename),
 					'slug' 	=> $product->slug,
+					'category' 	=> $product->getProductType->name,
 				)
 			)
 		);
@@ -167,6 +169,12 @@ class CartController extends Controller {
 			$request->session()->set('customeremail', $request->email);
 		}
 		return view('cart::list-cart')->with($this->data);
+	}
+
+	public function removeItem($rowId)
+	{
+		Cart::remove($rowId);
+		return redirect(URL::to('cart/checkout/list'));
 	}
 	
 }

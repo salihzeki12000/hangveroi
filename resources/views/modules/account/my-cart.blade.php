@@ -66,7 +66,9 @@
 							<img class="img-thumbnail img-responsive" style="width: 100%" src="{{ $item->options->image }}" alt="{{ $item->name }}">
 						</div>
 						<div class="col-md-6 col-xs-6">
-							<a class="linkInCard" target="_blank" href="{{ URL::to('product/'. $item->options->slug . '-' . $item->id) }}">{{ $item->name }}</a>
+							<a class="linkInCard font-size-15" target="_blank" href="{{ URL::to('product/'. $item->options->slug . '-' . $item->id) }}">{{ $item->name }}</a>
+							<p class="margin-bottom-0">{{ $item->options->category }}</p>
+							<p class="margin-top-0"><a href="{{ URL::to('cart/remove/' . $item->rowId) }}">Xóa</a></p>
 						</div>
 						<div class="col-md-2 col-xs-6">
 							{{ product_price($item->price) }}

@@ -36,9 +36,9 @@ class Base extends Model {
 	public static function get_upload_url($filename, $dir = "/")
 	{
 		if (strlen($filename) > 0) {
-			$prefix = 'http://';
-			if (substr_compare($filename, $prefix, 0, 7) != 0) {
-				return URL::to('assets/uploads').$dir.$filename;
+			$prefix = 'http';
+			if (substr_compare($filename, $prefix, 0, 4) != 0) {
+				$filename = URL::to('assets/uploads').$dir.$filename;
 			}
 		}
 		// remove 3 lines below when https expire
