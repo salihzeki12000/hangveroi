@@ -8,7 +8,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favico.png') }}" />
 	<meta name="_token" content="{{ csrf_token() }}">	
 	<meta name="description" content="{!! isset($_description) ? $_description : '' !!}">
-	<meta property="fb:app_id" content="" />
+	<meta property="fb:app_id" content="734771876860976" />
 	<meta property="og:url" content="{{ Request::url() }}" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="{!! isset($_title) ? $_title : '' !!}" />
