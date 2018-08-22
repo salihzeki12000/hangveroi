@@ -130,8 +130,10 @@ a:hover { color: #094e38; text-decoration: none }
 .left-position {  }
 .left-position .wrapmenu { border: 1px solid #f5f6f7; padding: 10px; color: #000; }
 .left-position .wrapmenu h2 { font-size: 14px; font-weight: 500; margin: 0 0 10px 0 }
+.left-position .wrapmenu .userNameLeft { font-size: 16px; font-weight: bold; margin: 0 0 10px 0 }
 .left-position .wrapmenu li { display: block; padding: 5px 10px; }
 .left-position .wrapmenu li:hover { background: #f5f6f7 }
+.left-position .wrapmenu li.active { background: #f5f6f7; font-weight: bold; }
 .left-position .wrapmenu .parent { font-weight: 300; }
 .left-position .wrapmenu .parent .fa { color: #999; }
 .left-position .wrapmenu .child li a { font-weight: 300; padding-left: 20px; }

@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\City;
 use App\Models\District;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\User;
 use Html;
 use Hash;
@@ -16,9 +18,29 @@ use Facebook\Exceptions\FacebookSDKException;
 
 class AccountController extends Controller {
 
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 	public function index()
 	{
-		return view('account::index');
+		$this->data['_title'] = 'Tài khoản của ' . Auth::user()->name;
+		return view('account::index')->with($this->data);
+	}
+
+	public function editAccount()
+	{
+		$this->data['_title'] = 'Tài khoản của tôi | Ohangveroi.com';
+		return view('account::edit_account')->with($this->data);
+	}
+
+	public function managedOrders()
+	{
+		$this->data['_title'] = 'Đơn hàng của tôi | Ohangveroi.com';
+		$orders = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(20);
+		$this->data['orders'] = $orders;
+		return view('account::managed_orders')->with($this->data);
 	}
 
 	public function login()

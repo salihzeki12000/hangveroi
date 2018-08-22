@@ -67,3 +67,25 @@ function product_price($priceFloat) {
 	$price = number_format($priceFloat, $decimal_place, '', $symbol_thousand);
 	return $price.$symbol;
 }
+
+function display_status($statusCode)
+{
+	switch ($statusCode) {
+		case 'new':
+			$status = "Đơn mới tạo";
+			break;
+		case 'shipping':
+			$status = "Đang được vận chuyển";
+			break;
+		case 'cancel':
+			$status = "Đã hủy";
+			break;
+		case 'success':
+			$status = "Đơn hàng thành công";
+			break;
+		default:
+			$status = "Đơn mới tạo";
+			break;
+	}
+	return $status;
+}
