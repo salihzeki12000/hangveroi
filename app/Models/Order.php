@@ -32,5 +32,10 @@ class Order extends Model
     {
         return $this->hasMany('App\Models\OrderDetail', 'order_id', 'id');
     }
+
+    public function getNotes()
+    {
+        return $this->hasMany('App\Models\OrderNote', 'order_id', 'id')->orderBy('created_at', 'DESC');
+    }
     
 }

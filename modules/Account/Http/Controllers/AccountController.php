@@ -26,7 +26,7 @@ class AccountController extends Controller {
 	public function index()
 	{
 		$this->data['_title'] = 'Tài khoản của ' . Auth::user()->name;
-		return view('account::index')->with($this->data);
+		return redirect()->to('/account/order/history');
 	}
 
 	public function editAccount(Request $request)

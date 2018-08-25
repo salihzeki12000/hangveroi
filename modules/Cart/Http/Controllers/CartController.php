@@ -80,6 +80,7 @@ class CartController extends Controller {
 
 	public function doOrder(Request $request)
 	{
+		date_default_timezone_set( 'Asia/Ho_Chi_Minh' );
 		if ($request->submit) {
 			$order_item = new Order();
 			if (Auth::check()) {

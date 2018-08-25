@@ -7,7 +7,7 @@
 				<div class="breadcmenu">
 					<ol class="breadcrumb">
 						<li><a href="{{ URL::to('/') }}">Trang chủ</a></li>
-						<li>Tài khoản của tôi</li>
+						<li>Đơn hàng của tôi</li>
 					</ol>
 				</div>
 			</div>

@@ -31,6 +31,15 @@
 				<div class="panel">
 					<div class="panel-heading"><h3>{{ $_nav_title }}</h3></div>
 					<div class="panel-body">
+						@if (Session::has('msg'))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="alert alert-success" role="alert">
+									{{ Session::get('msg') }}
+								</div>
+							</div>
+						</div>
+						@endif
 						<div class="responsive-table">
 							<table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
 								<thead>
