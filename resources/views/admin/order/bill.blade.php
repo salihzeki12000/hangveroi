@@ -10,14 +10,14 @@
 	<table border="1" cellspacing="0" cellpadding="0" style="width: 100%; font-size: 12px;">
 		<tbody>
 			<tr>
-				<th align="left" style="padding: 5px;">Thông tin thanh toán</th>
-				<th align="left" style="padding: 5px;">Địa chỉ giao hàng</th>
+				<th align="left" style="padding: 5px; width: 50%">Thông tin thanh toán</th>
+				<th align="left" style="padding: 5px; width: 50%">Địa chỉ giao hàng</th>
 			</tr>
 			<tr>
 				<td style="padding: 5px;">Khách hàng: {{ $articleItem->cus_name }}</td>
 				<td style="padding: 5px;">Khách hàng: {{ $articleItem->cus_name }}</td>
 			</tr>
-			@if($articleItem->cus_email != "")
+			@if($articleItem->cus_email != "" && $articleItem->cus_email != 'ntkimchau0707@gmail.com')
 			<tr>
 				<td style="padding: 5px;">Email: {{ $articleItem->cus_email }}</td>
 				<td style="padding: 5px;">Email: {{ $articleItem->cus_email }}</td>
