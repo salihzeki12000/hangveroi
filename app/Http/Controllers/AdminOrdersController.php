@@ -106,4 +106,10 @@ class AdminOrdersController extends Controller
         $orderNote->save();
         return redirect()->to('/admin/orders')->with('msg', 'Updated!');
     }
+
+    public function printBill(Request $request)
+    {
+        $this->data['articleItem'] = Order::withTrashed()->where('id', $request->id)->first();
+        return view('admin.order.bill')->with($this->data);
+    }
 }

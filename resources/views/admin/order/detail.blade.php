@@ -19,36 +19,81 @@
 				<div class="panel">
 					<div class="panel-heading"><h3>{!! $_nav_title !!}</h3></div>
 					<div class="panel-body">
-						<div class="responsive-table">
-							<table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+						<div class="responsive-table divForPrint">
+							<h2>THÔNG TIN ĐƠN HÀNG ({{ date('d/m/Y', strtotime($articleItem->created_at)) }})</h2>
+							<table id="datatables-example" class="table table-striped table-hover" width="100%" cellspacing="0">
 								<thead>
 									<tr>
-										<th>Thông tin khách hàng</th>
-										<th>Chi tiết đơn hàng</th>
-										<th>Tổng số tiền</th>
-										<th>Trạng thái đơn hàng</th>
+										<th>Thông tin thanh toán</th>
+										<th>Địa chỉ giao hàng</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr id="article-{{ $articleItem->id }}">
-										<td>
-											<b>{{ $articleItem->cus_name }}</b><br>
-											{{ $articleItem->cus_phone }}<br>
-											{{ $articleItem->cus_address }}
+									<tr>
+										<td>Khách hàng: {{ $articleItem->cus_name }}</td>
+										<td>Khách hàng: {{ $articleItem->cus_name }}</td>
+									</tr>
+									@if($articleItem->cus_email != "")
+									<tr>
+										<td>Email: {{ $articleItem->cus_email }}</td>
+										<td>Email: {{ $articleItem->cus_email }}</td>
+									</tr>
+									@endif
+									<tr>
+										<td>Số điện thoại: {{ $articleItem->cus_phone }}</td>
+										<td>Số điện thoại: {{ $articleItem->cus_phone }}</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td>Địa chỉ: {{ $articleItem->cus_address }}</td>
+									</tr>
+								</tbody>
+							</table>
+							<h2>THÔNG TIN CHI TIẾT</h2>
+							<table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+								<thead>
+									<tr>
+										<th>Sản phẩm</th>
+										<th>Đơn giá</th>
+										<th>Số lượng</th>
+										<th>Tạm tính</th>
+									</tr>
+								</thead>
+								<tbody>
+									@php
+									$orderItems = $articleItem->getOrderItems;
+									@endphp
+									@foreach($orderItems as $orderItem)
+									<tr>
+										<td class="text-left">{{ $orderItem->product_name }}</td>
+										<td class="text-left">{{ number_format($orderItem->product_price) . ' đ' }}</td>
+										<td class="text-center">{{ $orderItem->product_qty }}</td>
+										<td class="text-right">{{ number_format($orderItem->product_price * $orderItem->product_qty) . ' đ' }}</td>
+									</tr>
+									@endforeach
+									<tr>
+										<td colspan="3" class="text-right">
+											<b>Tạm tính</b>
 										</td>
-										<td>
-											@foreach($orderItemDetails as $item)
-											{{ $item->product_qty }} x {{ $item->product_name }} ({{ number_format($item->product_price) }} VNĐ) <br>
-											@endforeach
+										<td class="text-right">
+											<b>{{ $articleItem->total_price }} đ</b>
 										</td>
-										<td>{{ $articleItem->total_price }} VNĐ</td>
-										<td>
-											{{ $articleItem->status }}
+									</tr>
+									<tr>
+										<td colspan="3" class="text-right">
+											<b>Phí vận chuyển</b>
 										</td>
+										<td class="text-right"><b>{{ (str_replace(",", "", $articleItem->total_price) < 100000) ? '20,000 ₫' : 'Miễn phí' }}</b></td>
+									</tr>
+									<tr>
+										<td colspan="3" class="text-right"><b>Tổng giá trị đơn hàng</b></td>
+										<td class="text-right"><b>{{ (str_replace(",", "", $articleItem->total_price) < 100000) ? number_format(str_replace(",", "", $articleItem->total_price) + 20000)  . ' ₫' : $articleItem->total_price . ' đ'}}</b></td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
+						<input class="btn btn-danger printBill" type="button" value="Print Bill">
+						<hr>
 						<form action="" method="POST">
 							<input type="hidden" name="order_id" value="{{ $articleItem->id }}">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -80,4 +125,10 @@
 		</div>
 	</div>
 </div>
+<script>
+	$('.printBill').click(function() {
+		var windowOpen = window.open('{{ URL::to("/admin/orders/print/" . $articleItem->id) }}', "windowChild", "width=700, height=700");
+		return false;
+	});
+</script>
 @endsection
