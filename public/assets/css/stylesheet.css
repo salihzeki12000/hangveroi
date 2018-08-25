@@ -40,6 +40,7 @@ a:hover { color: #094e38; text-decoration: none }
 .video-right { display: block; overflow: hidden; height: 280px }
 .video-right iframe { width: 100%; height: 280px; }
 .box-bg-xam { display: block; overflow: hidden; background: #f5f6f7; padding: 15px 0; }
+.box-bg-white { display: block; overflow: hidden; background: #fff; padding: 10px; }
 .box-promotion { border: 1px solid #dedede; display: block; overflow: hidden }
 .box-promotion h2 { margin-top: 10px; font-weight: normal; font-size: 25px; }
 .box-promotion img { width: 100%; margin-top: 10px }
@@ -153,6 +154,22 @@ a:hover { color: #094e38; text-decoration: none }
 	box-shadow: 0 1px 2px 0 rgba(98,98,98,.5);
 }
 .hotlines { border: 1px solid #dedede; padding: 10px 5px; }
+.custom-label {
+	line-height: 32px;
+	font-weight: normal;
+}
+.fix-height-180 {
+	height: 180px;
+}
+.order-detail {  }
+.order-detail h3 {
+	font-weight: 400;
+	margin-top: 5px;
+	font-size: 20px;
+}
+.order-detail p {
+	margin: 0;
+}
 
 .footer-box { color: #fff }
 .footer-box .link-footer { color: #fff }

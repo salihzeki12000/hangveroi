@@ -9,7 +9,7 @@
 			Quản lý đơn hàng
 		</a>
 	</li>
-	<li class="{{ REQUEST::url() == URL::to('/account/order/review') ? 'active' : '' }}">
+	<!-- <li class="{{ REQUEST::url() == URL::to('/account/order/review') ? 'active' : '' }}">
 		<a href="{{ URL::to('/account/order/review') }}">
 			Nhận xét sản phẩm đã mua
 		</a>
@@ -18,5 +18,5 @@
 		<a href="{{ URL::to('/account/my-review') }}">
 			Nhận xét của tôi
 		</a>
-	</li>
+	</li> -->
 </ul>

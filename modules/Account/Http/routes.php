@@ -9,8 +9,9 @@ Route::group(['middleware' => 'web', 'prefix' => 'account', 'namespace' => 'Modu
 	Route::post('/register', 'AccountController@doregister');
 
 	Route::get('/my-cart', 'AccountController@mycart');
-	Route::get('/edit', 'AccountController@editAccount');
+	Route::resource('/edit', 'AccountController@editAccount');
 	Route::get('/order/history', 'AccountController@managedOrders');
+	Route::get('/order/view/{code}', 'AccountController@orderDetail');
 
 	Route::get('/logout', 'AccountController@logout');
 	Route::get('/login-with-facebook', 'AccountController@loginWithFacebook');

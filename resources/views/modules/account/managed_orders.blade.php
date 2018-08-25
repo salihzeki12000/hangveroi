@@ -43,7 +43,7 @@
 							@endphp
 							<tr>
 								<td>
-									<a href="#">{{ $order->id }}</a>
+									<a href="{{ URL::to('/account/order/view/' . $order->id) }}">#{{ $order->id }}</a>
 								</td>
 								<td>{{ date("d/m/Y", strtotime($order->created_at)) }}</td>
 								<td>

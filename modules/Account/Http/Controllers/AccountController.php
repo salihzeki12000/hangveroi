@@ -29,9 +29,21 @@ class AccountController extends Controller {
 		return view('account::index')->with($this->data);
 	}
 
-	public function editAccount()
+	public function editAccount(Request $request)
 	{
 		$this->data['_title'] = 'Tài khoản của tôi | Ohangveroi.com';
+		$inputs = $request->all();
+
+		if (isset($inputs['submit'])) {
+			$user = User::find(Auth::user()->id);
+			$user->name = $inputs['username'];
+			$user->phone = $inputs['phone'];
+			$user->address = $inputs['address'];
+			if ($user->save()) {
+				return redirect()->to('/account/edit')->with('msg', 'Cập nhật tài khoản thành công!');
+			}
+		}
+
 		return view('account::edit_account')->with($this->data);
 	}
 
@@ -41,6 +53,13 @@ class AccountController extends Controller {
 		$orders = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(20);
 		$this->data['orders'] = $orders;
 		return view('account::managed_orders')->with($this->data);
+	}
+
+	public function orderDetail(Request $request)
+	{
+		$this->data['_title'] = 'Đơn hàng của tôi | Ohangveroi.com';
+		$this->data['order'] = Order::where('id', $request->segment(4))->where('user_id', Auth::user()->id)->first();
+		return view('account::order_detail')->with($this->data);
 	}
 
 	public function login()
