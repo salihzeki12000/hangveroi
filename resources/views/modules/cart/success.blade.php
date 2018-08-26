@@ -24,6 +24,8 @@
 					</p>
 				</div>
 			</div>
+			<div class="clearfix"></div>
+			<hr>
 			<div class="col-md-12">
 				<div class="module-row">
 					<h2 class="category-product">
