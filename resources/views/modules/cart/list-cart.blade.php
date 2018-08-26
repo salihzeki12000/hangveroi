@@ -122,7 +122,7 @@
 						$total = str_replace(",", "", Cart::subtotal());
 						$totalDown10 = $total * 0.1;
 						@endphp
-						Thành tiền: <span class="final_money text-right pull-right">{{ (str_replace(",", "", Cart::subtotal()) < 100000) ? number_format($total) + 20000 - $totalDown10 : number_format($total - $totalDown10) }}đ</span><br>
+						Thành tiền: <span class="final_money text-right pull-right">{{ (str_replace(",", "", Cart::subtotal()) < 100000) ? number_format($total + 20000 - $totalDown10) : number_format($total - $totalDown10) }}đ</span><br>
 						@else
 						Thành tiền: <span class="final_money text-right pull-right">{{ (str_replace(",", "", Cart::subtotal()) < 100000) ? number_format(str_replace(",", "", Cart::subtotal()) + 20000) : Cart::subtotal() }}đ</span><br>
 						@endif
