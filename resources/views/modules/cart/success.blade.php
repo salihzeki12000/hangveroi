@@ -63,4 +63,59 @@
 		</div>
 	</div>
 </div>
+<script>
+	$(document).ready(function() {
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+			}
+		});
+		$('.addtocart').on('click', function () {
+			var product_id = $(this).data('id');
+			var product_name = $(this).data('name');
+			var product_category = $(this).data('category');
+			var product_price = $(this).data('price'); 
+
+			$.ajax({
+				url: _base_url + "cart/addtocart",
+				type: 'post',
+				data: {
+					id: product_id
+				},
+				success:(function(result) {
+					if (result.error == false) {
+						$.notify({
+							message: "Thêm sản phẩm vào giỏ hàng thành công!"
+						},{
+							type: 'success'
+						});
+						var cart = result.cart;
+						var html = '';
+						$('.quantity').html(result.totalQty);
+						for(var k in cart) {
+							html += '<li><a href="' + _base_url + 'product/' + cart[k].options.slug + '-' + cart[k].id +'"><div class="name">' + cart[k].name + '</div><div><img src="' + cart[k].options.image + '" alt="' + cart[k].name + '"><div class="price">Giá: ' + cart[k].price + ' <br>Số lượng: ' + cart[k].qty + '</div></div></a></li>';
+						}
+						html += '<li class="divider"></li><li><a style="color: #cc0000" href="' + _base_url + 'cart/checkout/list">Xem giỏ hàng <i class="fa fa-check fa-2x" aria-hidden="true"></i></a></li>';
+						$('.sub-cart').html(html);
+						fbq('track', 'AddToCart', {
+							content_name: product_name, 
+							content_category: product_category,
+							content_ids: [product_id],
+							content_type: 'product',
+							value: product_price,
+							currency: 'VND' 
+						});
+					} else {
+						$.notify({
+							message: "Thêm giỏ sản vào giỏ hàng không thành công!"
+						},{
+							type: 'danger'
+						});
+					}
+				})
+			})
+			return false;
+		});
+	});
+</script>
 @stop
