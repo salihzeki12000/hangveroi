@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\OrderNote;
+use App\Models\Product;
 
 class AdminOrdersController extends Controller
 {
@@ -111,5 +112,112 @@ class AdminOrdersController extends Controller
     {
         $this->data['articleItem'] = Order::withTrashed()->where('id', $request->id)->first();
         return view('admin.order.bill')->with($this->data);
+    }
+
+    public function editOrder(Request $request)
+    {
+        $this->data['_header'] =    Html::style('assets/css/plugins/select2.min.css').
+        Html::style('assets/css/plugins/ionrangeslider/ion.rangeSlider.css').
+        Html::style('assets/css/plugins/ionrangeslider/ion.rangeSlider.skinFlat.css').
+        Html::style('assets/css/plugins/bootstrap-material-datetimepicker.css').
+        Html::style('assets/css/plugins/mediaelementplayer.css').
+        Html::style('assets/css/plugins/animate.min.css').
+        Html::style('assets/css/plugins/dropzone.css').
+        Html::style('plugins/uploadify/uploadify.css').
+        Html::style('plugins/froala_editor/css/froala_editor.min.css').
+
+        Html::script('assets/js/plugins/jquery.datatables.min.js').
+        Html::script('assets/js/plugins/datatables.bootstrap.min.js').
+        Html::script('assets/js/plugins/jquery.knob.js').
+        Html::script('assets/js/plugins/ion.rangeSlider.min.js').
+        Html::script('assets/js/plugins/bootstrap-material-datetimepicker.js').
+        Html::script('assets/js/plugins/jquery.mask.min.js').
+        Html::script('assets/js/plugins/select2.full.min.js').
+        Html::script('assets/js/plugins/nouislider.min.js').
+        Html::script('plugins/uploadify/jquery.uploadify.min.js').
+        Html::script('plugins/froala_editor/js/froala_editor.min.js').
+        Html::script('assets/js/plugins/dropzone.js').
+        Html::script('assets/js/plugins/jquery.validate.min.js').
+
+        Html::style('plugins/bootstrap-dialog/css/bootstrap-dialog.min.css').
+        Html::script('plugins/bootstrap-dialog/js/bootstrap-dialog.min.js').
+
+        Html::style('plugins/bootstrap-select/css/bootstrap-select.min.css').
+        Html::script('plugins/bootstrap-select/js/bootstrap-select.min.js');
+
+        $orderItem = Order::withTrashed()->where('id', $request->segment(4))->first();
+        $orderDetails = OrderDetail::where('order_id', $request->segment(4))->get();
+        $productItems = Product::orderBy('name', 'ASC')->get();
+
+        $this->data['articleItem'] = $orderItem;
+        $this->data['orderItemDetails'] = $orderDetails;
+        $this->data['productItems'] = $productItems;
+
+        $this->data['_title'] = 'Edit order';
+        $this->data['_nav_title'] = 'Edit order of <b>' . $orderItem->cus_name . '</b>' ;
+        return view('admin.order.edit')->with($this->data);
+    }
+
+    public function doEditOrder(Request $request)
+    {
+        date_default_timezone_set( 'Asia/Ho_Chi_Minh' );
+        $order = Order::find($request->id);
+        $order->cus_name = $request->cus_name;
+        $order->cus_email = $request->cus_email;
+        $order->cus_phone = $request->cus_phone;
+        $order->cus_address = $request->cus_address;
+        $order->save();
+
+        $orderNote = new OrderNote();
+        $orderNote->order_id = $order->id;
+        $orderNote->note = "Update informations of customer";
+        $orderNote->save();
+
+        return redirect()->to('/admin/orders/view/' . $request->id)->with('msg', 'Updated!');
+    }
+
+    public function updateOrderItem(Request $request)
+    {
+        date_default_timezone_set( 'Asia/Ho_Chi_Minh' );
+        $orderItem = OrderDetail::find($request->id);
+        $orderPrice = 0;
+        $orderQty = 0;
+        $orderId = $orderItem->order_id;
+        $order = Order::find($orderId);
+        if ($request->qty != 0) {
+            $orderItem->product_qty = $request->qty;
+            $orderItem->save();
+
+            $orderItems = OrderDetail::where('order_id', $orderId)->get();
+            foreach($orderItems as $item) {
+                $orderPrice += $item->product_price * $item->product_qty;
+                $orderQty += $item->product_qty;
+            }
+            $order->total_price = number_format($orderPrice);
+            $order->qty = $orderQty;
+            $order->save();
+        } else {
+            $orderItem->forceDelete();
+            $orderItems = OrderDetail::where('order_id', $orderId)->get();
+            if (count($orderItems) == 0) {
+                $order->forceDelete();
+            } else {
+                foreach($orderItems as $item) {
+                    $orderPrice += $item->product_price * $item->product_qty;
+                    $orderQty += $item->product_qty;
+                }
+                $order->total_price = number_format($orderPrice);
+                $order->qty = $orderQty;
+                $order->save();
+            }
+        }
+        $orderNote = new OrderNote();
+        $orderNote->order_id = $order->id;
+        $orderNote->note = "Update quantity order item";
+        $orderNote->save();
+
+        $data = ['status' => true];
+
+        return response()->json($data);
     }
 }

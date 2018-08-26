@@ -19,6 +19,15 @@
 				<div class="panel">
 					<div class="panel-heading"><h3>{!! $_nav_title !!}</h3></div>
 					<div class="panel-body">
+						@if (Session::has('msg'))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="alert alert-success" role="alert">
+									{{ Session::get('msg') }}
+								</div>
+							</div>
+						</div>
+						@endif
 						<div class="responsive-table divForPrint">
 							<h2>THÔNG TIN ĐƠN HÀNG ({{ date('d/m/Y', strtotime($articleItem->created_at)) }})</h2>
 							<table id="datatables-example" class="table table-striped table-hover" width="100%" cellspacing="0">

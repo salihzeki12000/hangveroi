@@ -78,6 +78,9 @@
 											<a href="{{ admin_link_helper('view', $item['id']) }}">
 												<span class="btn btn-outline btn-primary">View <span class="fa fa-eye"></span></span>
 											</a>
+											<a href="{{ admin_link_helper('edit', $item['id']) }}">
+												<span class="btn btn-outline btn-warning">Edit <span class="fa fa-pencil"></span></span>
+											</a>
 											<!-- &nbsp;
 											<a class="deleleItem" data-segment1="{{ Request::segment(1) }}" data-segment2="{{ Request::segment(2) }}" data-name="{{ $item['name'] }}" data-token="{{ csrf_token() }}" data-id="{{ $item['id'] }}" href="{{ admin_link_helper('delete', $item['id']) }}">
 												<span class="btn btn-outline btn-primary">Delete <span class="fa fa-trash"></span></span>
