@@ -109,45 +109,58 @@
 					<div class="alert alert-success">
 						Tạm tính: <span class="total_money text-right pull-right">{{ Cart::subtotal() }}đ</span><br>
 						@if (str_replace(",", "", Cart::subtotal()) < 100000)
-						Phí vận chuyển: <span class="total_money text-right pull-right">20,000đ</span>
+						Phí vận chuyển: <span class="total_money text-right pull-right">20,000đ</span><br>
 						@endif
+						<!--get Customer-->
+						@if ((Auth::check() && Auth::user()->id == 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
+						Khuyến mãi: <span class="total_money text-right pull-right">- 10%</span>
+						@endif
+						<!--end Get Customer-->
 						<hr>
+						@if ((Auth::check() && Auth::user()->id == 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
+						@php
+						$total = str_replace(",", "", Cart::subtotal());
+						$totalDown10 = $total * 0.1;
+						@endphp
+						Thành tiền: <span class="final_money text-right pull-right">{{ (str_replace(",", "", Cart::subtotal()) < 100000) ? number_format($total) + 20000 - $totalDown10 : number_format($total - $totalDown10) }}đ</span><br>
+						@else
 						Thành tiền: <span class="final_money text-right pull-right">{{ (str_replace(",", "", Cart::subtotal()) < 100000) ? number_format(str_replace(",", "", Cart::subtotal()) + 20000) : Cart::subtotal() }}đ</span><br>
+						@endif
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
 							Phương thức thanh toán:<br>
 							<input type="radio" class="payment1" id="payment1" name="paymentmethod" value="1" checked> Thanh toán tiền mặt khi nhận hàng.
 							{{-- <br>
-							<input type="radio" class="payment2" id="payment2" name="paymentmethod" value="2"> Thanh toán qua chuyển khoản ngân hàng.<br><br>
-							<div class="bank_info alert alert-info border-radius-5">
-								<b>Ngân hàng: Vietcombank</b><br>
-								Chủ tài khoản: Nguyễn Thế Bảo <br>
-								Số tài khoản: 0071005586830 <br><br>
-								<b>Ngân hàng: Á Châu (ACB)</b><br>
-								Chủ tài khoản: Nguyễn Thế Bảo <br>
-								Số tài khoản: 174341219 <br>
-							</div> --}}
+								<input type="radio" class="payment2" id="payment2" name="paymentmethod" value="2"> Thanh toán qua chuyển khoản ngân hàng.<br><br>
+								<div class="bank_info alert alert-info border-radius-5">
+									<b>Ngân hàng: Vietcombank</b><br>
+									Chủ tài khoản: Nguyễn Thế Bảo <br>
+									Số tài khoản: 0071005586830 <br><br>
+									<b>Ngân hàng: Á Châu (ACB)</b><br>
+									Chủ tài khoản: Nguyễn Thế Bảo <br>
+									Số tài khoản: 174341219 <br>
+								</div> --}}
+							</div>
 						</div>
-					</div>
-					<style>
-					.bank_info { display: none }
-				</style>
-				<script>
-					$('.payment2').click(function() {
-						if($('#payment2').is(':checked')) { 
-							$('.bank_info').css('display', 'block');
-						}
-					});
-					$('.payment1').click(function() {
-						if($('#payment1').is(':checked')) { 
-							$('.bank_info').css('display', 'none');
-						}
-					});
-				</script><hr>
-				<input style="width:100%" type="submit" name="submit" class="btn btn-danger border-radius-5 font-size-20" value="Tiến hành đặt hàng">
-			</form>
+						<style>
+						.bank_info { display: none }
+					</style>
+					<script>
+						$('.payment2').click(function() {
+							if($('#payment2').is(':checked')) { 
+								$('.bank_info').css('display', 'block');
+							}
+						});
+						$('.payment1').click(function() {
+							if($('#payment1').is(':checked')) { 
+								$('.bank_info').css('display', 'none');
+							}
+						});
+					</script><hr>
+					<input style="width:100%" type="submit" name="submit" class="btn btn-danger border-radius-5 font-size-20" value="Tiến hành đặt hàng">
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
-@stop
+	@stop

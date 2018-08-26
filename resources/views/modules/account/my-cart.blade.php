@@ -87,10 +87,23 @@
 				<div class="alert alert-success border-radius-5">
 					Tạm tính: <span class="total_money text-right pull-right">{{ Cart::subtotal() }}đ</span><br>
 					@if (str_replace(",", "", Cart::subtotal()) < 100000)
-					Phí vận chuyển: <span class="total_money text-right pull-right">20,000đ</span>
+					Phí vận chuyển: <span class="total_money text-right pull-right">20,000đ</span><br>
 					@endif
+					<!--get Customer-->
+					@if ((Auth::check() && Auth::user()->id == 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
+					Khuyến mãi: <span class="total_money text-right pull-right">- 10%</span>
+					@endif
+					<!--end Get Customer-->
 					<hr>
+					@if ((Auth::check() && Auth::user()->id == 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
+					@php
+					$total = str_replace(",", "", Cart::subtotal());
+					$totalDown10 = $total * 0.1;
+					@endphp
+					Thành tiền: <span class="final_money text-right pull-right">{{ (str_replace(",", "", Cart::subtotal()) < 100000) ? number_format($total) + 20000 - $totalDown10 : number_format($total - $totalDown10) }}đ</span><br>
+					@else
 					Thành tiền: <span class="final_money text-right pull-right">{{ (str_replace(",", "", Cart::subtotal()) < 100000) ? number_format(str_replace(",", "", Cart::subtotal()) + 20000) : Cart::subtotal() }}đ</span><br>
+					@endif
 				</div>
 				<a style="width:100%" href="{{ URL::to('cart/checkout/shipping') }}" class="btn btn-danger border-radius-5 font-size-20">Mua hàng</a>
 			</div>
