@@ -72,6 +72,10 @@ class CartController extends Controller {
 			Session::forget('customername');
 			Session::forget('customerphone');
 			Session::forget('customeraddress');
+
+			$productItems = Product::orderByRaw('RAND()')->paginate(12);
+
+			$this->data['productItems'] = $productItems;
 			$this->data['_title'] = 'Đặt hàng thành công!';
 			$this->data['_description'] = 'Quý khách đã đặt hàng thành công trên website Ohangveroi.com. Cám ơn quý khách đã mua hàng của chúng tôi. Quý khách có thể liên hệ 0969 292 449 trong trường hợp cần thiết';
 			return view('cart::success')->with($this->data);
