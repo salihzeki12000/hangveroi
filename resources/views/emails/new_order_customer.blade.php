@@ -104,7 +104,7 @@
 					$total = str_replace(",", "", $cart_total_price);
 					$totalDown10 = $total * 0.1;
 					@endphp
-					<td style="text-align: right;">{{ ($total < 100000) ? number_format($total + 20000 + $totalDown10)  . ' ₫' : $total + $totalDown10 . ' đ'}}</td>
+					<td style="text-align: right;">{{ ($total < 100000) ? number_format(($total + 20000) - $totalDown10)  . ' ₫' : $total + $totalDown10 . ' đ'}}</td>
 					@else
 					<td style="text-align: right;">{{ (str_replace(",", "", $cart_total_price) < 100000) ? number_format(str_replace(",", "", $cart_total_price) + 20000)  . ' ₫' : $cart_total_price . ' đ'}}</td>
 					@endif
