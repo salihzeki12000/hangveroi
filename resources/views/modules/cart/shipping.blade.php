@@ -128,12 +128,12 @@
 					Phí vận chuyển: <span class="total_money text-right pull-right">20,000đ</span><br>
 					@endif
 					<!--get Customer-->
-					@if ((Auth::check() && Auth::user()->id == 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
+					@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
 					Khuyến mãi: <span class="total_money text-right pull-right">- 10%</span>
 					@endif
 					<!--end Get Customer-->
 					<hr>
-					@if ((Auth::check() && Auth::user()->id == 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
+					@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
 					@php
 					$total = str_replace(",", "", Cart::subtotal());
 					if ($total < 100000)

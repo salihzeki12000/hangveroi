@@ -48,7 +48,7 @@
 					<b>Phương thức thanh toán:</b> Tiền mặt khi nhận hàng <br>
 					<b>Thời gian giao hàng dự kiến:</b> dự kiến giao hàng trước 19:00 {{ date('H') <= 12 ? ' hôm nay.' : ' ngày ' . date('d-m-Y', strtotime(' +1 day')) }} <br>
 					<!--get Customer-->
-					@if ((Auth::check() && Auth::user()->id == 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
+					@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
 					<b>Khuyến mãi:</b> - 10% <br>
 					@endif
 					<!--end Get Customer-->
@@ -84,7 +84,7 @@
 					<td colspan="3" style="text-align: right;padding: 5px;">Tổng tạm tính</td>
 					<td style="text-align: right;">{{ $cart_total_price . ' ₫' }}</td>
 				</tr>
-				@if ((Auth::check() && Auth::user()->id == 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
+				@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
 				<tr>
 					<td colspan="3" style="text-align: right;padding: 5px;">Khuyến mãi</td>
 					<td style="text-align: right;">10%</td>
@@ -98,7 +98,7 @@
 				</tr>
 				<tr>
 					<td colspan="3" style="text-align: right;padding: 5px;">Tổng giá trị đơn hàng</td>
-					@if ((Auth::check() && Auth::user()->id == 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
+					@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
 					@php
 					$total = str_replace(",", "", $cart_total_price);
 					if ($total < 100000)
