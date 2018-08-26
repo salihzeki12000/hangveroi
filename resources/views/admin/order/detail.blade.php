@@ -102,6 +102,7 @@
 							</table>
 						</div>
 						<input class="btn btn-danger printBill" type="button" value="Print Bill">
+						<a class="btn btn-default" href="{{ URL::to('/admin/orders/edit/' . $articleItem->id) }}">Edit this order</a>
 						<hr>
 						<form action="" method="POST">
 							<input type="hidden" name="order_id" value="{{ $articleItem->id }}">
