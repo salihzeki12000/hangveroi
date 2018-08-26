@@ -101,6 +101,10 @@
 					@if ((Auth::check() && Auth::user()->id == 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
 					@php
 					$total = str_replace(",", "", $cart_total_price);
+					if ($total < 100000)
+					{
+						$total += 20000;
+					}
 					$totalDown10 = $total * 0.1;
 					@endphp
 					<td style="text-align: right;">{{ ($total < 100000) ? number_format(($total + 20000) - $totalDown10)  . ' ₫' : $total + $totalDown10 . ' đ'}}</td>

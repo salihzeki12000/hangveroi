@@ -136,6 +136,10 @@
 					@if ((Auth::check() && Auth::user()->id == 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
 					@php
 					$total = str_replace(",", "", Cart::subtotal());
+					if ($total < 100000)
+					{
+						$total += 20000;
+					}
 					$totalDown10 = $total * 0.1;
 					@endphp
 					Thành tiền: <span class="final_money text-right pull-right">{{ (str_replace(",", "", Cart::subtotal()) < 100000) ? number_format(($total + 20000) - $totalDown10) : number_format($total - $totalDown10) }}đ</span><br>
