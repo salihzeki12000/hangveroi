@@ -20,7 +20,7 @@ class AccountController extends Controller {
 
 	public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['login', 'dologin', 'register', 'doregister']]);
     }
 
 	public function index()
