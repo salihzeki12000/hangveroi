@@ -24,19 +24,18 @@
 	<meta property="product:retailer_item_id" content="dogiadung">
 	@endif
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>   
-	{{ Html::style('assets/css/bootstrap.min.css') }}
-	{{ Html::style('plugins/font-awesome/css/font-awesome.min.css') }}
-	{{ Html::style('plugins/bootstrap-dropdown/css/animate.min.css') }}
-	{{ Html::style('plugins/bootstrap-dropdown/css/bootstrap-dropdownhover.min.css') }}
-	{{ Html::style('assets/css/helpers.css') }}
-	{{ Html::style('assets/css/stylesheet.css') }}
-
-	{{ Html::script('assets/js/bootstrap.min.js') }}
-	{{ Html::script('plugins/bootstrap-dropdown/js/bootstrap-dropdownhover.min.js') }}
-	{{ Html::script('plugins/bootstrap-notify/bootstrap-notify.js') }}
-
-	{{ Html::script('assets/js/top.js') }}
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://st.ohangveroi.com/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://st.ohangveroi.com/plugins/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="https://st.ohangveroi.com/plugins/bootstrap-dropdown/css/animate.min.css">
+	<link rel="stylesheet" type="text/css" href="https://st.ohangveroi.com/plugins/bootstrap-dropdown/css/bootstrap-dropdownhover.min.css">
+	<link rel="stylesheet" type="text/css" href="https://st.ohangveroi.com/assets/css/helpers.css">
+	<link rel="stylesheet" type="text/css" href="https://st.ohangveroi.com/assets/css/stylesheet.css">
+	
+	<script type="text/javascript" src="https://st.ohangveroi.com/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://st.ohangveroi.com/plugins/bootstrap-dropdown/js/bootstrap-dropdownhover.min.js"></script>
+	<script type="text/javascript" src="https://st.ohangveroi.com/plugins/bootstrap-notify/bootstrap-notify.js"></script>
+	<script type="text/javascript" src="https://st.ohangveroi.com/assets/js/top.js"></script>
 
 	{!! isset($_header) ? $_header : '' !!}
 	<script>
