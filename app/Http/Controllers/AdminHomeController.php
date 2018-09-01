@@ -6,6 +6,9 @@ use Html;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use DB;
+use App\Models\Order;
+use App\Models\Product;
+use App\User;
 
 class AdminHomeController extends Controller
 {
@@ -27,7 +30,9 @@ class AdminHomeController extends Controller
     public function index()
     {
         $this->data['_header'] = Html::style('assets/css/plugins/simple-line-icons.css').Html::style('assets/css/plugins/animate.min.css').Html::style('assets/css/plugins/fullcalendar.min.css').Html::script('assets/js/plugins/fullcalendar.min.js').Html::script('assets/js/plugins/jquery.vmap.min.js').Html::script('assets/js/plugins/maps/jquery.vmap.world.js').Html::script('assets/js/plugins/jquery.vmap.sampledata.js').Html::script('assets/js/plugins/chart.min.js');
-
+        $this->data['totalProductNearOutOfStock'] = Product::where('units_on_order', '<', 5)->count();
+        $this->data['totalUser'] = User::all()->count();
+        $this->data['totalOrder'] = Order::where('status', 'new')->count();
         return view('admin.home')->with($this->data);
     }
 

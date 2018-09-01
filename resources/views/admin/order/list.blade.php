@@ -46,7 +46,6 @@
 									<tr>
 										<th>ID</th>
 										<th>Purcharer</th>
-										<th>Phone number</th>
 										<th>Quantity</th>
 										<th>Total Price</th>
 										<th>Date ordered</th>
@@ -58,8 +57,14 @@
 									@foreach($articleItems as $item)
 									<tr id="article-{{ $item['id'] }}">
 										<td>{{ $item['id'] }}</td>
-										<td>{{ $item['cus_name'] }}</td>
-										<td>{{ $item['cus_phone'] }}</td>
+										<td>
+											{{ $item['cus_name'] }} <br>
+											@if($item['cus_email'] != "")
+											{{ $item['cus_email'] }} <br>
+											@endif
+											{{ $item['cus_phone'] }} <br>
+											{{ $item['cus_address'] }}
+										</td>
 										<td>{{ $item['qty'] }}</td>
 										<td>{{ product_price(str_replace(',', '', $item['total_price'])) }}</td>
 										<td>{{ $item['created_at'] }}</td>
