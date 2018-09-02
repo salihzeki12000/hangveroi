@@ -37,5 +37,25 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\ProductType', 'product_type', 'id');   
     }
+
+    public function hasPromotion()
+    {
+        $hasPromotion = $this->belongsTo('App\Models\ProductPromotion', 'id', 'product_id')->where('date_start', '<=', date('Y-m-d H:i:s'))->where('date_end', '>=', date('Y-m-d H:i:s'))->count();
+        if ($hasPromotion) {
+            return true;
+        } else {
+            return false;
+        }  
+    }
+
+    public function getPromotion()
+    {
+        return $this->belongsTo('App\Models\ProductPromotion', 'id', 'product_id');   
+    }
+
+    public function getNewPricePromotion()
+    {
+
+    }
     
 }

@@ -100,7 +100,7 @@
 				fbq('track', 'ViewContent', {
 					currency: 'VND',
 					content_type: 'product',
-					content_ids: ['{{ $articleItem["id"] }}'],
+					content_ids: {{ $articleItem["id"] }},
 					content_name: '{!! $articleItem["name"] !!}',
 					value: '{{ $articleItem["price"] }}',
 					content_category: '{!! $articleItem->getProductType->name !!}'

@@ -94,8 +94,8 @@
 	<hr>
 </div>
 <div class="col-md-12">
-	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(13); ?>
-	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(10); ?>
+	<?php //echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(13); ?>
+	<?php //echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(10); ?>
 	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(5); ?>
 	<script>
 		$(document).ready(function() {
@@ -134,7 +134,7 @@
 							fbq('track', 'AddToCart', {
 								content_name: product_name, 
 								content_category: product_category,
-								content_ids: [product_id],
+								content_ids: product_id,
 								content_type: 'product',
 								value: product_price,
 								currency: 'VND' 

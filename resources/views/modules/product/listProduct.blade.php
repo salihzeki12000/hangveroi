@@ -131,7 +131,7 @@ if ($location == 'home') {
 						fbq('track', 'AddToCart', {
 							content_name: product_name, 
 							content_category: product_category,
-							content_ids: [product_id],
+							content_ids: product_id,
 							content_type: 'product',
 							value: product_price,
 							currency: 'VND' 

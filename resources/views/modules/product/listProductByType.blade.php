@@ -27,18 +27,29 @@ if (!$error) {
 					<div class="col-md-4">
 						<a class="item" href="{{ URL::to('product/'.$productItems[0]['slug'].'-'.$productItems[0]['id']) }}">
 							<div class="product-item feature">
+								@if($productItems[0]->hasPromotion())
+								<img class="hot" src="{{ asset('assets/img/discounts.png') }}" alt="Sản phẩm {{ $productItems[0]['name'] }} giảm giá {{ $productItems[0]->getPromotion->discount }} phần trăm">
+								<span class="percent-discount">{{ $productItems[0]->getPromotion->discount }}%</span>
+								@else
 								<img class="hot" src="{{ asset('assets/img/hot-item.png') }}" alt="Sản phẩm {{ $productItems[0]['name'] }} nổi bật">
+								@endif
 								@if($productItems[0]->image_thumb != 0)
 								@if (!empty(App\Models\Gallery::find($productItems[0]->image_thumb)))
 								<img class="img-responsive img-thumbnail margin-bottom-5" style="width: 100%; height: auto;" src="{{ App\Models\Base::get_upload_url($productItems[0]->getImage->filename) }}" alt="{{ $productItems[0]['name'] }}">
 								@endif
 								@endif
 								<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItems[0]['name'] }}</h3>
-								<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[0]['price']) }}</b>
+								@if($productItems[0]->hasPromotion())
+								<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[0]->getPromotion->money_has_discount) }}</b>
+								@else
+								<b class="price margin-top-0 margin-bottom-5">{{ $productItems[0]['price'] }}</b>
+								@endif
 								<div class="boxcount-social-top">
 									<div class="fb-like" data-href="{{ URL::to('product/'.$productItems[0]['slug'].'-'.$productItems[0]['id']) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
 								</div>
-								<!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
+								@if($productItems[0]->hasPromotion())
+								&nbsp;<i class="real-price">{{ product_price($productItems[0]['price']) }}</i><br>
+								@endif
 								<div>
 									<button data-id="{{ $productItems[0]['id'] }}" data-name="{{ $productItems[0]['name'] }}" data-price="{{ $productItems[0]['price'] }}" data-category="{{ $productItems[0]->getProductType->name }}" class="margin-top-10 margin-bottom-10 btn btn-outline btn-default pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Mua Ngay</button>
 								</div>
@@ -59,11 +70,17 @@ if (!$error) {
 										@endif
 										@endif
 										<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItems[$i]['name'] }}</h3>
+										@if($productItems[$i]->hasPromotion())
+										<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[$i]->getPromotion->money_has_discount) }}</b>
+										@else
 										<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[$i]['price']) }}</b>
+										@endif
 										<div class="boxcount-social-top">
 											<div class="fb-like" data-href="{{ URL::to('product/'.$productItems[$i]['slug'].'-'.$productItems[$i]['id']) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
 										</div>
-										<!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
+										@if($productItems[$i]->hasPromotion())
+										&nbsp;<i class="real-price">{{ product_price($productItems[$i]['price']) }}</i><br>
+										@endif
 										<div class="margin-top-10">
 											<button data-id="{{ $productItems[$i]['id'] }}" data-name="{{ $productItems[$i]['name'] }}" data-price="{{ $productItems[$i]['price'] }}" data-category="{{ $productItems[$i]->getProductType->name }}" class="btn btn-outline btn-default pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Mua Ngay</button>
 										</div>

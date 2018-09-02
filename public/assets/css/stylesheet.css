@@ -170,6 +170,17 @@ a:hover { color: #094e38; text-decoration: none }
 .order-detail p {
 	margin: 0;
 }
+.percent-discount {
+	position: absolute;
+	right: 0;
+	font-size: 25px;
+	color: #fff;
+	-moz-transform: scale(1) rotate(6deg) translateX(-19px) translateY(-2px);
+	-webkit-transform: scale(1) rotate(6deg) translateX(-19px) translateY(-2px);
+	-o-transform: scale(1) rotate(6deg) translateX(-19px) translateY(-2px);
+	-ms-transform: scale(1) rotate(6deg) translateX(-19px) translateY(-2px);
+	transform: scale(1) rotate(6deg) translateX(-19px) translateY(-2px);
+}
 
 .footer-box { color: #fff }
 .footer-box .link-footer { color: #fff }
