@@ -9,6 +9,11 @@
 			Quản lý đơn hàng
 		</a>
 	</li>
+	<li>
+		<a href="{{ URL::to('/account/logout') }}">
+			Thoát
+		</a>
+	</li>
 	<!-- <li class="{{ REQUEST::url() == URL::to('/account/order/review') ? 'active' : '' }}">
 		<a href="{{ URL::to('/account/order/review') }}">
 			Nhận xét sản phẩm đã mua

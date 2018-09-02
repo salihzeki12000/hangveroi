@@ -9,6 +9,8 @@ use App\Models\City;
 use App\Models\District;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Setting;
+use App\Models\OrderNote;
 use Cart;
 use Redirect;
 use Auth;
@@ -96,9 +98,28 @@ class CartController extends Controller {
 			$order_item->cus_phone = $request->session()->get('customerphone');
 			$order_item->cus_address = $request->session()->get('customeraddress');
 			$order_item->cus_email = $request->session()->get('customeremail');
-			$order_item->total_price = Cart::subtotal();
-			$order_item->qty = Cart::count();
+			if ((Auth::check() && Auth::user()->id != 1) && Setting::where('key', 'first_customers')->first()["value"] == 1) {
+				$total = str_replace(",", "", Cart::subtotal());
+				if ($total < 100000)
+				{
+					$total += 20000;
+				}
+				$totalDown10 = $total * 0.1;
+				$finalTotal = $total - $totalDown10;
+				$finalTotal = number_format($finalTotal);
+				$isFirstPromotion = true;
+			} else {
+				$finalTotal = Cart::subtotal();
+				$isFirstPromotion = false;
+			}
+			$order_item->total_price = $finalTotal;
 			if($order_item->save()) {
+				if ($isFirstPromotion){
+					$orderNote = new OrderNote();
+					$orderNote->order_id = $order_item->id;
+					$orderNote->note = "Order has promotion campaign -10%";
+					$orderNote->save();
+				}
 				foreach(Cart::content() as $item) {
 					$order_detail_item = new OrderDetail();
 					$order_detail_item->product_id = $item->id;
@@ -118,8 +139,8 @@ class CartController extends Controller {
 					$productUpdate->save();
 				}
 				$data = array(
-					'carts' => Cart::content(),
-					'cart_total_price' => Cart::subtotal(),
+					'carts' => Cart::subtotal(),
+					'cart_total_price' => $finalTotal,
 					'cus_name' => $request->session()->get('customername'),
 					'cus_phone' => $request->session()->get('customerphone'),
 					'cus_address' => $request->session()->get('customeraddress'),
