@@ -94,8 +94,8 @@
 	<hr>
 </div>
 <div class="col-md-12">
-	<?php //echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(13); ?>
-	<?php //echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(10); ?>
+	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(13); ?>
+	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(10); ?>
 	<?php echo Modules\Product\Http\Controllers\ProductController::listProductByProductType(5); ?>
 	<script>
 		$(document).ready(function() {

@@ -42,7 +42,7 @@ if (!$error) {
 								@if($productItems[0]->hasPromotion())
 								<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[0]->getPromotion->money_has_discount) }}</b>
 								@else
-								<b class="price margin-top-0 margin-bottom-5">{{ $productItems[0]['price'] }}</b>
+								<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[0]['price']) }}</b>
 								@endif
 								<div class="boxcount-social-top">
 									<div class="fb-like" data-href="{{ URL::to('product/'.$productItems[0]['slug'].'-'.$productItems[0]['id']) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
