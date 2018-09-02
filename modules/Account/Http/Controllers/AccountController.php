@@ -19,9 +19,9 @@ use Facebook\Exceptions\FacebookSDKException;
 class AccountController extends Controller {
 
 	public function __construct()
-    {
-        $this->middleware('auth', ['except' => ['login', 'dologin', 'register', 'doregister']]);
-    }
+	{
+        // $this->middleware('auth', ['except' => ['login', 'dologin', 'register', 'doregister', 'managedOrders']]);
+	}
 
 	public function index()
 	{
@@ -31,35 +31,47 @@ class AccountController extends Controller {
 
 	public function editAccount(Request $request)
 	{
-		$this->data['_title'] = 'Tài khoản của tôi | Ohangveroi.com';
-		$inputs = $request->all();
+		if (Auth::check()) {
+			$this->data['_title'] = 'Tài khoản của tôi | Ohangveroi.com';
+			$inputs = $request->all();
 
-		if (isset($inputs['submit'])) {
-			$user = User::find(Auth::user()->id);
-			$user->name = $inputs['username'];
-			$user->phone = $inputs['phone'];
-			$user->address = $inputs['address'];
-			if ($user->save()) {
-				return redirect()->to('/account/edit')->with('msg', 'Cập nhật tài khoản thành công!');
+			if (isset($inputs['submit'])) {
+				$user = User::find(Auth::user()->id);
+				$user->name = $inputs['username'];
+				$user->phone = $inputs['phone'];
+				$user->address = $inputs['address'];
+				if ($user->save()) {
+					return redirect()->to('/account/edit')->with('msg', 'Cập nhật tài khoản thành công!');
+				}
 			}
-		}
 
-		return view('account::edit_account')->with($this->data);
+			return view('account::edit_account')->with($this->data);
+		} else {
+			return redirect()->to('/account/login');
+		}
 	}
 
 	public function managedOrders()
 	{
-		$this->data['_title'] = 'Đơn hàng của tôi | Ohangveroi.com';
-		$orders = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(20);
-		$this->data['orders'] = $orders;
-		return view('account::managed_orders')->with($this->data);
+		if (Auth::check()) {
+			$this->data['_title'] = 'Đơn hàng của tôi | Ohangveroi.com';
+			$orders = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(20);
+			$this->data['orders'] = $orders;
+			return view('account::managed_orders')->with($this->data);
+		} else {
+			return redirect()->to('/account/login');
+		}
 	}
 
 	public function orderDetail(Request $request)
 	{
-		$this->data['_title'] = 'Đơn hàng của tôi | Ohangveroi.com';
-		$this->data['order'] = Order::where('id', $request->segment(4))->where('user_id', Auth::user()->id)->first();
-		return view('account::order_detail')->with($this->data);
+		if (Auth::check()) {
+			$this->data['_title'] = 'Đơn hàng của tôi | Ohangveroi.com';
+			$this->data['order'] = Order::where('id', $request->segment(4))->where('user_id', Auth::user()->id)->first();
+			return view('account::order_detail')->with($this->data);
+		} else {
+			return redirect()->to('/account/login');
+		}
 	}
 
 	public function login()
@@ -86,14 +98,18 @@ class AccountController extends Controller {
 
 	public function register()
 	{
-		$this->data['_header'] = 
-		Html::script("https://www.google.com/recaptcha/api.js").
-		Html::style('plugins/bootstrap-select/css/bootstrap-select.min.css').
-		Html::script('plugins/bootstrap-select/js/bootstrap-select.min.js');
-		$this->data['_title'] = 'Đăng kí tài khoản';
-		$this->data['cityItems'] = City::orderBy('id', 'ASC')->get();
-		$this->data['districtItems'] = District::where('city_id', 79)->orderBy('name', 'ASC')->get();
-		return view('account::register')->with($this->data);
+		if (Auth::check()) {
+			$this->data['_header'] = 
+			Html::script("https://www.google.com/recaptcha/api.js").
+			Html::style('plugins/bootstrap-select/css/bootstrap-select.min.css').
+			Html::script('plugins/bootstrap-select/js/bootstrap-select.min.js');
+			$this->data['_title'] = 'Đăng kí tài khoản';
+			$this->data['cityItems'] = City::orderBy('id', 'ASC')->get();
+			$this->data['districtItems'] = District::where('city_id', 79)->orderBy('name', 'ASC')->get();
+			return view('account::register')->with($this->data);
+		} else {
+			return redirect()->to('/account/login');
+		}
 	}
 
 	public function doregister(Request $request)
