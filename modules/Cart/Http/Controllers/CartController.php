@@ -39,14 +39,16 @@ class CartController extends Controller {
 		$product = Product::find($id);
 		Cart::add(
 			array(
-				'id' 		=> $id, 
-				'name' 		=> $product->name, 
-				'price' 	=> $product->price, 
-				'qty' 		=> 1,
+				'id' 				=> $id, 
+				'name' 				=> $product->name,
+				'price' 			=> $product->hasPromotion() ? $product->getPromotion->money_has_discount : $product->price,
+				'qty' 				=> 1,
 				'options'	=>array(
 					'image' => Base::get_upload_url($product->getImage->filename),
 					'slug' 	=> $product->slug,
-					'category' 	=> $product->getProductType->name,
+					'category' => $product->getProductType->name,
+					'price_real' => $product->price,
+					'discount' => $product->hasPromotion() ? $product->getPromotion->discount : 0,
 				)
 			)
 		);
@@ -126,18 +128,18 @@ class CartController extends Controller {
 				);
 				// send to Admin
 				Mail::send('emails.new_order', $data, function ($message) use ($data) {
-                    $message->from('info@ohangveroi.com', 'Ohangveroi.com')
-                        ->to('thebaoit@gmail.com', 'Nguyen The Bao')
-                        ->subject('[NEW ORDER] ' . $data['cus_name'] . ' - ' . $data['cus_phone']);
-                });
+					$message->from('info@ohangveroi.com', 'Ohangveroi.com')
+					->to('thebaoit@gmail.com', 'Nguyen The Bao')
+					->subject('[NEW ORDER] ' . $data['cus_name'] . ' - ' . $data['cus_phone']);
+				});
                 // send to Customer
-                if ($request->session()->get('customeremail') != "") {
-                	Mail::send('emails.new_order_customer', $data, function ($message) use ($data) {
-	                    $message->from('info@ohangveroi.com', 'Ohangveroi.com')
-	                        ->to($data['cus_email'], $data['cus_name'])
-	                        ->subject('Xác nhận đơn hàng #' . $data['order_id']);
-	                });
-                }
+				if ($request->session()->get('customeremail') != "") {
+					Mail::send('emails.new_order_customer', $data, function ($message) use ($data) {
+						$message->from('info@ohangveroi.com', 'Ohangveroi.com')
+						->to($data['cus_email'], $data['cus_name'])
+						->subject('Xác nhận đơn hàng #' . $data['order_id']);
+					});
+				}
 				Cart::destroy();
 				return redirect()->to('/cart/checkout/success');
 			}

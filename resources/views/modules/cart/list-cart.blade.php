@@ -35,29 +35,43 @@
 				<div class="col-md-8">
 					<div class="alert alert-warning">
 						<div class="row">
-							<div class="col-md-8 col-xs-6">
-								Giỏ hàng có 	<b>{{ Cart::count() }}</b> sản phẩm
+							<div class="col-md-4 col-xs-12">
+								<b>Giỏ hàng có 	<b>{{ Cart::count() }}</b> sản phẩm</b>
 							</div>
 							<div class="col-md-2 col-xs-3">
-								Giá mua
+								<b>Giá</b>
 							</div>
 							<div class="col-md-2 col-xs-3">
-								Số lượng
+								<b>Giảm giá</b>
+							</div>
+							<div class="col-md-2 col-xs-3">
+								<b>Giảm còn</b>
+							</div>
+							<div class="col-md-2 col-xs-3">
+								<b>Số lượng</b>
 							</div>
 						</div>
 					</div>
 					@foreach(Cart::content() as $item)
 					<div class="row">
-						<div class="col-md-2 col-xs-6">
+						<div class="col-md-1 col-xs-4">
 							<img class="img-thumbnail img-responsive" style="width: 100%" src="{{ $item->options->image }}" alt="{{ $item->name }}">
 						</div>
-						<div class="col-md-6 col-xs-6">
-							<b>{{ $item->name }}</b>
+						<div class="col-md-3 col-xs-8">
+							<a class="linkInCard font-size-15" target="_blank" href="{{ URL::to('product/'. $item->options->slug . '-' . $item->id) }}">{{ $item->name }}</a>
+							<p class="margin-bottom-0">{{ $item->options->category }}</p>
+							<p class="margin-top-0"><a href="{{ URL::to('cart/remove/' . $item->rowId) }}">Xóa</a></p>
 						</div>
-						<div class="col-md-2 col-xs-6">
+						<div class="col-md-2 col-xs-3">
+							{{ product_price($item->options->price_real) }}
+						</div>
+						<div class="col-md-2 col-xs-3">
+							{{ $item->options->discount }}%
+						</div>
+						<div class="col-md-2 col-xs-3">
 							{{ product_price($item->price) }}
 						</div>
-						<div class="col-md-2 col-xs-6">
+						<div class="col-md-2 col-xs-3">
 							{{ $item->qty }}
 						</div>
 					</div>

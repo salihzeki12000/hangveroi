@@ -37,5 +37,19 @@ class Order extends Model
     {
         return $this->hasMany('App\Models\OrderNote', 'order_id', 'id')->orderBy('created_at', 'DESC');
     }
-    
+
+    public function getTotalOrderByMonth($month)
+    {
+        return Order::whereBetween('created_at', [date('Y').'-'.$month.'-01', date('Y').'-'.$month.'-31'])->count();
+    }
+    public function getTotalMoneyByMonth($month)
+    {
+        $money = 0;
+        $orders = Order::whereBetween('created_at', [date('Y').'-'.$month.'-01', date('Y').'-'.$month.'-31'])->get();
+        foreach($orders as $order)
+        {
+            $money += str_replace(',', '', $order->total_price);
+        }
+        return $money;
+    }
 }

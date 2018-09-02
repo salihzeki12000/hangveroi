@@ -223,7 +223,7 @@
             </div> -->
 
             <div class="col-md-12 card-wrap padding-0">
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <div class="panel">
                         <div class="panel-heading bg-white border-none" style="padding:20px;">
                             <div class="col-md-6 col-sm-6 col-sm-12 text-left">
@@ -256,13 +256,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="panel">
                         <div class="panel-heading bg-white border-none" style="padding:20px;">
                             <div class="col-md-6 col-sm-6 col-sm-12 text-left">
                                 <h4>Orders</h4>
+                                <p>Total money of {{ date('M') }}: <b>{{ number_format($totalMoneyCurrentMonth) }}đ</b></p>
                             </div>
                             <div class="col-md-6 col-sm-6 col-sm-12">
                                 <div class="mini-onoffswitch pull-right onoffswitch-primary" style="margin-top:10px;">
@@ -276,7 +277,7 @@
                                 <canvas class="bar-chart"></canvas>
                             </div>
                             <div class="col-md-12 padding-0" >
-                                <div class="col-md-4 col-sm-4 hidden-xs" style="padding-top:20px;">
+                                <!-- <div class="col-md-4 col-sm-4 hidden-xs" style="padding-top:20px;">
                                     <canvas class="doughnut-chart2"></canvas>
                                 </div>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -287,7 +288,7 @@
                                             <span class="sr-only">60% Complete</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -456,23 +457,28 @@
         ];
 
         var barChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             datasets: [
             {
-                label: "My First dataset",
+                label: "Orders",
                 fillColor: "rgba(21,186,103,0.4)",
                 strokeColor: "rgba(220,220,220,0.8)",
                 highlightFill: "rgba(21,186,103,0.2)",
                 highlightStroke: "rgba(21,186,103,0.2)",
-                data: [65, 59, 80, 81, 56, 55, 40]
-            },
-            {
-                label: "My Second dataset",
-                fillColor: "rgba(21,113,186,0.5)",
-                strokeColor: "rgba(151,187,205,0.8)",
-                highlightFill: "rgba(21,113,186,0.2)",
-                highlightStroke: "rgba(21,113,186,0.2)",
-                data: [28, 48, 40, 19, 86, 27, 90]
+                data: [
+                {{ $totalOrder1 }}, 
+                {{ $totalOrder2 }}, 
+                {{ $totalOrder3 }}, 
+                {{ $totalOrder4 }}, 
+                {{ $totalOrder5 }}, 
+                {{ $totalOrder6 }}, 
+                {{ $totalOrder7 }}, 
+                {{ $totalOrder8 }}, 
+                {{ $totalOrder9 }}, 
+                {{ $totalOrder10 }}, 
+                {{ $totalOrder11 }}, 
+                {{ $totalOrder12 }}
+                ]
             }
             ]
         };
@@ -484,25 +490,25 @@
                 showTooltips: true
             });
 
-            var ctx2 = $(".line-chart")[0].getContext("2d");
-            window.myLine = new Chart(ctx2).Line(lineChartData, {
-             responsive: true,
-             showTooltips: true,
-             multiTooltipTemplate: "<%= value %>",
-             maintainAspectRatio: false
-         });
-
             var ctx3 = $(".bar-chart")[0].getContext("2d");
             window.myLine = new Chart(ctx3).Bar(barChartData, {
-             responsive: true,
-             showTooltips: true
-         });
+               responsive: true,
+               showTooltips: true
+           });
 
-            var ctx4 = $(".doughnut-chart2")[0].getContext("2d");
-            window.myDoughnut2 = new Chart(ctx4).Doughnut(doughnutData2, {
-                responsive : true,
-                showTooltips: true
-            });
+            // var ctx2 = $(".line-chart")[0].getContext("2d");
+            // window.myLine = new Chart(ctx2).Line(lineChartData, {
+            //  responsive: true,
+            //  showTooltips: true,
+            //  multiTooltipTemplate: "<%= value %>",
+            //  maintainAspectRatio: false
+         // });
+
+            // var ctx4 = $(".doughnut-chart2")[0].getContext("2d");
+            // window.myDoughnut2 = new Chart(ctx4).Doughnut(doughnutData2, {
+            //     responsive : true,
+            //     showTooltips: true
+            // });
 
         };
         
