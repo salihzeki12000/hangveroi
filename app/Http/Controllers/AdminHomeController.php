@@ -49,6 +49,12 @@ class AdminHomeController extends Controller
         $this->data['totalOrder12'] = $order->getTotalOrderByMonth('12');
 
         $this->data['totalMoneyCurrentMonth'] = $order->getTotalMoneyByMonth(date('m'));
+
+        $this->data['totalOrderByNew'] = $order->getTotalOrderStatus(date('m'), 'new');
+        $this->data['totalOrderByShipping'] = $order->getTotalOrderStatus(date('m'), 'shipping');
+        $this->data['totalOrderByCancel'] = $order->getTotalOrderStatus(date('m'), 'cancel');
+        $this->data['totalOrderBySuccess'] = $order->getTotalOrderStatus(date('m'), 'success');
+
         $this->data['totalMoney'] = $order->getTotalMoneyByMonth(0);
         return view('admin.home')->with($this->data);
     }

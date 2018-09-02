@@ -277,25 +277,35 @@
                             <div id="canvas-holder1">
                                 <canvas class="bar-chart"></canvas>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body" style="padding-bottom:50px;">
                             <div class="col-md-12 padding-0" >
-                                <!-- <div class="col-md-4 col-sm-4 hidden-xs" style="padding-top:20px;">
+                                <div class="col-md-6 col-sm-6 hidden-xs" style="padding-top:20px;">
                                     <canvas class="doughnut-chart2"></canvas>
                                 </div>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <h4>Progress Produksi barang</h4>
-                                    <p>Sed hendrerit. Curabitur blandit mollis lacus. Duis leo. Sed libero.fusce commodo aliquam arcu..</p>
-                                    <div class="progress progress-mini">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                                            <span class="sr-only">60% Complete</span>
+                                <div class="col-md-6 col-sm-6 hidden-xs">
+                                    <h4>Orders in {{ date('M') }}</h4>
+                                    <p>Target: 100 orders</p>
+                                    <div class="progress">
+                                        @php
+                                        $order = new App\Models\Order;
+                                        $totalOr = $order->getTotalOrderByMonth(date('m'));
+                                        @endphp
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ $totalOr }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $totalOr/100*100  }}%;">
                                         </div>
+                                        <span>{{ $totalOr/100*100  }}% Complete</span>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <!-- <div class="col-md-12">
                 <div class="panel bg-green text-white">
                     <div class="panel-body">
                         <div class="col-md-8 col-sm-8 col-xs-12">
@@ -317,7 +327,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <script type="text/javascript">
@@ -425,35 +435,29 @@
 
         var doughnutData2 = [
         {
-            value: 100,
+            value: {{ $totalOrderByNew }},
             color:"#129352",
             highlight: "#15BA67",
-            label: "Alfa"
+            label: "New"
         },
         {
-            value: 250,
+            value: {{ $totalOrderByShipping }},
             color: "#FF6656",
             highlight: "#FF6656",
-            label: "Beta"
+            label: "Shipping"
         },
         {
-            value: 100,
+            value: {{ $totalOrderByCancel }},
             color: "#FDB45C",
             highlight: "#15BA67",
-            label: "Gamma"
+            label: "Cancel"
         },
         {
-            value: 40,
+            value: {{ $totalOrderBySuccess }},
             color: "#FD786A",
             highlight: "#15BA67",
-            label: "Peta"
+            label: "Success"
         },
-        {
-            value: 120,
-            color: "#15A65D",
-            highlight: "#15BA67",
-            label: "X"
-        }
 
         ];
 
@@ -485,11 +489,11 @@
         };
 
         window.onload = function(){
-            var ctx = $(".doughnut-chart")[0].getContext("2d");
-            window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {
-                responsive : true,
-                showTooltips: true
-            });
+            // var ctx = $(".doughnut-chart")[0].getContext("2d");
+            // window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {
+            //     responsive : true,
+            //     showTooltips: true
+            // });
 
             var ctx3 = $(".bar-chart")[0].getContext("2d");
             window.myLine = new Chart(ctx3).Bar(barChartData, {
@@ -505,14 +509,14 @@
             //  maintainAspectRatio: false
          // });
 
-            // var ctx4 = $(".doughnut-chart2")[0].getContext("2d");
-            // window.myDoughnut2 = new Chart(ctx4).Doughnut(doughnutData2, {
-            //     responsive : true,
-            //     showTooltips: true
-            // });
+         var ctx4 = $(".doughnut-chart2")[0].getContext("2d");
+         window.myDoughnut2 = new Chart(ctx4).Doughnut(doughnutData2, {
+            responsive : true,
+            showTooltips: true
+        });
 
-        };
-        
+     };
+
         //  end:  Chart =============
 
         // start: Calendar =========

@@ -56,4 +56,9 @@ class Order extends Model
         }
         return $money;
     }
+
+    public function getTotalOrderStatus($month, $status)
+    {
+        return Order::where('created_at', '>=', date('Y').'-'.$month.'-00')->where('created_at', '<=', date('Y').'-'.$month.'-32')->where('status', $status)->count();
+    }
 }
