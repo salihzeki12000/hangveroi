@@ -40,12 +40,16 @@ class Order extends Model
 
     public function getTotalOrderByMonth($month)
     {
-        return Order::whereBetween('created_at', [date('Y').'-'.$month.'-01', date('Y').'-'.$month.'-31'])->count();
+        return Order::where('created_at', '>=', date('Y').'-'.$month.'-00')->where('created_at', '<=', date('Y').'-'.$month.'-32')->count();
     }
     public function getTotalMoneyByMonth($month)
     {
         $money = 0;
-        $orders = Order::whereBetween('created_at', [date('Y').'-'.$month.'-01', date('Y').'-'.$month.'-31'])->get();
+        if ($month != 0) {
+            $orders = Order::where('created_at', '>=', date('Y').'-'.$month.'-00')->where('created_at', '<=', date('Y').'-'.$month.'-32')->where('status', 'success')->get();
+        } else {
+            $orders = Order::where('status', 'success')->get();
+        }
         foreach($orders as $order)
         {
             $money += str_replace(',', '', $order->total_price);

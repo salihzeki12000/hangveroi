@@ -35,20 +35,21 @@ class AdminHomeController extends Controller
         $this->data['totalOrder'] = Order::where('status', 'new')->count();
 
         $order = new Order();
-        $this->data['totalOrder1'] = $order->getTotalOrderByMonth(1);
-        $this->data['totalOrder2'] = $order->getTotalOrderByMonth(2);
-        $this->data['totalOrder3'] = $order->getTotalOrderByMonth(3);
-        $this->data['totalOrder4'] = $order->getTotalOrderByMonth(4);
-        $this->data['totalOrder5'] = $order->getTotalOrderByMonth(5);
-        $this->data['totalOrder6'] = $order->getTotalOrderByMonth(6);
-        $this->data['totalOrder7'] = $order->getTotalOrderByMonth(7);
-        $this->data['totalOrder8'] = $order->getTotalOrderByMonth(8);
-        $this->data['totalOrder9'] = $order->getTotalOrderByMonth(9);
-        $this->data['totalOrder10'] = $order->getTotalOrderByMonth(10);
-        $this->data['totalOrder11'] = $order->getTotalOrderByMonth(11);
-        $this->data['totalOrder12'] = $order->getTotalOrderByMonth(12);
+        $this->data['totalOrder1'] = $order->getTotalOrderByMonth('01');
+        $this->data['totalOrder2'] = $order->getTotalOrderByMonth('02');
+        $this->data['totalOrder3'] = $order->getTotalOrderByMonth('03');
+        $this->data['totalOrder4'] = $order->getTotalOrderByMonth('04');
+        $this->data['totalOrder5'] = $order->getTotalOrderByMonth('05');
+        $this->data['totalOrder6'] = $order->getTotalOrderByMonth('06');
+        $this->data['totalOrder7'] = $order->getTotalOrderByMonth('07');
+        $this->data['totalOrder8'] = $order->getTotalOrderByMonth('08');
+        $this->data['totalOrder9'] = $order->getTotalOrderByMonth('09');
+        $this->data['totalOrder10'] = $order->getTotalOrderByMonth('10');
+        $this->data['totalOrder11'] = $order->getTotalOrderByMonth('11');
+        $this->data['totalOrder12'] = $order->getTotalOrderByMonth('12');
 
         $this->data['totalMoneyCurrentMonth'] = $order->getTotalMoneyByMonth(date('m'));
+        $this->data['totalMoney'] = $order->getTotalMoneyByMonth(0);
         return view('admin.home')->with($this->data);
     }
 

@@ -263,6 +263,7 @@
                         <div class="panel-heading bg-white border-none" style="padding:20px;">
                             <div class="col-md-6 col-sm-6 col-sm-12 text-left">
                                 <h4>Orders</h4>
+                                <p>Total money: <b>{{ number_format($totalMoney) }}đ</b></p>
                                 <p>Total money of {{ date('M') }}: <b>{{ number_format($totalMoneyCurrentMonth) }}đ</b></p>
                             </div>
                             <div class="col-md-6 col-sm-6 col-sm-12">
