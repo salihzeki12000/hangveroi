@@ -113,6 +113,7 @@ class CartController extends Controller {
 				$isFirstPromotion = false;
 			}
 			$order_item->total_price = $finalTotal;
+			$order_item->qty = Cart::count();
 			if($order_item->save()) {
 				if ($isFirstPromotion){
 					$orderNote = new OrderNote();
@@ -129,7 +130,6 @@ class CartController extends Controller {
 					$order_detail_item->order_id = $order_item->id;
 					$order_detail_item->save();
 
-
 					$productUpdate = Product::find($item->id);
 					$unitsOnOrder = $productUpdate->units_on_order - $item->qty;
 					if ($unitsOnOrder < 0) {
@@ -139,7 +139,7 @@ class CartController extends Controller {
 					$productUpdate->save();
 				}
 				$data = array(
-					'carts' => Cart::subtotal(),
+					'carts' => Cart::content(),
 					'cart_total_price' => $finalTotal,
 					'cus_name' => $request->session()->get('customername'),
 					'cus_phone' => $request->session()->get('customerphone'),
