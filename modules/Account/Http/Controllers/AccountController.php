@@ -98,7 +98,7 @@ class AccountController extends Controller {
 
 	public function register()
 	{
-		if (Auth::check()) {
+		if (!Auth::check()) {
 			$this->data['_header'] = 
 			Html::script("https://www.google.com/recaptcha/api.js").
 			Html::style('plugins/bootstrap-select/css/bootstrap-select.min.css').
