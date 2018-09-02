@@ -110,13 +110,10 @@
 					@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
 					@php
 					$total = str_replace(",", "", Cart::subtotal());
-					if ($total < 100000)
-					{
-						$total += 20000;
-					}
 					$totalDown10 = $total * 0.1;
+					$finalTotal = $total - $totalDown10;
 					@endphp
-					Thành tiền: <span class="final_money text-right pull-right">{{ number_format($total - $totalDown10) }}đ</span><br>
+					Thành tiền: <span class="final_money text-right pull-right">{{ $total < 100000 ? number_format($finalTotal + 20000) : number_format($finalTotal) }}đ</span><br>
 					@else
 					Thành tiền: <span class="final_money text-right pull-right">{{ (str_replace(",", "", Cart::subtotal()) < 100000) ? number_format(str_replace(",", "", Cart::subtotal()) + 20000) : Cart::subtotal() }}đ</span><br>
 					@endif

@@ -140,7 +140,7 @@ class CartController extends Controller {
 				}
 				$data = array(
 					'carts' => Cart::content(),
-					'cart_total_price' => $finalTotal,
+					'cart_total_price' => Cart::subtotal(),
 					'cus_name' => $request->session()->get('customername'),
 					'cus_phone' => $request->session()->get('customerphone'),
 					'cus_address' => $request->session()->get('customeraddress'),

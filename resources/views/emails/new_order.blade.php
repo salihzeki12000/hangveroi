@@ -80,14 +80,19 @@
 					<td style="text-align: right;">{{ number_format($cart->price * $cart->qty) . ' ₫' }}</td>
 				</tr>
 				@endforeach
-				<tr>
-					<td colspan="3" style="text-align: right;padding: 5px;">Tổng tạm tính</td>
-					<td style="text-align: right;">{{ $cart_total_price . ' ₫' }}</td>
-				</tr>
 				@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
 				<tr>
 					<td colspan="3" style="text-align: right;padding: 5px;">Khuyến mãi</td>
-					<td style="text-align: right;">10%</td>
+					<td style="text-align: right;">-10%</td>
+				</tr>
+				<tr>
+					<td colspan="3" style="text-align: right;padding: 5px;">Tổng tạm tính</td>
+					<td style="text-align: right;">{{ number_format(str_replace(",", "", $cart_total_price) -  (str_replace(",", "", $cart_total_price) * 0.1))  . ' ₫' }}</td>
+				</tr>
+				@else				
+				<tr>
+					<td colspan="3" style="text-align: right;padding: 5px;">Tổng tạm tính</td>
+					<td style="text-align: right;">{{ $cart_total_price . ' ₫' }}</td>
 				</tr>
 				@endif
 				<tr>
@@ -101,13 +106,10 @@
 					@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
 					@php
 					$total = str_replace(",", "", $cart_total_price);
-					if ($total < 100000)
-					{
-						$total += 20000;
-					}
 					$totalDown10 = $total * 0.1;
+					$finalTotal = $total - $totalDown10;
 					@endphp
-					<td style="text-align: right;">{{ number_format($total - $totalDown10) }}đ</td>
+					<td style="text-align: right;">{{ $total < 100000 ? number_format($finalTotal + 20000) : number_format($finalTotal) }}đ</td>
 					@else
 					<td style="text-align: right;">{{ (str_replace(",", "", $cart_total_price) < 100000) ? number_format(str_replace(",", "", $cart_total_price) + 20000)  . ' ₫' : $cart_total_price . ' đ'}}</td>
 					@endif
