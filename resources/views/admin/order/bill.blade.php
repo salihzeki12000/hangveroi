@@ -78,6 +78,15 @@
 	<div style="text-align: right; margin-top: 10px;">
 		<i>Hoá đơn lập: {{ date('d/m/Y') }}</i>
 	</div>
+	<hr>
+	<h2 style="font-size: 15px; margin-bottom: 0;">Khuyến mãi HOT - Giảm 10% tổng đơn hàng từ ngày 2/9 đến hết ngày 15/9</h2>
+	<p>Khi mua hàng trực tiếp tại website: https://ohangveroi.com</p>
+	3 bước đơn giản: <br>
+	- 1: Đăng kí thành viên <br>
+	- 2: Đăng nhập <br>
+	- 3: Chọn hàng muốn mua, click "Mua Hàng" và điền đầy đủ thông tin giao hàng.<br>
+	Như vậy là bạn đã được giảm 10% trực tiếp trên đơn hàng rồi. <br>
+	Cám ơn bạn đã sử dụng dịch vụ của Ohangveroi.com.
 </div>
 <script>
 	window.print()
