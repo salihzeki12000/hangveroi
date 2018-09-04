@@ -71,7 +71,7 @@ if (!$error) {
 										@endif
 										<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItems[$i]['name'] }}</h3>
 										@if($productItems[$i]->hasPromotion())
-										<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[$i]->getPromotion->money_has_discount) }}</b>
+										<b class="price margin-top-0 margin-bottom-5 font-size-18">{{ product_price($productItems[$i]->getPromotion->money_has_discount) }}</b>
 										&nbsp;<i class="real-price">{{ product_price($productItems[$i]['price']) }}</i><br>
 										@else
 										<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[$i]['price']) }}</b>
