@@ -71,16 +71,14 @@ if (!$error) {
 										@endif
 										<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItems[$i]['name'] }}</h3>
 										@if($productItems[$i]->hasPromotion())
-										<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[$i]->getPromotion->money_has_discount) }}</b>&nbsp;<i class="real-price">{{ product_price($productItems[$i]['price']) }}</i>
+										<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[$i]->getPromotion->money_has_discount) }}</b>
+										&nbsp;<i class="real-price">{{ product_price($productItems[$i]['price']) }}</i><br>
 										@else
 										<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[$i]['price']) }}</b>
 										@endif
-										<div class="boxcount-social-top">
+										<!-- <div class="boxcount-social-top">
 											<div class="fb-like" data-href="{{ URL::to('product/'.$productItems[$i]['slug'].'-'.$productItems[$i]['id']) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
-										</div>
-										@if($productItems[$i]->hasPromotion())
-										&nbsp;<i class="real-price">{{ product_price($productItems[$i]['price']) }}</i><br>
-										@endif
+										</div> -->
 										<div class="margin-top-10">
 											<button data-id="{{ $productItems[$i]['id'] }}" data-name="{{ $productItems[$i]['name'] }}" data-price="{{ $productItems[$i]['price'] }}" data-category="{{ $productItems[$i]->getProductType->name }}" class="btn btn-outline btn-default pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Mua Ngay</button>
 										</div>
