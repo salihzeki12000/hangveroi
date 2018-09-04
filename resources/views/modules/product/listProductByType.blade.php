@@ -74,7 +74,7 @@ if (!$error) {
 										<b class="price margin-top-0 margin-bottom-5 font-size-18">{{ product_price($productItems[$i]->getPromotion->money_has_discount) }}</b>
 										&nbsp;<i class="real-price">{{ product_price($productItems[$i]['price']) }}</i><br>
 										@else
-										<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[$i]['price']) }}</b>
+										<b class="price margin-top-0 margin-bottom-5 font-size-18">{{ product_price($productItems[$i]['price']) }}</b>
 										@endif
 										<!-- <div class="boxcount-social-top">
 											<div class="fb-like" data-href="{{ URL::to('product/'.$productItems[$i]['slug'].'-'.$productItems[$i]['id']) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
