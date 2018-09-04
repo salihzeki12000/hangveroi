@@ -25,7 +25,11 @@ if ($location == 'home') {
 							@endif
 							@endif
 							<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItem['name'] }}</h3>
-							<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItem['price']) }}</b><!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
+							@if($productItem->hasPromotion())
+							<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItem->getPromotion->money_has_discount) }}</b>&nbsp;<i class="real-price">{{ product_price($productItem['price']) }}</i>
+							@else
+							<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItem['price']) }}</b>
+							@endif
 							<div>
 								<button data-id="{{ $productItem['id'] }}" data-name="{{ $productItem['name'] }}" data-price="{{ $productItem['price'] }}" data-category="{{ $productItem->getProductType->name }}" class="btn btn-outline btn-danger pull-right addtocart addcart-fullwidth <!--addcart-absolute-->">Mua Ngay<!--<i class="fa fa-cart-plus" aria-hidden="true"></i>--></button>
 							</div>
@@ -73,8 +77,11 @@ if ($location == 'home') {
 								<img class="img-responsive img-thumbnail margin-bottom-5" style="width: 100%; height: auto;" src="{{ App\Models\Base::get_upload_url($productItem->getImage->filename) }}" alt="{{ $productItem['name'] }}">
 								@endif
 								@endif
-								<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItem['name'] }}</h3>
-								<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItem['price']) }}</b><!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
+								@if($productItem->hasPromotion())
+								<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItem->getPromotion->money_has_discount) }}</b>&nbsp;<i class="real-price">{{ product_price($productItem['price']) }}</i>
+								@else
+								<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItem['price']) }}</b>
+								@endif
 								<div>
 									<button data-id="{{ $productItem['id'] }}" data-name="{{ $productItem['name'] }}" data-price="{{ $productItem['price'] }}" data-category="{{ $productItem->getProductType->name }}" class="btn btn-outline btn-danger pull-right addtocart addcart-fullwidth <!--addcart-absolute-->">Mua Ngay<!--<i class="fa fa-cart-plus" aria-hidden="true"></i>--></button>
 								</div>

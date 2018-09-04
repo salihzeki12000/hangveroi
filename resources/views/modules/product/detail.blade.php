@@ -69,7 +69,11 @@
 					</div>
 					<div class="col-md-5">
 						<div class="product-name">{{ $articleItem['name'] }}</div>
-						<b class="price">{{ product_price($articleItem['price']) }}</b><!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
+						@if($articleItem->hasPromotion())
+						<b class="price margin-top-0 margin-bottom-5">{{ product_price($articleItem->getPromotion->money_has_discount) }}</b>&nbsp;<i class="real-price">{{ product_price($articleItem['price']) }}</i><br>
+						@else
+						<b class="price margin-top-0 margin-bottom-5">{{ product_price($articleItem['price']) }}</b><br>
+						@endif
 						<div class="boxcount-social">
 							<div class="fb-like" data-href="{{ Request::url() }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div> <br>
 							<div class="g-plusone" data-size="medium" data-annotation="inline"></div>

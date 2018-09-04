@@ -70,10 +70,10 @@ if (!$error) {
 										@endif
 										@endif
 										<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItems[$i]['name'] }}</h3>
-										@if($productItems[$i]->hasPromotion())
-										<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[$i]->getPromotion->money_has_discount) }}</b>
+										@if($productItem->hasPromotion())
+										<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItem->getPromotion->money_has_discount) }}</b>&nbsp;<i class="real-price">{{ product_price($productItem['price']) }}</i>
 										@else
-										<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[$i]['price']) }}</b>
+										<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItem['price']) }}</b>
 										@endif
 										<div class="boxcount-social-top">
 											<div class="fb-like" data-href="{{ URL::to('product/'.$productItems[$i]['slug'].'-'.$productItems[$i]['id']) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
