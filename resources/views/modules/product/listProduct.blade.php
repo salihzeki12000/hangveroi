@@ -77,6 +77,7 @@ if ($location == 'home') {
 								<img class="img-responsive img-thumbnail margin-bottom-5" style="width: 100%; height: auto;" src="{{ App\Models\Base::get_upload_url($productItem->getImage->filename) }}" alt="{{ $productItem['name'] }}">
 								@endif
 								@endif
+								<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItem['name'] }}</h3>
 								@if($productItem->hasPromotion())
 								<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItem->getPromotion->money_has_discount) }}</b>&nbsp;<i class="real-price">{{ product_price($productItem['price']) }}</i>
 								@else
