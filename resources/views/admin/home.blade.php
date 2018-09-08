@@ -258,7 +258,7 @@
                     </div>
                 </div> -->
 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="panel">
                         <div class="panel-heading bg-white border-none" style="padding:20px;">
                             <div class="col-md-6 col-sm-6 col-sm-12 text-left">
@@ -266,12 +266,12 @@
                                 <p>Total money: <b>{{ number_format($totalMoney) }}đ</b></p>
                                 <p>Total money of {{ date('M') }}: <b>{{ number_format($totalMoneyCurrentMonth) }}đ</b></p>
                             </div>
-                            <div class="col-md-6 col-sm-6 col-sm-12">
+                            <!-- <div class="col-md-6 col-sm-6 col-sm-12">
                                 <div class="mini-onoffswitch pull-right onoffswitch-primary" style="margin-top:10px;">
                                     <input type="checkbox" name="onoffswitch3" class="onoffswitch-checkbox" id="myonoffswitch3" checked>
                                     <label class="onoffswitch-label" for="myonoffswitch3"></label>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="panel-body" style="padding-bottom:50px;">
                             <div id="canvas-holder1">
@@ -280,14 +280,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="panel">
                         <div class="panel-body" style="padding-bottom:50px;">
                             <div class="col-md-12 padding-0" >
-                                <div class="col-md-6 col-sm-6 hidden-xs" style="padding-top:20px;">
+                                <div class="col-md-12 col-sm-12 hidden-xs" style="padding-top:20px;">
                                     <canvas class="doughnut-chart2"></canvas>
                                 </div>
-                                <div class="col-md-6 col-sm-6 hidden-xs">
+                                <div class="col-md-12 col-sm-12 hidden-xs">
                                     <h4>Orders in {{ date('M') }}</h4>
                                     <p>Target: 100 orders</p>
                                     <div class="progress">
