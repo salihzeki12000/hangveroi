@@ -156,6 +156,7 @@
 														<ul class="dropdown-menu dropdownhover-bottom" role="menu" style="">
 															<li><a href="{{ URL::to('product/type/do-dung-gia-dinh-5') }}">Đồ dùng gia đình</a></li>
 															<li><a href="{{ URL::to('product/type/dung-cu-lam-bep-10') }}">Dụng cụ làm bếp</a></li>
+															<li><a href="{{ URL::to('product/type/do-dung-nha-tam-14') }}">Đồ dùng nhà tắm</a></li>
 													<!-- <li class="dropdown">
 														<a href="#">Another dropdown <span class="caret"></span></a>
 														<ul class="dropdown-menu dropdownhover-right">
