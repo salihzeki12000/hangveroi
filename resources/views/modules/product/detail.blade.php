@@ -79,13 +79,15 @@
 							<div class="fb-like" data-href="{{ Request::url() }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div> <br>
 							<div class="g-plusone" data-size="medium" data-annotation="inline"></div>
 						</div>
-						<div class="status"><b>Tình trạng:</b> {{ $articleItem['units_on_order'] > 0 ? 'Còn hàng' : 'Hết hàng' }}</div>
+						<div class="status"><b>Tình trạng:</b> Còn hàng</div>
+						<div class="clearfix"><br></div>
 						<div class="status">
-							<b>Đánh giá:</b> <br/>
+							<!-- <b>Đánh giá:</b> <br/>
 							@for($i = 0; $i < $productReview; $i++)
 							<i style="color: #fff004" class="fa fa-star" aria-hidden="true"></i>
 							@endfor
-							<i>({{ count($productReviews) }} đánh giá)</i> / <a href="#" data-toggle="modal" data-target="#createreview">Viết đánh giá</a>
+							<i>({{ count($productReviews) }} đánh giá)</i> -->
+							<!--  / <a href="#" data-toggle="modal" data-target="#createreview">Viết đánh giá</a>
 							<div class="modal fade" id="createreview" tabindex="-1" role="dialog" aria-labelledby="Viết đánh giá">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
@@ -141,10 +143,10 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 						</div>
 						<div class="status">
-							<a data-id="{{ $articleItem['id'] }}" data-name="{{ $articleItem['name'] }}" data-price="{{ $articleItem['price'] }}" data-category="{{ $articleItem->getProductType->name }}" class="btn btn-danger addtocart border-radius-5 font-size-20" href="#">Mua ngay</a>
+							<a data-id="{{ $articleItem['id'] }}" data-name="{{ $articleItem['name'] }}" data-price="{{ $articleItem['price'] }}" data-category="{{ $articleItem->getProductType->name }}" class="btn btn-danger addtocart border-radius-5 font-size-20 padding-left-40 padding-right-40" href="#">Mua ngay</a>
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -170,7 +172,7 @@
 			<div class="box-detail-review">
 				<ul class="nav nav-tabs" role="tablist">
 					<li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Mô tả</a></li>
-					<li role="presentation"><a href="#reviewbox" aria-controls="reviewbox" role="tab" data-toggle="tab">Đánh giá</a></li>
+					<!-- <li role="presentation"><a href="#reviewbox" aria-controls="reviewbox" role="tab" data-toggle="tab">Đánh giá</a></li> -->
 				</ul>
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane active" id="description">
@@ -182,7 +184,7 @@
 						<b>Mô tả</b><br>
 						<?php echo $articleItem['descriptions']; ?>
 					</div>
-					<div role="tabpanel" class="tab-pane" id="reviewbox">
+					<!-- <div role="tabpanel" class="tab-pane" id="reviewbox">
 						@if(count($productReviews) > 0)
 						@foreach( $productReviews as $pv_item )
 						<div class="each-review">
@@ -235,13 +237,12 @@
 						<br>
 						<br>
 						@endif
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
 <script>
 	$(document).ready(function(){
 		$.ajaxSetup({

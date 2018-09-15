@@ -87,7 +87,7 @@ if (!$error) {
 							</div>
 							@endfor
 						</div>
-						<a href="{{ URL::to('product/type/' . $productTypeSlug . '-' . $productTypeId) }}" class="text-right pull-right"><i>Xem thêm</i></a>
+						<a href="{{ URL::to('product/type/' . $productTypeSlug . '-' . $productTypeId) }}" class="btn btn-danger pull-right"><i>Xem thêm</i></a>
 					</div>
 				</div>
 			</div>
