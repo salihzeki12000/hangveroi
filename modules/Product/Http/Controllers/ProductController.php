@@ -119,8 +119,12 @@ class ProductController extends Controller {
 				} else {
 					$arrayTypes[] = $productType->id;
 				}
+				$productTypeId = $productType->id;
 				$productTypeName = $productType->name;
+				$productTypeSlug = $productType->slug;
+				$_this->data['productTypeId'] = $productTypeId;
 				$_this->data['productTypeName'] = $productTypeName;
+				$_this->data['productTypeSlug'] = $productTypeSlug;
 				$error = false;
 			} else {
 				$error = true;

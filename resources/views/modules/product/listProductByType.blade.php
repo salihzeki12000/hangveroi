@@ -1,8 +1,8 @@
 <?php 
 if (!$error) {
 	$productItems = App\Models\Product::whereIn('product_type', $arrayTypes)
-	->orderBy('created_at', 'DESC')
-	->limit($limitProduct)->get();
+	->orderBy('created_at', 'DESC')->get(); // Without limit
+	// ->limit($limitProduct)->get();
 	if (empty($productItems)) {
 		?>
 		<div class="module-row">
@@ -87,6 +87,7 @@ if (!$error) {
 							</div>
 							@endfor
 						</div>
+						<a href="{{ URL::to('product/type/' . $productTypeSlug . '-' . $productTypeId) }}" class="text-right pull-right"><i>Xem thêm</i></a>
 					</div>
 				</div>
 			</div>
