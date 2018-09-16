@@ -80,6 +80,9 @@ function display_status($statusCode)
 		case 'cancel':
 			$status = "Đã hủy";
 			break;
+		case 'handle':
+			$status = "Đã xữ lý";
+			break;
 		case 'success':
 			$status = "Đơn hàng thành công";
 			break;

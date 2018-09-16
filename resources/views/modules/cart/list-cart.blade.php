@@ -84,6 +84,14 @@
 						</div>
 					</div><br>
 					<div class="clearfix"></div>
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="form-group">
+								<label for="noteOrder">Ghi chú đơn hàng</label>
+								<textarea name="note_order" id="noteOrder" rows=10 class="form-control"></textarea>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="col-md-4 small-right-position">
 					<div class="row">
@@ -145,37 +153,29 @@
 					<div class="row">
 						<div class="col-sm-12">
 							Phương thức thanh toán:<br>
-							<input type="radio" class="payment1" id="payment1" name="paymentmethod" value="1" checked> Thanh toán tiền mặt khi nhận hàng.
-							{{-- <br>
-								<input type="radio" class="payment2" id="payment2" name="paymentmethod" value="2"> Thanh toán qua chuyển khoản ngân hàng.<br><br>
-								<div class="bank_info alert alert-info border-radius-5">
-									<b>Ngân hàng: Vietcombank</b><br>
-									Chủ tài khoản: Nguyễn Thế Bảo <br>
-									Số tài khoản: 0071005586830 <br><br>
-									<b>Ngân hàng: Á Châu (ACB)</b><br>
-									Chủ tài khoản: Nguyễn Thế Bảo <br>
-									Số tài khoản: 174341219 <br>
-								</div> --}}
-							</div>
+							<input type="radio" class="payment1" id="payment1" name="paymentmethod" value="1" checked />
+							Thanh toán tiền mặt khi nhận hàng.
 						</div>
-						<style>
-						.bank_info { display: none }
-					</style>
-					<script>
-						$('.payment2').click(function() {
-							if($('#payment2').is(':checked')) { 
-								$('.bank_info').css('display', 'block');
-							}
-						});
-						$('.payment1').click(function() {
-							if($('#payment1').is(':checked')) { 
-								$('.bank_info').css('display', 'none');
-							}
-						});
-					</script><hr>
-					<input style="width:100%" type="submit" name="submit" class="btn btn-danger border-radius-5 font-size-20" value="Tiến hành đặt hàng">
-				</form>
-			</div>
+					</div>
+					<style>
+					.bank_info { display: none }
+				</style>
+				<script>
+					$('.payment2').click(function() {
+						if($('#payment2').is(':checked')) { 
+							$('.bank_info').css('display', 'block');
+						}
+					});
+					$('.payment1').click(function() {
+						if($('#payment1').is(':checked')) { 
+							$('.bank_info').css('display', 'none');
+						}
+					});
+				</script>
+				<hr>
+				<input style="width:100%" type="submit" name="submit" class="btn btn-danger border-radius-5 font-size-20" value="Tiến hành đặt hàng">
+			</form>
 		</div>
 	</div>
-	@stop
+</div>
+@stop

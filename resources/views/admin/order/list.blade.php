@@ -75,6 +75,8 @@
 											<span class="label label-warning">Đang giao hàng</span>
 											@elseif ($item->status == 'cancel')
 											<span class="label label-default">Đã hủy</span>
+											@elseif ($item->status == 'handle')
+											<span class="label label-info">Đã xữ lý</span>
 											@elseif ($item->status == 'success')
 											<span class="label label-success">Thành công</span>
 											@endif

@@ -112,6 +112,7 @@
 							</div>
 							<select name="status" class="selectpicker form-control" data-id="{{ $articleItem->id }}" data-name="{{ $articleItem->cus_name }}" data-token="{{ csrf_token() }}" data-segment1="{{ Request::segment(1) }}">
 								<option {{ $articleItem->status == 'new' ? 'selected' : '' }} value="new">Đơn hàng mới</option>
+								<option {{ $articleItem->status == 'handle' ? 'selected' : '' }} value="handle">Đã xữ lý</option>
 								<option {{ $articleItem->status == 'shipping' ? 'selected' : '' }} value="shipping">Đang giao hàng</option>
 								<option {{ $articleItem->status == 'cancel' ? 'selected' : '' }} value="cancel">Đã hủy</option>
 								<option {{ $articleItem->status == 'success' ? 'selected' : '' }} value="success">Thành công</option>
