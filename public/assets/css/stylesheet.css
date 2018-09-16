@@ -181,6 +181,11 @@ a:hover { color: #094e38; text-decoration: none }
 	-ms-transform: scale(1) rotate(6deg) translateX(-19px) translateY(-2px);
 	transform: scale(1) rotate(6deg) translateX(-19px) translateY(-2px);
 }
+.status_new { padding: 2px 10px; background: #3498db; border-radius: 10px; color: #fff; }
+.status_success { padding: 2px 10px; background: #2ecc71; border-radius: 10px; color: #fff; }
+.status_cancel { padding: 2px 10px; background: #34495e; border-radius: 10px; color: #fff; }
+.status_shipping { padding: 2px 10px; background: #e74c3c; border-radius: 10px; color: #fff; }
+.status_handle { padding: 2px 10px; background: #f1c40f; border-radius: 10px; color: #fff; }
 
 .footer-box { color: #fff }
 .footer-box .link-footer { color: #fff }

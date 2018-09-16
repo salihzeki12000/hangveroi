@@ -23,7 +23,7 @@
 				</div>
 			</div>
 			<div class="col-md-9 right-position">
-				<div class="wrapListProduct">
+				<div class="wrapListProduct font-size-12">
 					<table class="table table-condensed table-hover">
 						<thead>
 							<tr>
@@ -31,7 +31,7 @@
 								<th>Ngày mua</th>
 								<th>Sản phẩm</th>
 								<th class="text-right">Tổng tiền</th>
-								<th class="text-right">Trạng thái đơn hàng</th>
+								<th class="text-right">Trạng thái<br>đơn hàng</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -54,7 +54,7 @@
 									@endif
 								</td>
 								<td class="text-right">{{ $order->total_price }} đ</td>
-								<td class="text-right">{{ display_status($order->status) }}</td>
+								<td class="text-right"><span class="status_{{ $order->status }}">{{ display_status($order->status) }}</span></td>
 							</tr>
 							@endforeach
 							@else
