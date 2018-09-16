@@ -98,7 +98,7 @@ class CartController extends Controller {
 			$order_item->cus_phone = $request->session()->get('customerphone');
 			$order_item->cus_address = $request->session()->get('customeraddress');
 			$order_item->cus_email = $request->session()->get('customeremail');
-			$order_item->note = $request->get('order_note');
+			$order_item->note = $request->get('note_order');
 			if ((Auth::check() && Auth::user()->id != 1) && Setting::where('key', 'first_customers')->first()["value"] == 1) {
 				$total = str_replace(",", "", Cart::subtotal());
 				if ($total < 100000)
@@ -148,20 +148,20 @@ class CartController extends Controller {
 					'cus_email' => $request->session()->get('customeremail'),
 					'order_id' => $order_item->id
 				);
-				// // send to Admin
-				// Mail::send('emails.new_order', $data, function ($message) use ($data) {
-				// 	$message->from('info@ohangveroi.com', 'Ohangveroi.com')
-				// 	->to('thebaoit@gmail.com', 'Nguyen The Bao')
-				// 	->subject('[NEW ORDER] ' . $data['cus_name'] . ' - ' . $data['cus_phone']);
-				// });
-    //             // send to Customer
-				// if ($request->session()->get('customeremail') != "") {
-				// 	Mail::send('emails.new_order_customer', $data, function ($message) use ($data) {
-				// 		$message->from('info@ohangveroi.com', 'Ohangveroi.com')
-				// 		->to($data['cus_email'], $data['cus_name'])
-				// 		->subject('Xác nhận đơn hàng #' . $data['order_id']);
-				// 	});
-				// }
+				// send to Admin
+				Mail::send('emails.new_order', $data, function ($message) use ($data) {
+					$message->from('info@ohangveroi.com', 'Ohangveroi.com')
+					->to('thebaoit@gmail.com', 'Nguyen The Bao')
+					->subject('[NEW ORDER] ' . $data['cus_name'] . ' - ' . $data['cus_phone']);
+				});
+                // send to Customer
+				if ($request->session()->get('customeremail') != "") {
+					Mail::send('emails.new_order_customer', $data, function ($message) use ($data) {
+						$message->from('info@ohangveroi.com', 'Ohangveroi.com')
+						->to($data['cus_email'], $data['cus_name'])
+						->subject('Xác nhận đơn hàng #' . $data['order_id']);
+					});
+				}
 				Cart::destroy();
 				return redirect()->to('/cart/checkout/success');
 			}

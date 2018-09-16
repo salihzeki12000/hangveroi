@@ -46,6 +46,7 @@
 									<tr>
 										<th>ID</th>
 										<th>Purcharer</th>
+										<th>Note</th>
 										<th>Quantity</th>
 										<th>Total Price</th>
 										<th>Date ordered</th>
@@ -65,6 +66,7 @@
 											{{ $item['cus_phone'] }} <br>
 											{{ $item['cus_address'] }}
 										</td>
+										<td>{{ $item['note'] }}</td>
 										<td>{{ $item['qty'] }}</td>
 										<td>{{ product_price(str_replace(',', '', $item['total_price'])) }}</td>
 										<td>{{ $item['created_at'] }}</td>
@@ -83,10 +85,10 @@
 										</td>
 										<td>
 											<a href="{{ admin_link_helper('view', $item['id']) }}">
-												<span class="btn btn-outline btn-primary">View <span class="fa fa-eye"></span></span>
+												<span style="padding: 0px 10px" class="btn btn-outline btn-primary">View <span class="fa fa-eye"></span></span>
 											</a>
 											<a href="{{ admin_link_helper('edit', $item['id']) }}">
-												<span class="btn btn-outline btn-warning">Edit <span class="fa fa-pencil"></span></span>
+												<span style="padding: 0px 10px" class="btn btn-outline btn-warning">Edit <span class="fa fa-pencil"></span></span>
 											</a>
 											<!-- &nbsp;
 											<a class="deleleItem" data-segment1="{{ Request::segment(1) }}" data-segment2="{{ Request::segment(2) }}" data-name="{{ $item['name'] }}" data-token="{{ csrf_token() }}" data-id="{{ $item['id'] }}" href="{{ admin_link_helper('delete', $item['id']) }}">
