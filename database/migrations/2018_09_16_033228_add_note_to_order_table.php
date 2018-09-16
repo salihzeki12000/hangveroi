@@ -13,7 +13,8 @@ class AddNoteToOrderTable extends Migration
     public function up()
     {
         Schema::table('order', function (Blueprint $table) {
-            $table->text('note')->default(NULL);
+            $table->collation = 'utf8_unicode_ci';
+            $table->text('note')->nullable();
         });
     }
 
