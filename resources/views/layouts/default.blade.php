@@ -356,6 +356,20 @@
 			</div>
 		</footer>
 	</div>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	<div class="fb-customerchat"
+	attribution=setup_tool
+	page_id="591208257907534"
+	theme_color="#0c5f44"
+	logged_in_greeting="Xin chào! Chúng tôi rất vui lòng được phục vụ bạn"
+	logged_out_greeting="Xin chào! Chúng tôi rất vui lòng được phục vụ bạn"></div>
 </div>
 </body>
 </html>
