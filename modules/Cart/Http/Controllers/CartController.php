@@ -105,7 +105,7 @@ class CartController extends Controller {
 				{
 					$total += 20000;
 				}
-				$totalDown10 = $total * 0.1;
+				$totalDown10 = $total * 0.05;
 				$finalTotal = $total - $totalDown10;
 				$finalTotal = number_format($finalTotal);
 				$isFirstPromotion = true;
@@ -119,7 +119,7 @@ class CartController extends Controller {
 				if ($isFirstPromotion){
 					$orderNote = new OrderNote();
 					$orderNote->order_id = $order_item->id;
-					$orderNote->note = "Order has promotion campaign -10%";
+					$orderNote->note = "Order has promotion campaign -5%";
 					$orderNote->save();
 				}
 				foreach(Cart::content() as $item) {
@@ -152,6 +152,7 @@ class CartController extends Controller {
 				Mail::send('emails.new_order', $data, function ($message) use ($data) {
 					$message->from('info@ohangveroi.com', 'Ohangveroi.com')
 					->to('thebaoit@gmail.com', 'Nguyen The Bao')
+					->cc('ntkimchau0707@gmail.com', 'Kim Chau')
 					->subject('[NEW ORDER] ' . $data['cus_name'] . ' - ' . $data['cus_phone']);
 				});
                 // send to Customer

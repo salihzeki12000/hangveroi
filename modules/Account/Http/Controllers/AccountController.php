@@ -15,6 +15,7 @@ use URL;
 use Facebook\Facebook;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
+use Mail;
 
 class AccountController extends Controller {
 
@@ -93,6 +94,8 @@ class AccountController extends Controller {
 		$inputs = $request->all();
 		if (Auth::attempt(['email' => $inputs['email'], 'password' => $inputs['password']])) {
 			return redirect()->back();
+		} else {
+			return redirect()->to('/account/login')->with('msg', 'Đăng nhập không thành công, vui lòng kiểm tra lại email và mật khẩu. Xin cảm ơn!');
 		}
 	}
 
@@ -125,22 +128,22 @@ class AccountController extends Controller {
 		// $userItem->district_id = $inputs['district'];
 		$userItem->address = $inputs['address'];
 		if ($userItem->save()) {
+			$data = array(
+				'email' => $userItem->email,
+				'cus_name' => $userItem->name,
+				'cus_phone' => $userItem->phone,
+				'cus_address' => $userItem->address,
+			);
+			Mail::send('modules.account.emails.register-template', $data, function($message) use ($data)
+			{
+				$message->from('info@ohangveroi.com', 'Ohangveroi.com')
+				->to('thebaoit@gmail.com', 'The Bao')
+				->subject('[Ohangveroi.com] New member - ' . $data['cus_name']);
+			});
 			return redirect()->to('account/login');
 		} else {
 			return view('account::register');
 		}
-		// if($userItem->save())
-		// {
-		// 	$data_email = array(
-		// 		'email' => $userItem->email,
-		// 		);
-
-		// 	Mail::send('modules.account.emails.register-template', $data_email, function($message) use ($data_email)
-		// 	{
-		// 		$subject = "HDLSHLDS";
-		// 		$message->to($data_email['email'])->subject($subject);
-		// 	});
-		// }
 	}
 
 	public function mycart(Request $request)

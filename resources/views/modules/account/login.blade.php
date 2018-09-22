@@ -10,6 +10,17 @@
 			</div>
 		</div>
 		<div class="second-row">
+			@if (Session::has('msg'))
+			<div class="row">
+				<div class="col-md-12">
+					<div class="col-md-12">
+						<div class="alert alert-warning" role="alert">
+							{{ Session::get('msg') }}
+						</div>
+					</div>
+				</div>
+			</div>
+			@endif
 			<div class="col-md-8 col-md-offset-2">
 				<form method="post" action="{{ Request::url() }}">
 					{{ csrf_field() }}
@@ -22,6 +33,7 @@
 						<input id="txt_password" class="form-control" type="password" name="password" value>
 					</div>
 					<div class="form-group text-right">
+						<a href="{{ URL::to('/account/register') }}" class="btn btn-waring">Đăng kí</a>
 						<input class="btn btn-danger" name="submit" type="submit" value="Đăng nhập">
 					</div>
 				</form>

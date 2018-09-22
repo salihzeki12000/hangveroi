@@ -49,7 +49,7 @@
 					<b>Thời gian giao hàng dự kiến:</b> dự kiến giao hàng trước 19:00 {{ date('H') <= 12 ? ' hôm nay.' : ' ngày ' . date('d-m-Y', strtotime(' +1 day')) }} <br>
 					<!--get Customer-->
 					@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
-					<b>Khuyến mãi:</b> - 10% <br>
+					<b>Khuyến mãi:</b> - 5% <br>
 					@endif
 					<!--end Get Customer-->
 					@if (str_replace(",", "", $cart_total_price) < 100000)
@@ -84,11 +84,11 @@
 				@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
 				<tr>
 					<td colspan="3" style="text-align: right;padding: 5px;">Khuyến mãi</td>
-					<td style="text-align: right;">-10%</td>
+					<td style="text-align: right;">-5%</td>
 				</tr>
 				<tr>
 					<td colspan="3" style="text-align: right;padding: 5px;">Tổng tạm tính</td>
-					<td style="text-align: right;">{{ number_format(str_replace(",", "", $cart_total_price) -  (str_replace(",", "", $cart_total_price) * 0.1))  . ' ₫' }}</td>
+					<td style="text-align: right;">{{ number_format(str_replace(",", "", $cart_total_price) -  (str_replace(",", "", $cart_total_price) * 0.05))  . ' ₫' }}</td>
 				</tr>
 				@else				
 				<tr>
@@ -107,7 +107,7 @@
 					@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
 					@php
 					$total = str_replace(",", "", $cart_total_price);
-					$totalDown10 = $total * 0.1;
+					$totalDown10 = $total * 0.05;
 					$finalTotal = $total - $totalDown10;
 					@endphp
 					<td style="text-align: right;">{{ $total < 100000 ? number_format($finalTotal + 20000) : number_format($finalTotal) }}đ</td>

@@ -135,14 +135,14 @@
 						@endif
 						<!--get Customer-->
 						@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
-						Khuyến mãi: <span class="total_money text-right pull-right">- 10%</span>
+						Khuyến mãi: <span class="total_money text-right pull-right">- 5%</span>
 						@endif
 						<!--end Get Customer-->
 						<hr>
 						@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
 						@php
 						$total = str_replace(",", "", Cart::subtotal());
-						$totalDown10 = $total * 0.1;
+						$totalDown10 = $total * 0.05;
 						$finalTotal = $total - $totalDown10;
 						@endphp
 						Thành tiền: <span class="final_money text-right pull-right">{{ $total < 100000 ? number_format($finalTotal + 20000) : number_format($finalTotal) }}đ</span><br>
