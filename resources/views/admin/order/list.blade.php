@@ -72,7 +72,7 @@
 											$orderItems = $item->getOrderItems;
 											@endphp
 											@foreach($orderItems as $orderItem)
-											{{ $orderItem->product_name }} x {{ $orderItem->product_qty }} <br/>
+											{{ $orderItem->product_name }} - <b>({{ $orderItem->product_qty }})</b> <br/>
 											@endforeach
 										</td>
 										<td>{{ product_price(str_replace(',', '', $item['total_price'])) }}</td>
