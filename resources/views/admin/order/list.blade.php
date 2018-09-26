@@ -47,7 +47,7 @@
 										<th>ID</th>
 										<th>Purcharer</th>
 										<th>Note</th>
-										<th>Quantity</th>
+										<th>Items</th>
 										<th>Total Price</th>
 										<th>Date ordered</th>
 										<th>Status</th>
@@ -67,7 +67,14 @@
 											{{ $item['cus_address'] }}
 										</td>
 										<td>{{ $item['note'] }}</td>
-										<td>{{ $item['qty'] }}</td>
+										<td>
+											@php
+											$orderItems = $item->getOrderItems;
+											@endphp
+											@foreach($orderItems as $orderItem)
+											{{ $orderItem->product_name }} x {{ $orderItem->product_qty }} <br/>
+											@endforeach
+										</td>
 										<td>{{ product_price(str_replace(',', '', $item['total_price'])) }}</td>
 										<td>{{ $item['created_at'] }}</td>
 										<td>
