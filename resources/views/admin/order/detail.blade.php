@@ -101,6 +101,7 @@
 								</tbody>
 							</table>
 						</div>
+						<input type="text" class="form-control feeShip"><br>
 						<input class="btn btn-danger printBill" type="button" value="Print Bill">
 						<a class="btn btn-default" href="{{ URL::to('/admin/orders/edit/' . $articleItem->id) }}">Edit this order</a>
 						<hr>
@@ -137,8 +138,12 @@
 	</div>
 </div>
 <script>
+	var URL = '{{ URL::to("/admin/orders/print/" . $articleItem->id) }}';
+	$('.feeShip').on('keyup', function () {
+		URL = '{{ URL::to("/admin/orders/print/" . $articleItem->id) }}' + '?feeShip=' + $(this).val();
+	});
 	$('.printBill').click(function() {
-		var windowOpen = window.open('{{ URL::to("/admin/orders/print/" . $articleItem->id) }}', "windowChild", "width=700, height=700");
+		var windowOpen = window.open(URL, "windowChild", "width=700, height=700");
 		return false;
 	});
 </script>

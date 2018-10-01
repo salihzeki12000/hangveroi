@@ -63,6 +63,24 @@
 					<b>{{ $articleItem->total_price }}đ</b>
 				</td>
 			</tr>
+			@if(REQUEST::get('feeShip'))
+			<tr>
+				<td colspan="3" align="right" style="padding: 5px;">
+					<b>Phí vận chuyển</b>
+				</td>
+				<td align="right" style="padding: 5px;"><b>{{ number_format(REQUEST::get('feeShip')) }}đ</b></td>
+			</tr>
+			<tr>
+				<td colspan="3" align="right" style="padding: 5px;">
+					<b>Shop hỗ trợ vận chuyển</b>
+				</td>
+				<td align="right" style="padding: 5px;"><b>-{{ number_format(REQUEST::get('feeShip')/2) }}đ</b></td>
+			</tr>
+			<tr>
+				<td colspan="3" align="right" style="padding: 5px;"><b>Tổng giá trị đơn hàng</b></td>
+				<td align="right" style="padding: 5px;"><b>{{ number_format(str_replace(",", "", $articleItem->total_price) + (REQUEST::get('feeShip')/2)) }}đ</b></td>
+			</tr>
+			@else
 			<tr>
 				<td colspan="3" align="right" style="padding: 5px;">
 					<b>Phí vận chuyển</b>
@@ -73,6 +91,7 @@
 				<td colspan="3" align="right" style="padding: 5px;"><b>Tổng giá trị đơn hàng</b></td>
 				<td align="right" style="padding: 5px;"><b>{{ (str_replace(",", "", $articleItem->total_price) < 100000) ? number_format(str_replace(",", "", $articleItem->total_price) + 20000)  . '₫' : $articleItem->total_price . 'đ'}}</b></td>
 			</tr>
+			@endif
 		</tbody>
 	</table>
 	<div style="text-align: right; margin-top: 10px;">
