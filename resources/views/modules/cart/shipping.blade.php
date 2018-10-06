@@ -35,6 +35,11 @@
 					<form method="post" action="{{ URL::to('cart/getcheckout') }}">
 						{{ csrf_field() }}
 						<div class="form-group">
+							<label for="txt_phone">Số điện thoại</label>
+							<input id="txt_phone" class="txt-phone form-control" onkeypress='validate(event)' data-token="{{ csrf_token() }}" type="text" name="phone" value="" required>
+							<i>(Tự động điền thông tin nếu bạn đã là khách hàng của Ohangveroi.com)</i>	
+						</div>
+						<div class="form-group">
 							<label for="txt_name">Họ tên</label>
 							<input id="txt_name" class="form-control" type="text" name="name" value="" required>	
 						</div>
@@ -45,10 +50,6 @@
 						<div class="form-group">
 							<label for="txt_address">Địa chỉ giao hàng</label>
 							<input id="txt_address" class="form-control" type="text" name="address" value="" required>	
-						</div>
-						<div class="form-group">
-							<label for="txt_phone">Số điện thoại</label>
-							<input id="txt_phone" class="form-control" type="text" name="phone" value="" required>	
 						</div>
 						<div class="form-group text-right">
 							<input class="btn btn-danger" name="submit" type="submit" value="Giao hàng địa chỉ này">
@@ -80,6 +81,11 @@
 					<form method="post" action="{{ URL::to('cart/getcheckout') }}">
 						{{ csrf_field() }}
 						<div class="form-group">
+							<label for="txt_phone">Số điện thoại</label>
+							<input id="txt_phone" class="txt-phone form-control" onkeypress='validate(event)' data-token="{{ csrf_token() }}" type="text" name="phone" value="" required>
+							<i>(Tự động điền thông tin nếu bạn đã là khách hàng của Ohangveroi.com)</i>	
+						</div>
+						<div class="form-group">
 							<label for="txt_name">Họ tên</label>
 							<input id="txt_name" class="form-control" type="text" name="name" value="{{ Auth::user()->name ? Auth::user()->name : Session::get('customername') }}" required>	
 						</div>
@@ -90,10 +96,6 @@
 						<div class="form-group">
 							<label for="txt_address">Địa chỉ giao hàng</label>
 							<input id="txt_address" class="form-control" type="text" name="address" value="{{ Auth::user()->address ? Auth::user()->address : Session::get('customeraddress') }}" required>	
-						</div>
-						<div class="form-group">
-							<label for="txt_phone">Số điện thoại</label>
-							<input id="txt_phone" class="form-control" type="text" name="phone" value="{{ Auth::user()->phone ? Auth::user()->phone : Session::get('customerphone') }}" required>	
 						</div>
 						<div class="form-group text-right">
 							<input class="btn btn-danger border-radius-5 font-size-20" name="submit" type="submit" value="Giao hàng địa chỉ này">
@@ -148,4 +150,41 @@
 		</div>
 	</div>
 </div>
+<script>
+	$('.txt-phone').blur(function() {
+		var phone = $(this).val();
+		var token = $(this).data('token');
+		$.ajax({
+			url: _base_url + "/cart/checkout/shipping/search-info",
+			type: 'post',
+			data: {
+				phone: phone,
+				_token: token
+			}
+		})
+		.done(function(result) {
+			if (result.error == "false") {
+				$('#txt_name').val(result.info.cus_name);
+				$('#txt_address').val(result.info.cus_address);
+				$('#txt_email').val(result.info.cus_email);
+			}
+		})			
+		return false;
+	})
+	function validate(evt) {
+		var theEvent = evt || window.event;
+		if (theEvent.type === 'paste') {
+			key = event.clipboardData.getData('text/plain');
+		} else {
+
+			var key = theEvent.keyCode || theEvent.which;
+			key = String.fromCharCode(key);
+		}
+		var regex = /[0-9]|\./;
+		if( !regex.test(key) ) {
+			theEvent.returnValue = false;
+			if(theEvent.preventDefault) theEvent.preventDefault();
+		}
+	}
+</script>
 @stop

@@ -206,5 +206,16 @@ class CartController extends Controller {
 		Cart::remove($rowId);
 		return redirect(URL::to('cart/checkout/list'));
 	}
+
+	public function searchInfo(Request $request)
+	{
+		$phone = str_replace(array('.', ' '), array('', ''), $request->phone);
+		$orderInfo = Order::where('cus_phone', $phone)->first();
+		if (count($orderInfo)) {
+			return response()->json(['error' => 'false', 'info' => $orderInfo]);
+		} else {
+			return response()->json(['error' => 'true', 'info' => null]);
+		}
+	}
 	
 }
