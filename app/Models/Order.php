@@ -56,7 +56,16 @@ class Order extends Model
         }
         return $money;
     }
-
+    public function getTotalOrderByDay($day)
+    {
+        $money = 0;
+        $orders = Order::where('created_at', $day)->where('status', 'success')->get();
+        foreach($orders as $order)
+        {
+            $money += str_replace(',', '', $order->total_price);
+        }
+        return $money;
+    }
     public function getTotalOrderStatus($month, $status)
     {
         return Order::where('created_at', '>=', date('Y').'-'.$month.'-00')->where('created_at', '<=', date('Y').'-'.$month.'-32')->where('status', $status)->count();

@@ -12,19 +12,32 @@
 						{{ $_nav_title }}
 					</p>
 				</div>
-				{{-- <div class="col-md-2">
-					<a href="{{ admin_link_helper('create') }}">
-						<h3 class="animated fadeInLeft">
-							<button class="btn ripple btn-raised btn-danger">
-								<div>
-									<span>Add new</span>
-									<span class="ink animate" style="height: 182px; width: 182px; top: -78px; left: 18px;"></span>
-								</div>
-							</button>
-						</h3>
-					</a>
-				</div> --}}
 			</div>
+		</div>
+		<div class="col-md-12">
+			@php
+			$order = new App\Models\Order();
+			@endphp
+			<table class="table table-reponsive table-bordered">
+				<tbody>
+					<tr>
+						<td class="text-center">Doanh thu hôm nay</td>
+						<td class="text-center">Doanh thu tháng <b>{{ date('m') }}</b></td>
+						<td class="text-center">Doanh thu tháng <b>{{ date('m', strtotime(date('Y-m').' -1 month')) }}</b></td>
+					</tr>
+					<tr>
+						<td class="text-center">
+							{{ number_format($order->getTotalOrderByDay(date('Y-m-d'))) }} VNĐ
+						</td>
+						<td class="text-center">
+							{{ number_format($order->getTotalMoneyByMonth(date('m'))) }} VNĐ
+						</td>
+						<td class="text-center">
+							{{ number_format($order->getTotalMoneyByMonth(date('m', strtotime(date('Y-m').' -1 month')))) }} VNĐ
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 		<div class="col-md-12 top-20 padding-0">
 			<div class="col-md-12">
@@ -97,10 +110,6 @@
 											<a href="{{ admin_link_helper('edit', $item['id']) }}">
 												<span style="padding: 0px 10px" class="btn btn-outline btn-warning">Edit <span class="fa fa-pencil"></span></span>
 											</a>
-											<!-- &nbsp;
-											<a class="deleleItem" data-segment1="{{ Request::segment(1) }}" data-segment2="{{ Request::segment(2) }}" data-name="{{ $item['name'] }}" data-token="{{ csrf_token() }}" data-id="{{ $item['id'] }}" href="{{ admin_link_helper('delete', $item['id']) }}">
-												<span class="btn btn-outline btn-primary">Delete <span class="fa fa-trash"></span></span>
-											</a> -->
 										</td>
 									</tr>
 									@endforeach
