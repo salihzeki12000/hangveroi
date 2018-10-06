@@ -58,6 +58,7 @@ Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
 	Route::get('orders/edit/{id}', 'AdminOrdersController@editOrder');
 	Route::post('orders/edit/{id}', 'AdminOrdersController@doEditOrder');
 	Route::post('order-item/update', 'AdminOrdersController@updateOrderItem');
+	Route::post('order-item/add', 'AdminOrdersController@addOrderItem');
 
 	#Product
 	Route::get('/product', 'AdminProductController@getProduct');

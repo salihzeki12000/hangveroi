@@ -53,7 +53,7 @@
 										<tr>
 											<th>Sản phẩm</th>
 											<th>Đơn giá</th>
-											<th class="text-center">Số lượng</th>
+											<th class="text-center">Số lượng ({{ $articleItem->qty }})</th>
 											<th class="text-right">Tạm tính</th>
 											<th class="text-right">Hành động</th>
 										</tr>
@@ -101,6 +101,27 @@
 								</table>
 							</div>
 						</form>
+						<form action="" method="POST">
+							<div class="row">
+								<div class="col-md-8">
+									<label for="">Product</label>
+									<select class="selectpicker form-control" data-live-search="true" name="productAddMore" id="productAddMore">
+										<option value="0">Please choose product</option>
+										@foreach($productItems as $productItem)
+										<option value="{{ $productItem->id }}">{{ $productItem->name }}</option>
+										@endforeach
+									</select>
+								</div>
+								<div class="col-md-1">
+									<label for="">Qty</label>
+									<input type="number" class="form-control" id="qtyProductAddMore" value="1">
+								</div>
+								<div class="col-md-3">
+									<label for=""></label>
+									<input type="submit" data-token="{{ csrf_token() }}" data-orderid="{{ $articleItem->id }}" class="btn btn-info form-control addMoreProduct" value="Add product">
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -108,6 +129,39 @@
 	</div>
 </div>
 <script>
+	$('.addMoreProduct').click(function() {
+		var productId = $('#productAddMore').val();
+		var qty = $('#qtyProductAddMore').val();
+		var orderId = $(this).data('orderid');
+		var token = $(this).data('token');
+		if (productId == 0) {
+			alert('Please choose product before click add product');
+			return false;
+		}
+		$.ajax({
+			url: _base_url + "admin/order-item/add",
+			type: 'post',
+			data: {
+				productId: productId,
+				qty: qty,
+				orderId: orderId,
+				_token: token
+			}
+		})
+		.done(function(result) {
+			if (result.status == true) {
+				location.reload();
+			}
+		})
+		.fail(function() {
+			BootstrapDialog.show({
+				type: BootstrapDialog.TYPE_DANGER,
+				title: 'Error',
+				message: 'Connection error'
+			});
+		});				
+		return false;
+	});
 	$('.updateQty').on('change', function() {
 		var rowId = $(this).data('row');
 		$('.update-row-' + rowId).removeAttr('disabled').addClass('btn-danger');

@@ -176,6 +176,58 @@ class AdminOrdersController extends Controller
         return redirect()->to('/admin/orders/view/' . $request->id)->with('msg', 'Updated!');
     }
 
+    public function addOrderItem(Request $request)
+    {
+        date_default_timezone_set( 'Asia/Ho_Chi_Minh' );
+        $orderPrice = 0;
+        $orderQty = 0;
+        $arrayProductId = array();
+        $orderItem = Order::find($request->orderId);
+        $orderDetailItems = OrderDetail::where('order_id', $orderItem->id)->get();
+        $productItem = Product::find($request->productId);
+        $orderNote = new OrderNote();
+        foreach ($orderDetailItems as $orderDetailItem) {
+            $arrayProductId[] = $orderDetailItem->product_id;
+        }
+        if (in_array($productItem->id, $arrayProductId)) {
+            $orderDetailItem->product_qty = $orderDetailItem->product_qty + $request->qty;
+            $orderDetailItem->save();
+
+            $orderItems = OrderDetail::where('order_id', $orderItem->id)->get();
+            foreach($orderItems as $item) {
+                $orderPrice += $item->product_price * $item->product_qty;
+                $orderQty += $item->product_qty;
+            }
+            $orderItem->total_price = number_format($orderPrice);
+            $orderItem->qty = $orderQty;
+            $orderItem->save();
+            $orderNote->order_id = $orderItem->id;
+            $orderNote->note = "Update qty of product " . $productItem->name;
+        } else {
+            $orderDetailItem = new OrderDetail();
+            $orderDetailItem->product_id = $productItem->id;
+            $orderDetailItem->product_name = $productItem->name;
+            $orderDetailItem->product_price = $productItem->price;
+            $orderDetailItem->product_qty = $request->qty;
+            $orderDetailItem->order_id = $orderItem->id;
+            $orderDetailItem->save();
+
+            $orderItems = OrderDetail::where('order_id', $orderItem->id)->get();
+            foreach($orderItems as $item) {
+                $orderPrice += $item->product_price * $item->product_qty;
+                $orderQty += $item->product_qty;
+            }
+            $orderItem->total_price = number_format($orderPrice);
+            $orderItem->qty = $orderQty;
+            $orderItem->save();
+            $orderNote->order_id = $orderItem->id;
+            $orderNote->note = "Added " . $request->qty ." ". $productItem->name . " to this order";
+        }
+        $orderNote->save();
+        $data = ['status' => true];
+        return response()->json($data);
+    }
+
     public function updateOrderItem(Request $request)
     {
         date_default_timezone_set( 'Asia/Ho_Chi_Minh' );
