@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use DB;
 
 class Order extends Model
 {
@@ -56,10 +57,10 @@ class Order extends Model
         }
         return $money;
     }
-    public function getTotalOrderByDay($day)
+    public function getTotalMoneyByToday()
     {
         $money = 0;
-        $orders = Order::where('created_at', 'LIKE', '"'.$day.'%"')->where('status', 'success')->get();
+        $orders = Order::whereDate('created_at', '>=', date('Y-m-d 00:00:00'))->where('status', 'success')->get();
         foreach($orders as $order)
         {
             $money += str_replace(',', '', $order->total_price);

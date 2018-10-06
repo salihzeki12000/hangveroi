@@ -27,7 +27,7 @@
 					</tr>
 					<tr>
 						<td class="text-center">
-							{{ number_format($order->getTotalOrderByDay(date('Y-m-d'))) }} VNĐ
+							{{ number_format($order->getTotalMoneyByToday(date('Y-m-d'))) }} VNĐ
 						</td>
 						<td class="text-center">
 							{{ number_format($order->getTotalMoneyByMonth(date('m'))) }} VNĐ
