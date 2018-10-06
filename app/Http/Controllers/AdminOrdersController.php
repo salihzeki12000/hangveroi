@@ -190,8 +190,9 @@ class AdminOrdersController extends Controller
             $arrayProductId[] = $orderDetailItem->product_id;
         }
         if (in_array($productItem->id, $arrayProductId)) {
-            $orderDetailItem->product_qty = $orderDetailItem->product_qty + $request->qty;
-            $orderDetailItem->save();
+            $orderDetail = OrderDetail::where('product_id', $request->productId)->first();
+            $orderDetail->product_qty = $orderDetail->product_qty + $request->qty;
+            $orderDetail->save();
 
             $orderItems = OrderDetail::where('order_id', $orderItem->id)->get();
             foreach($orderItems as $item) {
@@ -204,13 +205,13 @@ class AdminOrdersController extends Controller
             $orderNote->order_id = $orderItem->id;
             $orderNote->note = "Update qty of product " . $productItem->name;
         } else {
-            $orderDetailItem = new OrderDetail();
-            $orderDetailItem->product_id = $productItem->id;
-            $orderDetailItem->product_name = $productItem->name;
-            $orderDetailItem->product_price = $productItem->price;
-            $orderDetailItem->product_qty = $request->qty;
-            $orderDetailItem->order_id = $orderItem->id;
-            $orderDetailItem->save();
+            $orderDetail = new OrderDetail();
+            $orderDetail->product_id = $productItem->id;
+            $orderDetail->product_name = $productItem->name;
+            $orderDetail->product_price = $productItem->price;
+            $orderDetail->product_qty = $request->qty;
+            $orderDetail->order_id = $orderItem->id;
+            $orderDetail->save();
 
             $orderItems = OrderDetail::where('order_id', $orderItem->id)->get();
             foreach($orderItems as $item) {
