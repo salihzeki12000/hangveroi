@@ -60,7 +60,7 @@ class Order extends Model
     public function getTotalMoneyByToday()
     {
         $money = 0;
-        $orders = Order::whereDate('created_at', '>=', date('Y-m-d 00:00:00'))->get();
+        $orders = Order::whereDate('created_at', '>=', date('Y-m-d 00:00:00'))->where('status', '!=', 'cancel')->get();
         foreach($orders as $order)
         {
             $money += str_replace(',', '', $order->total_price);
@@ -69,7 +69,7 @@ class Order extends Model
     }
     public function getTotalOrderByToday()
     {
-        return Order::whereDate('created_at', '>=', date('Y-m-d 00:00:00'))->count();
+        return Order::whereDate('created_at', '>=', date('Y-m-d 00:00:00'))->where('status', '!=', 'cancel')->count();
     }
     public function getTotalOrderStatus($month, $status)
     {
