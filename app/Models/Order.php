@@ -59,7 +59,7 @@ class Order extends Model
     public function getTotalOrderByDay($day)
     {
         $money = 0;
-        $orders = Order::where('created_at', $day)->where('status', 'success')->get();
+        $orders = Order::where('created_at', 'LIKE', '"'.$day.'%"')->where('status', 'success')->get();
         foreach($orders as $order)
         {
             $money += str_replace(',', '', $order->total_price);
