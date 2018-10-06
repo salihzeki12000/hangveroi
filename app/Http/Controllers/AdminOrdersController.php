@@ -190,7 +190,7 @@ class AdminOrdersController extends Controller
             $arrayProductId[] = $orderDetailItem->product_id;
         }
         if (in_array($productItem->id, $arrayProductId)) {
-            $orderDetail = OrderDetail::where('product_id', $request->productId)->first();
+            $orderDetail = OrderDetail::where('product_id', $productItem->id)->first();
             $orderDetail->product_qty = $orderDetail->product_qty + $request->qty;
             $orderDetail->save();
 
