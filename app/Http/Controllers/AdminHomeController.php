@@ -48,6 +48,19 @@ class AdminHomeController extends Controller
         $this->data['totalOrder11'] = $order->getTotalOrderByMonth('11');
         $this->data['totalOrder12'] = $order->getTotalOrderByMonth('12');
 
+        $this->data['totalMoney1'] = $order->getTotalMoneyByMonth('01');
+        $this->data['totalMoney2'] = $order->getTotalMoneyByMonth('02');
+        $this->data['totalMoney3'] = $order->getTotalMoneyByMonth('03');
+        $this->data['totalMoney4'] = $order->getTotalMoneyByMonth('04');
+        $this->data['totalMoney5'] = $order->getTotalMoneyByMonth('05');
+        $this->data['totalMoney6'] = $order->getTotalMoneyByMonth('06');
+        $this->data['totalMoney7'] = $order->getTotalMoneyByMonth('07');
+        $this->data['totalMoney8'] = $order->getTotalMoneyByMonth('08');
+        $this->data['totalMoney9'] = $order->getTotalMoneyByMonth('09');
+        $this->data['totalMoney10'] = $order->getTotalMoneyByMonth('10');
+        $this->data['totalMoney11'] = $order->getTotalMoneyByMonth('11');
+        $this->data['totalMoney12'] = $order->getTotalMoneyByMonth('12');
+
         $this->data['totalMoneyCurrentMonth'] = $order->getTotalMoneyByMonth(date('m'));
 
         $this->data['totalOrderByNew'] = $order->getTotalOrderStatus(date('m'), 'new');

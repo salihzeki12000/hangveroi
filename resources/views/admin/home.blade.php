@@ -289,15 +289,15 @@
                                 </div>
                                 <div class="col-md-12 col-sm-12 hidden-xs">
                                     <h4>Orders in {{ date('M') }}</h4>
-                                    <p>Target: 100 orders</p>
+                                    <p>Target: 150 orders</p>
                                     <div class="progress">
                                         @php
                                         $order = new App\Models\Order;
                                         $totalOr = $order->getTotalOrderByMonth(date('m'));
                                         @endphp
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ $totalOr }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $totalOr/100*100  }}%;">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ $totalOr }}" aria-valuemin="0" aria-valuemax="150" style="width: {{ $totalOr/150*100  }}%;">
                                         </div>
-                                        <span>{{ $totalOr/100*100  }}% Complete</span>
+                                        <span>{{ $totalOr/150*100  }}% Complete</span>
                                     </div>
                                 </div>
                             </div>
@@ -484,7 +484,28 @@
                 {{ $totalOrder11 }}, 
                 {{ $totalOrder12 }}
                 ]
-            }
+            },
+            {
+                label: "Moneys",
+                fillColor: "rgba(231, 76, 60,0.4)",
+                strokeColor: "rgba(192, 57, 43,0.4)",
+                highlightFill: "rgba(211, 84, 0,0.4)",
+                highlightStroke: "rgba(230, 126, 34,0.4)",
+                data: [
+                {{ $totalMoney1 }}, 
+                {{ $totalMoney2 }}, 
+                {{ $totalMoney3 }}, 
+                {{ $totalMoney4 }}, 
+                {{ $totalMoney5 }}, 
+                {{ $totalMoney6 }}, 
+                {{ $totalMoney7 }}, 
+                {{ $totalMoney8 }}, 
+                {{ $totalMoney9 }}, 
+                {{ $totalMoney10 }}, 
+                {{ $totalMoney11 }}, 
+                {{ $totalMoney12 }}
+                ]
+            },
             ]
         };
 
