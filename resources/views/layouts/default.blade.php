@@ -8,6 +8,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favico.png') }}" />
 	<meta name="_token" content="{{ csrf_token() }}">	
 	<meta name="description" content="{!! isset($_description) ? $_description : '' !!}">
+	<meta name="description" content="{!! isset($_keywords) ? $_keywords : 'giao hang mien phi, gia dung tien ich, gia dung gia re, ly uong beer, hop dung mut tet' !!}">
 	<meta property="fb:app_id" content="734771876860976" />
 	<meta property="og:url" content="{{ Request::url() }}" />
 	<meta property="og:type" content="article" />
@@ -147,6 +148,9 @@
 												<ul class="nav navbar-nav">
 													<li>
 														<a href="{{ URL::to('') }}">Trang chủ</a>
+													</li>
+													<li>
+														<a href="{{ URL::to('/product/type/all') }}">Tất cả sản phẩm</a>
 													</li>
 													<li>
 														<a href="{{ URL::to('/product/type/do-dung-tien-ich-13') }}">Đồ dùng tiện ích</a>

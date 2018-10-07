@@ -90,6 +90,9 @@ class ProductController extends Controller {
 				$productTypeName = $productType->name;
 				$_this->data['productTypeName'] = $productTypeName;
 			}
+		} else {
+			$_this->data['productTypeName'] = 'Tất cả sản phẩm tại Ohangveroi.com';
+			$isChild = false;
 		}
 		$_this->data['arrayTypes'] = $arrayTypes;
 		$_this->data['location'] = $location;
@@ -175,5 +178,19 @@ class ProductController extends Controller {
 		$featureProducts = Product::where('is_feature', 1)->orderByRaw('RAND()')->limit(3)->get();
 		$_this->data['featureProducts'] = $featureProducts;
 		return view('product::listFeatureProduct')->with($_this->data);
+	}
+
+	public function allProduct()
+	{
+		$productItems = Product::orderBy('name', 'ASC')->paginate(9999);
+		$this->data['productItems'] = $productItems;
+		$this->data['productTypeName'] = 'Tất cả sản phẩm tại Ohangveroi.com';
+		$this->data['location'] = 'list';
+		$this->data['isChild'] = false; 
+		$this->data['colNum'] = [3, 4, 6];
+		$this->data['_title'] = "Tất cả sản phẩm gia dụng tiện ích giá rẻ tại Ohangveroi.com";
+		$this->data['_description'] = "Tất cả sản phẩm gia dụng tiện ích giá rẻ tại Ohangveroi.com | Gọi ngay 0969 292 449 để được tư vấn sản phẩm hiệu quả nhất.";
+		$this->data['_keywords'] = "giao hàng miễn phí, gia dung giá rẻ, gia dụng tiện ích, giao hang mien phi, giao hang nhanh";
+		return view('product::allProduct')->with($this->data);
 	}
 }
