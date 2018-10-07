@@ -1,2 +1,5 @@
-User-agent: *
-Disallow:
+User-Agent: *
+Disallow: 
+Disallow: /admin
+
+Sitemap: https://ohangveroi.com/sitemap.xml
