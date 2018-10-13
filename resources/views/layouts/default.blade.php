@@ -153,7 +153,7 @@
 														<a href="{{ URL::to('/product/type/all') }}">Tất cả sản phẩm</a>
 													</li>
 													<li>
-														<a href="{{ URL::to('/product/type/do-dung-tien-ich-13') }}">Đồ dùng tiện ích</a>
+														<a href="{{ URL::to('/product/type/hang-tet-2019-15') }}">Hàng tết 2019</a>
 													</li>
 													<li class="dropdown">
 														<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Đồ gia dụng<span class="caret"></span></a>
@@ -161,6 +161,9 @@
 															<li><a href="{{ URL::to('product/type/do-dung-gia-dinh-5') }}">Đồ dùng gia đình</a></li>
 															<li><a href="{{ URL::to('product/type/dung-cu-lam-bep-10') }}">Dụng cụ làm bếp</a></li>
 															<li><a href="{{ URL::to('product/type/do-dung-phong-tam-14') }}">Đồ dùng phòng tắm</a></li>
+															<li>
+																<a href="{{ URL::to('/product/type/do-dung-tien-ich-13') }}">Đồ dùng tiện ích</a>
+															</li>
 													<!-- <li class="dropdown">
 														<a href="#">Another dropdown <span class="caret"></span></a>
 														<ul class="dropdown-menu dropdownhover-right">
