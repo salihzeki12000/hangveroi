@@ -69,8 +69,7 @@
 <!-- end: Left Menu -->
 <!-- start: Mobile -->
 <div id="mimin-mobile" class="reverse">
-</div>
-    <!-- <div class="mimin-mobile-menu-list">
+    <div class="mimin-mobile-menu-list">
         <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
             <ul class="nav nav-list">
                 <li class="active ripple">
@@ -205,5 +204,5 @@
 </div>
 <button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
     <span class="fa fa-bars"></span>
-</button> -->
+</button>
 <!-- end: Mobile -->
