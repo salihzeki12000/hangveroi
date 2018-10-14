@@ -7,15 +7,6 @@
                 <h1 class="animated fadeInLeft">21:00</h1>
                 <p class="animated fadeInRight">Sat,October 1st 2029</p>
             </li>
-            <li class="active ripple">
-                <a class="tree-toggle nav-header"><span class="fa-home fa"></span> Dashboard 
-                    <span class="fa-angle-right fa right-arrow text-right"></span>
-                </a>
-                <ul class="nav nav-list tree">
-                    <li><a href="{{ URL::to(Request::segment(1).'/product') }}">Dashboard v.1</a></li>
-                    <li><a href="dashboard-v2.html">Dashboard v.2</a></li>
-                </ul>
-            </li>
             <li class="ripple">
                 <a class="tree-toggle nav-header"><span class="fa-cubes fa"></span>{{ trans('order.orders') }} 
                     <span class="fa-angle-right fa right-arrow text-right"></span>
@@ -77,7 +68,7 @@
 </div>
 <!-- end: Left Menu -->
 <!-- start: Mobile -->
-<div id="mimin-mobile" class="reverse">
+<!-- <div id="mimin-mobile" class="reverse">
     <div class="mimin-mobile-menu-list">
         <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
             <ul class="nav nav-list">
@@ -213,5 +204,5 @@
 </div>
 <button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
     <span class="fa fa-bars"></span>
-</button>
+</button> -->
 <!-- end: Mobile -->
