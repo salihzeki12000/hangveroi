@@ -1,5 +1,5 @@
 <!-- start: right menu -->
-<!-- <div id="right-menu">
+<div id="right-menu">
     <ul class="nav nav-tabs">
         <li class="active">
             <a data-toggle="tab" href="#right-menu-user">
@@ -133,6 +133,7 @@
                     </li>
                 </ul>
             </div>
+            <!-- Chatbox -->
             <div class="col-md-12 chatbox">
                 <div class="col-md-12">
                     <a href="#" class="close-chat">X</a><h4>Akihiko Avaron</h4>
@@ -471,5 +472,5 @@
 
                                 </div>
                             </div>
-                        </div>   -->
-<!-- end: right menu
+                        </div>  
+<!-- end: right menu -->
