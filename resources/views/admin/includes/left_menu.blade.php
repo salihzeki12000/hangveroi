@@ -68,8 +68,9 @@
 </div>
 <!-- end: Left Menu -->
 <!-- start: Mobile -->
-<!-- <div id="mimin-mobile" class="reverse">
-    <div class="mimin-mobile-menu-list">
+<div id="mimin-mobile" class="reverse">
+</div>
+    <!-- <div class="mimin-mobile-menu-list">
         <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
             <ul class="nav nav-list">
                 <li class="active ripple">
