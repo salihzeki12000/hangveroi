@@ -307,18 +307,18 @@
 									<div class="col-md-3">
 										<h4>Chăm sóc khách hàng</h4>
 										<ul class="list-link">
-											<li><a class="link-footer" href="#">Liên hệ</a></li>
+											<li><a class="link-footer" href="{{ URL::to('contact') }}">Liên hệ</a></li>
 											<li><a class="link-footer" href="#">Trả hàng</a></li>
 											<li><a class="link-footer" href="#">Sơ đồ trang</a></li>
 											<li><a class="link-footer" href="#">Khuyến mãi</a></li>
-											<li><a class="link-footer" href="#">Hậu mãi</a></li>
+											<li><a class="link-footer" href="{{ URl::to('blog/10-cach-mua-hang-truc-tuyen-gia-re-nhat-1') }}">Cách mua hàng trực tuyến giá rẻ</a></li>
 										</ul>
 									</div>
 									<div class="col-md-3">
 										<h4>Tài khoản của tôi</h4>
 										<ul class="list-link">
-											<li><a class="link-footer" href="#">Tài khoản</a></li>
-											<li><a class="link-footer" href="#">Lịch sử mua hàng</a></li>
+											<li><a class="link-footer" href="{{ URL::to('account/edit') }}">Tài khoản</a></li>
+											<li><a class="link-footer" href="{{ URL::to('account/order/history') }}">Lịch sử mua hàng</a></li>
 											<li><a class="link-footer" href="#">Danh sách yêu thích</a></li>
 											<li><a class="link-footer" href="#">Hộp thư</a></li>
 										</ul>
