@@ -2,6 +2,7 @@
 
 use Pingpong\Modules\Routing\Controller;
 use Illuminate\Http\Request;
+use App\Models\News;
 
 class BlogController extends Controller {
 	
@@ -12,7 +13,12 @@ class BlogController extends Controller {
 
 	public function detail(Request $request)
 	{
-		echo $request->segment(2);
+		$slug_array = explode("-", $request->segment(2));
+		$id = end($slug_array);
+		$article = News::find($id);
+		$this->data['article'] = $article;
+		$this->data['_title'] = $article->name;
+		return view('blog::detail')->with($this->data);
 	}
 	
 }
