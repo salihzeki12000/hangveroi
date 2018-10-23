@@ -111,59 +111,58 @@
 			<script>
 				fbq('track', 'Lead');
 			</script>
-			<div class="row">
-				<div class="container-fluid">
-					<header>
-						<div class="container">
-							<div id="intro">
-								<div class="pull-left">
-									{{ App\Models\Setting::where('key', 'intro_text')->first()["value"] }}
-								</div>
-								<div class="pull-right">
-									@if(Auth::check())
-									Xin chào <a href="{{ URL::to('account') }}">{{ Auth::user()->name }}</a>
-									@else
-									<a href="{{ URL::to('account/register') }}">Đăng kí</a> / <a href="{{ URL::to('account/login') }}">Đăng nhập</a>
-									@endif
-								</div>
+			<div class="container-fluid">
+				<header class="row">
+					<div class="container">
+						<div id="intro">
+							<div class="pull-left">
+								{{ App\Models\Setting::where('key', 'intro_text')->first()["value"] }}
+							</div>
+							<div class="pull-right">
+								@if(Auth::check())
+								Xin chào <a href="{{ URL::to('account') }}">{{ Auth::user()->name }}</a>
+								@else
+								<a href="{{ URL::to('account/register') }}">Đăng kí</a> / <a href="{{ URL::to('account/login') }}">Đăng nhập</a>
+								@endif
 							</div>
 						</div>
-						<div class="wrap-menu">
-							<div class="container">
-								<div class="row">
-									<nav class="navbar navbar-inverse" role="navigation">
-										<div class="container-fluid">
-											<div class="navbar-header">
-												<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mnu-button">
-													<span class="sr-only">Toggle navigation</span>
-													<span class="icon-bar"></span>
-													<span class="icon-bar"></span>
-													<span class="icon-bar"></span>
-												</button>
-												<a href="{{ URL::to('') }}" title="">
-													<img src="{{ asset('assets/img/logo.png') }}" alt="">
-												</a>
-											</div>
-											<div class="collapse navbar-collapse" id="mnu-button" data-hover="dropdown" data-animations="">
-												<ul class="nav navbar-nav">
-													<li>
-														<a href="{{ URL::to('') }}">Trang chủ</a>
-													</li>
-													<li>
-														<a href="{{ URL::to('/product/type/all') }}">Tất cả sản phẩm</a>
-													</li>
-													<li>
-														<a href="{{ URL::to('/product/type/hang-tet-2019-15') }}">Hàng tết 2019</a>
-													</li>
-													<li class="dropdown">
-														<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Đồ gia dụng<span class="caret"></span></a>
-														<ul class="dropdown-menu dropdownhover-bottom" role="menu" style="">
-															<li><a href="{{ URL::to('product/type/do-dung-gia-dinh-5') }}">Đồ dùng gia đình</a></li>
-															<li><a href="{{ URL::to('product/type/dung-cu-lam-bep-10') }}">Dụng cụ làm bếp</a></li>
-															<li><a href="{{ URL::to('product/type/do-dung-phong-tam-14') }}">Đồ dùng phòng tắm</a></li>
-															<li>
-																<a href="{{ URL::to('/product/type/do-dung-tien-ich-13') }}">Đồ dùng tiện ích</a>
-															</li>
+					</div>
+					<div class="wrap-menu">
+						<div class="container">
+							<div class="row">
+								<nav class="navbar navbar-inverse" role="navigation">
+									<div class="container-fluid">
+										<div class="navbar-header">
+											<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mnu-button">
+												<span class="sr-only">Toggle navigation</span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+											</button>
+											<a href="{{ URL::to('') }}" title="">
+												<img src="{{ asset('assets/img/logo.png') }}" alt="">
+											</a>
+										</div>
+										<div class="collapse navbar-collapse" id="mnu-button" data-hover="dropdown" data-animations="">
+											<ul class="nav navbar-nav">
+												<li>
+													<a href="{{ URL::to('') }}">Trang chủ</a>
+												</li>
+												<li>
+													<a href="{{ URL::to('/product/type/all') }}">Tất cả sản phẩm</a>
+												</li>
+												<li>
+													<a href="{{ URL::to('/product/type/hang-tet-2019-15') }}">Hàng tết 2019</a>
+												</li>
+												<li class="dropdown">
+													<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Đồ gia dụng<span class="caret"></span></a>
+													<ul class="dropdown-menu dropdownhover-bottom" role="menu" style="">
+														<li><a href="{{ URL::to('product/type/do-dung-gia-dinh-5') }}">Đồ dùng gia đình</a></li>
+														<li><a href="{{ URL::to('product/type/dung-cu-lam-bep-10') }}">Dụng cụ làm bếp</a></li>
+														<li><a href="{{ URL::to('product/type/do-dung-phong-tam-14') }}">Đồ dùng phòng tắm</a></li>
+														<li>
+															<a href="{{ URL::to('/product/type/do-dung-tien-ich-13') }}">Đồ dùng tiện ích</a>
+														</li>
 													<!-- <li class="dropdown">
 														<a href="#">Another dropdown <span class="caret"></span></a>
 														<ul class="dropdown-menu dropdownhover-right">
@@ -302,7 +301,7 @@
 				<div class="row">
 					<div class="footer-row">
 						<div class="col-md-12">
-							<div class="box-bg-default-footer">
+							<div class="box-bg-default-footer row">
 								<div class="footer-box container">
 									<div class="col-md-3">
 										<h4>Chăm sóc khách hàng</h4>
@@ -362,21 +361,20 @@
 				</div>
 			</div>
 		</footer>
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+		<div class="fb-customerchat"
+		attribution=setup_tool
+		page_id="591208257907534"
+		theme_color="#0c5f44"
+		logged_in_greeting="Xin chào! Chúng tôi rất vui lòng được phục vụ bạn"
+		logged_out_greeting="Xin chào! Chúng tôi rất vui lòng được phục vụ bạn"></div>
 	</div>
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) return;
-		js = d.createElement(s); js.id = id;
-		js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
-		fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
-	<div class="fb-customerchat"
-	attribution=setup_tool
-	page_id="591208257907534"
-	theme_color="#0c5f44"
-	logged_in_greeting="Xin chào! Chúng tôi rất vui lòng được phục vụ bạn"
-	logged_out_greeting="Xin chào! Chúng tôi rất vui lòng được phục vụ bạn"></div>
-</div>
 </body>
 </html>
