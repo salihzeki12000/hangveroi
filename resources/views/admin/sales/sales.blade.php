@@ -69,7 +69,7 @@
 								@foreach(Cart::content() as $c_item)
 								<p>- {{ $c_item->name }} x {{ $c_item->qty }}</p>
 								@endforeach
-								<b>Tổng tiền: {{ Cart::total() }}đ</b>
+								<b>Tổng tiền: {{ Cart::subtotal() }}đ</b>
 								@else
 								<b>Giỏ hàng trống</b>
 								@endif
