@@ -56,7 +56,7 @@ class CartController extends Controller {
 		);
 		return response()->json([
 			'cart' => Cart::content(), 
-			'total' => Cart::total(),
+			'total' => Cart::subtotal(),
 			'totalQty' => Cart::count(),
 			'error' => false
 		]);
