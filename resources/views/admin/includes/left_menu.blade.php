@@ -8,6 +8,14 @@
                 <p class="animated fadeInRight">Sat,October 1st 2029</p>
             </li>
             <li class="ripple">
+                <a class="tree-toggle nav-header"><span class="fa-cubes fa"></span>Sales 
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                </a>
+                <ul class="nav nav-list tree">
+                    <li><a href="{{ URL::to(Request::segment(1).'/sales') }}">Sales</a></li>
+                </ul>
+            </li>
+            <li class="ripple">
                 <a class="tree-toggle nav-header"><span class="fa-cubes fa"></span>{{ trans('order.orders') }} 
                     <span class="fa-angle-right fa right-arrow text-right"></span>
                 </a>

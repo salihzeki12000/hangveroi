@@ -50,6 +50,10 @@ Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
 	Route::post('/executed', 'AdminHomeController@executedSql');
 
 	#Orders
+	Route::get('sales', 'AdminSalesController@index');
+	Route::post('sales', 'AdminSalesController@index');
+
+	#Orders
 	Route::get('orders', 'AdminOrdersController@getOrders');
 	Route::get('orders/view/{id}', 'AdminOrdersController@viewOrder');
 	Route::post('orders/view/{id}', 'AdminOrdersController@doUpdateOrder');
