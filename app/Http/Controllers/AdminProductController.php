@@ -78,6 +78,7 @@ class AdminProductController extends Controller
         $this->data['name']                     = Session::get('d_name', '');
         $this->data['image_thumb']              = Session::get('d_image_thumb', '');
         $this->data['price']                    = Session::get('d_price', '');
+        $this->data['real_price']               = Session::get('d_real_price', '');
         $this->data['descriptions']             = Session::get('d_descriptions', '');
         $this->data['specifications']           = Session::get('d_specifications', '');
         $this->data['units_on_order']           = Session::get('d_units_on_order', 0);
@@ -96,6 +97,7 @@ class AdminProductController extends Controller
             $this->data['id']                   = $articleItem->id;
             $this->data['name']                 = $articleItem->name;
             $this->data['price']                = $articleItem->price;
+            $this->data['real_price']           = $articleItem->real_price;
             $this->data['descriptions']         = $articleItem->descriptions;
             $this->data['specifications']       = $articleItem->specifications;
             $this->data['units_on_order']       = $articleItem->units_on_order;
@@ -138,6 +140,7 @@ class AdminProductController extends Controller
         $articleItem->name = $inputs['name'];
         $articleItem->slug = str_replace(" ", "-", strtolower(cleanVietnamese($inputs['name'])));
         $articleItem->price = $inputs['price'];
+        $articleItem->real_price = $inputs['real_price'];
         $articleItem->descriptions = $inputs['descriptions'];
         $articleItem->specifications = $inputs['specifications'];
         $articleItem->units_on_order = $inputs['units_on_order'];
@@ -162,6 +165,7 @@ class AdminProductController extends Controller
                         'd_id' => $articleItem->id,
                         'd_name' => $articleItem->name,
                         'd_price' => $articleItem->price,
+                        'd_real_price' => $articleItem->real_price,
                         'd_descriptions' => $articleItem->descriptions,
                         'd_specifications' => $articleItem->specifications,
                         'd_units_on_order' => $articleItem->units_on_order,

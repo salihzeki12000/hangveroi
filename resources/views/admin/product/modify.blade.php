@@ -62,6 +62,13 @@
 														<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="price" value="{{ $price }}" required>
 													</div>
 												</div>
+												<div class="form-group" style="margin-bottom:40px !important;">
+													<label style="font-size: 18px; padding: 5px;">Real Price</label>
+													<div class="input-group">
+														<span class="input-group-addon">VND</span>
+														<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="real_price" value="{{ $real_price }}" required>
+													</div>
+												</div>
 												<div class="form-group form-animate-text" style="margin-bottom:40px !important;">
 													<input type="text" class="form-text" id="txt_units" name="units_on_order" value={{ $units_on_order }} required>
 													<span class="bar"></span>
