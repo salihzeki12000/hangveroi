@@ -66,10 +66,17 @@ if (!$error) {
 										@endif
 										@endif
 										<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItems[$i]['name'] }}</h3>
-										<b class="price margin-top-0 margin-bottom-5 font-size-18">{{ product_price($productItems[$i]['price']) }}</b>
-										@if($productItems[$i]['real_price'] != 0)
-										&nbsp;<i class="real-price">{{ product_price($productItems[$i]['real_price']) }}</i>
-										@endif
+										<div class="row">
+											<div class="col-xs-7">
+												<b class="price margin-top-0 margin-bottom-5 font-size-18">{{ product_price($productItems[$i]['price']) }}</b><br>
+												@if($productItems[$i]['real_price'] != 0)
+												&nbsp;<i class="real-price">{{ product_price($productItems[$i]['real_price']) }}</i>
+												@endif
+											</div>
+											<div class="col-xs-5 padding-left-0">
+												<span class="discountTop">-{{ $productItems[$i]['price']/$productItems[$i]['real_price']*100 }}%</span>
+											</div>
+										</div>
 										<!-- <div class="boxcount-social-top">
 											<div class="fb-like" data-href="{{ URL::to('product/'.$productItems[$i]['slug'].'-'.$productItems[$i]['id']) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
 										</div> -->

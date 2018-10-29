@@ -34,7 +34,17 @@
 										@endif
 										@endif
 										<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItem['name'] }}</h3>
-										<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItem['price']) }}</b><!-- &nbsp;<i class="real-price">60.000 vnđ</i> --><br>
+										<div class="row">
+											<div class="col-xs-7">
+												<b class="price margin-top-0 margin-bottom-5 font-size-18">{{ product_price($productItem['price']) }}</b><br>
+												@if($productItem['real_price'] != 0)
+												&nbsp;<i class="real-price">{{ product_price($productItem['real_price']) }}</i>
+												@endif
+											</div>
+											<div class="col-xs-5 padding-left-0">
+												<span class="discountTop">-{{ $productItem['price']/$productItem['real_price']*100 }}%</span>
+											</div>
+										</div>
 										<div>
 											<button data-id="{{ $productItem['id'] }}" data-name="{{ $productItem['name'] }}" data-price="{{ $productItem['price'] }}" data-category="{{ $productItem->getProductType->name }}" class="btn btn-outline btn-danger pull-right addtocart addcart-fullwidth <!--addcart-absolute-->">Mua Ngay<!--<i class="fa fa-cart-plus" aria-hidden="true"></i>--></button>
 										</div>

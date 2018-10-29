@@ -25,7 +25,7 @@ if ($location == 'home') {
 							@endif
 							@endif
 							<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItem['name'] }}</h3>
-							<b class="price margin-top-0 margin-bottom-5 font-size-18">{{ product_price($productItem['price']) }}</b>
+							<b class="price margin-top-0 margin-bottom-5 font-size-18">{{ product_price($productItem['price']) }}</b><br>
 							@if($productItem['real_price'] != 0)
 							&nbsp;<i class="real-price">{{ product_price($productItem['real_price']) }}</i>
 							@endif
