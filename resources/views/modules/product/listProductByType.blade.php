@@ -74,7 +74,7 @@ if (!$error) {
 												@endif
 											</div>
 											<div class="col-xs-5 padding-left-0">
-												<span class="discountTop">-{{ $productItems[$i]['price']/$productItems[$i]['real_price']*100 }}%</span>
+												<span class="discountTop">-{{ intval($productItems[$i]['price']/$productItems[$i]['real_price']*100) }}%</span>
 											</div>
 										</div>
 										<!-- <div class="boxcount-social-top">
