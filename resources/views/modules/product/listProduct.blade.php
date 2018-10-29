@@ -25,9 +25,9 @@ if ($location == 'home') {
 							@endif
 							@endif
 							<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItem['name'] }}</h3>
-							<b class="price margin-top-0 margin-bottom-5 font-size-18">{{ product_price($productItems[$i]['price']) }}</b>
-							@if($productItems[$i]['real_price'] != 0)
-							&nbsp;<i class="real-price">{{ product_price($productItems[$i]['real_price']) }}</i>
+							<b class="price margin-top-0 margin-bottom-5 font-size-18">{{ product_price($productItem['price']) }}</b>
+							@if($productItem['real_price'] != 0)
+							&nbsp;<i class="real-price">{{ product_price($productItem['real_price']) }}</i>
 							@endif
 							<div>
 								<button data-id="{{ $productItem['id'] }}" data-name="{{ $productItem['name'] }}" data-price="{{ $productItem['price'] }}" data-category="{{ $productItem->getProductType->name }}" class="btn btn-outline btn-default pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Mua Ngay</button>
@@ -77,9 +77,9 @@ if ($location == 'home') {
 								@endif
 								@endif
 								<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItem['name'] }}</h3>
-								<b class="price margin-top-0 margin-bottom-5 font-size-18">{{ product_price($productItems[$i]['price']) }}</b>
-								@if($productItems[$i]['real_price'] != 0)
-								&nbsp;<i class="real-price">{{ product_price($productItems[$i]['real_price']) }}</i>
+								<b class="price margin-top-0 margin-bottom-5 font-size-18">{{ product_price($productItem['price']) }}</b>
+								@if($productItem['real_price'] != 0)
+								&nbsp;<i class="real-price">{{ product_price($productItem['real_price']) }}</i>
 								@endif
 								<div>
 									<button data-id="{{ $productItem['id'] }}" data-name="{{ $productItem['name'] }}" data-price="{{ $productItem['price'] }}" data-category="{{ $productItem->getProductType->name }}" class="btn btn-outline btn-default pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Mua Ngay</button>
