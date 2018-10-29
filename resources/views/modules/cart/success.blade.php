@@ -51,7 +51,7 @@
 												@endif
 											</div>
 											<div class="col-xs-5 padding-left-0">
-												<span class="discountTop">-{{ intval($productItem['price']/$productItem['real_price']*100) }}%</span>
+												<span class="discountTop">-{{ intval(100 - ($productItem['price']/$productItem['real_price']*100)) }}%</span>
 											</div>
 										</div>
 										<div>
