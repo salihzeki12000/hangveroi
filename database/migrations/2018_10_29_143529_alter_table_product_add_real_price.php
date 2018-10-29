@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-class AddIsFeatureToProductsTable extends Migration
+class AlterTableProductAddRealPrice extends Migration
 {
     /**
      * Run the migrations.
