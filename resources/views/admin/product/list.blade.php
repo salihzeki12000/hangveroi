@@ -39,7 +39,8 @@
 										<th>Name</th>
 										<th>Image</th>
 										<th>Units</th>
-										<th>Date added</th>
+										<th>Price</th>
+										<th>Real Price</th>
 										<th>Action</th>
 									</tr>
 								</thead>
@@ -56,7 +57,8 @@
 											@endif
 										</td>
 										<td>{{ $item['units_on_order'] }}</td>
-										<td>{{ $item['created_at'] }}</td>
+										<td>{{ $item['price'] }}</td>
+										<td>{{ $item['real_price'] }}</td>
 										<td>
 											<a class="changeStatus" data-segment1="{{ Request::segment(1) }}" data-segment2="{{ Request::segment(2) }}" data-name="{{ $item['name'] }}" data-token="{{ csrf_token() }}" data-id="{{ $item['id'] }}" href="{{ admin_link_helper('status', $item['id']) }}">
 												@if($item->trashed())
