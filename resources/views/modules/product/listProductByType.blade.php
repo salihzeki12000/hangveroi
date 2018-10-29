@@ -39,17 +39,13 @@ if (!$error) {
 								@endif
 								@endif
 								<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItems[0]['name'] }}</h3>
-								@if($productItems[0]->hasPromotion())
-								<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[0]->getPromotion->money_has_discount) }}</b>
-								@else
 								<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItems[0]['price']) }}</b>
+								@if($productItems[0]['real_price'] != 0)
+								&nbsp;<i class="real-price">{{ product_price($productItems[0]['real_price']) }}</i>
 								@endif
 								<div class="boxcount-social-top">
 									<div class="fb-like" data-href="{{ URL::to('product/'.$productItems[0]['slug'].'-'.$productItems[0]['id']) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
 								</div>
-								@if($productItems[0]->hasPromotion())
-								&nbsp;<i class="real-price">{{ product_price($productItems[0]['price']) }}</i><br>
-								@endif
 								<div>
 									<button data-id="{{ $productItems[0]['id'] }}" data-name="{{ $productItems[0]['name'] }}" data-price="{{ $productItems[0]['price'] }}" data-category="{{ $productItems[0]->getProductType->name }}" class="margin-top-10 margin-bottom-10 btn btn-outline btn-default pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Mua Ngay</button>
 								</div>
@@ -70,11 +66,9 @@ if (!$error) {
 										@endif
 										@endif
 										<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItems[$i]['name'] }}</h3>
-										@if($productItems[$i]->hasPromotion())
-										<b class="price margin-top-0 margin-bottom-5 font-size-18">{{ product_price($productItems[$i]->getPromotion->money_has_discount) }}</b>
-										&nbsp;<i class="real-price">{{ product_price($productItems[$i]['price']) }}</i><br>
-										@else
 										<b class="price margin-top-0 margin-bottom-5 font-size-18">{{ product_price($productItems[$i]['price']) }}</b>
+										@if($productItems[$i]['real_price'] != 0)
+										&nbsp;<i class="real-price">{{ product_price($productItems[$i]['real_price']) }}</i>
 										@endif
 										<!-- <div class="boxcount-social-top">
 											<div class="fb-like" data-href="{{ URL::to('product/'.$productItems[$i]['slug'].'-'.$productItems[$i]['id']) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>

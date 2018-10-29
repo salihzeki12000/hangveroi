@@ -69,11 +69,9 @@
 					</div>
 					<div class="col-md-5">
 						<div class="product-name">{{ $articleItem['name'] }}</div>
-						@if($articleItem->hasPromotion())
-						<p class="margin-bottom-0">Giảm giá: <b>{{ $articleItem->getPromotion->discount }}%</b></p>
-						<b class="price margin-top-0 margin-bottom-5 font-size-30">{{ product_price($articleItem->getPromotion->money_has_discount) }}</b>&nbsp;<i class="real-price font-size-12">{{ product_price($articleItem['price']) }}</i><br>
-						@else
-						<b class="price margin-top-0 margin-bottom-5 font-size-30">{{ product_price($articleItem['price']) }}</b><br>
+						<b class="price margin-top-0 margin-bottom-5 font-size-30">{{ product_price($articleItem['price']) }}</b>
+						@if($articleItem['real_price'] != 0)
+						&nbsp;<i class="real-price font-size-12">{{ product_price($articleItem['real_price']) }}</i>
 						@endif
 						<div class="boxcount-social">
 							<div class="fb-like" data-href="{{ Request::url() }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div> <br>

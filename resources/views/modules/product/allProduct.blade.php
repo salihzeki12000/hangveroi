@@ -33,10 +33,9 @@
 											@endif
 											@endif
 											<h3 class="product-name margin-top-0 margin-bottom-5">{{ $productItem['name'] }}</h3>
-											@if($productItem->hasPromotion())
-											<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItem->getPromotion->money_has_discount) }}</b>&nbsp;<i class="real-price">{{ product_price($productItem['price']) }}</i>
-											@else
-											<b class="price margin-top-0 margin-bottom-5">{{ product_price($productItem['price']) }}</b>
+											<b class="price margin-top-0 margin-bottom-5 font-size-18">{{ product_price($productItem['price']) }}</b>
+											@if($productItem['real_price'] != 0)
+											&nbsp;<i class="real-price">{{ product_price($productItem['real_price']) }}</i>
 											@endif
 											<div>
 												<button data-id="{{ $productItem['id'] }}" data-name="{{ $productItem['name'] }}" data-price="{{ $productItem['price'] }}" data-category="{{ $productItem->getProductType->name }}" class="btn btn-outline btn-default pull-right addtocart addcart-fullwidth <!--addcart-absolute-->"><i class="fa fa-cart-plus"></i> Mua Ngay</button>
