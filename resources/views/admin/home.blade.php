@@ -289,15 +289,21 @@
                                 </div>
                                 <div class="col-md-12 col-sm-12 hidden-xs">
                                     <h4>Orders in {{ date('M') }}</h4>
-                                    <p>Target: 150 orders</p>
+                                    <p>Target: 250 orders</p>
                                     <div class="progress">
                                         @php
                                         $order = new App\Models\Order;
                                         $totalOr = $order->getTotalOrderByMonth(date('m'));
                                         @endphp
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ $totalOr }}" aria-valuemin="0" aria-valuemax="150" style="width: {{ $totalOr/150*100  }}%;">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ $totalOr }}" aria-valuemin="0" aria-valuemax="250" style="width: {{ $totalOr/250*100  }}%;">
                                         </div>
-                                        <span>{{ $totalOr/150*100  }}% Complete</span>
+                                        <span>{{ $totalOr/250*100  }}% Complete</span>
+                                    </div>
+                                    <p>Target: 45.000.000đ</p>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ $totalMoneyCurrentMonth }}" aria-valuemin="0" aria-valuemax="45000000" style="width: {{ $totalMoneyCurrentMonth/45000000*100  }}%;">
+                                        </div>
+                                        <span>{{ $totalMoneyCurrentMonth/45000000*100  }}% Complete</span>
                                     </div>
                                 </div>
                             </div>
