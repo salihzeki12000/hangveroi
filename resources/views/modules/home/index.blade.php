@@ -3,7 +3,7 @@
 <div class="col-md-12">
 	<div class="row">
 		<div class="first-row">
-			<div class="col-md-8">
+			<div class="col-md-8 hidden-xs">
 				<div class="main_slide">
 					<ul class="bxslider">
 						@foreach ($main_sliders as $main_slider)
@@ -32,7 +32,7 @@
 					</script>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-4 hidden-xs hidden-sm">
 				<div class="row">
 					@foreach ($right_indexs as $right_index)
 					@if($right_index->image != 0)
