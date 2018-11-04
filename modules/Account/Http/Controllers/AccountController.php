@@ -143,7 +143,7 @@ class AccountController extends Controller {
 			Mail::send('modules.account.emails.register-template-guest', $data, function($message) use ($data)
 			{
 				$message->from('info@ohangveroi.com', 'Ohangveroi.com')
-				->to($data['cus_email'], $data['cus_name'])
+				->to($data['email'], $data['cus_name'])
 				->subject('[Ohangveroi.com]- Chào mừng thành viên ' . $data['cus_name']);
 			});
 			return redirect()->to('account/login');
