@@ -291,7 +291,7 @@
 			<div id="body">
 				<div class="row">
 					<div class="container">
-						<div class="col-md-12">
+						<div class="row">
 							@yield('content')
 						</div>
 					</div>
