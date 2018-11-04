@@ -50,7 +50,7 @@
 		</div>
 	</div>
 </div>
-<div class="col-md-12">
+<div class="col-md-12 hidden-xs">
 	<div class="second-row">
 		<div class="box-bg-xam">
 			<div class="col-md-6">
