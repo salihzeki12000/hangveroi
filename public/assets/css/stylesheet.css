@@ -21,7 +21,7 @@ a:hover { color: #094e38; text-decoration: none }
 @media screen and (max-width: 480px) {
 	.navbar-fixed-bottom, .navbar-fixed-top {
 		right: unset;
-		width: unset;
+		left: unset;
 	}
 }
 

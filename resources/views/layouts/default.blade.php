@@ -31,7 +31,7 @@
 	<link rel="stylesheet" type="text/css" href="https://st.ohangveroi.com/plugins/bootstrap-dropdown/css/animate.min.css">
 	<link rel="stylesheet" type="text/css" href="https://st.ohangveroi.com/plugins/bootstrap-dropdown/css/bootstrap-dropdownhover.min.css">
 	<link rel="stylesheet" type="text/css" href="https://st.ohangveroi.com/assets/css/helpers.css">
-	<link rel="stylesheet" type="text/css" href="https://st.ohangveroi.com/assets/css/stylesheet.css?v=1.2.2">
+	<link rel="stylesheet" type="text/css" href="https://st.ohangveroi.com/assets/css/stylesheet.css?v=1.2.3">
 	
 	<script type="text/javascript" src="https://st.ohangveroi.com/assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="https://st.ohangveroi.com/plugins/bootstrap-dropdown/js/bootstrap-dropdownhover.min.js"></script>
