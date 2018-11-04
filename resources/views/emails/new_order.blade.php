@@ -123,7 +123,7 @@
 			<tr>
 				<th colspan="2">
 					<div style="background: #0c5f44; width: 100%; display: block; overflow: hidden; color: #fff; text-align: left;">
-						<p style="padding: 0 5px;">Vui lòng liên hệ khách hàng nhanh nhất có thể.</p>
+						<p style="margin: 0; padding: 0 5px 20px 5px;"><b>Vui lòng liên hệ khách hàng nhanh nhất có thể.</p>
 					</div>
 				</th>
 			</tr>

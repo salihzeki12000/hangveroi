@@ -138,7 +138,13 @@ class AccountController extends Controller {
 			{
 				$message->from('info@ohangveroi.com', 'Ohangveroi.com')
 				->to('thebaoit@gmail.com', 'The Bao')
-				->subject('[Ohangveroi.com] New member - ' . $data['cus_name']);
+				->subject('[Ohangveroi.com]' . $data['cus_name']);
+			});
+			Mail::send('modules.account.emails.register-template-guest', $data, function($message) use ($data)
+			{
+				$message->from('info@ohangveroi.com', 'Ohangveroi.com')
+				->to($data['cus_email'], $data['cus_name'])
+				->subject('[Ohangveroi.com]- Chào mừng thành viên ' . $data['cus_name']);
 			});
 			return redirect()->to('account/login');
 		} else {
