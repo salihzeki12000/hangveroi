@@ -11,7 +11,7 @@ class AlterTableOrderAddShippingFee extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function (Blueprint $table) {
+        Schema::table('order', function (Blueprint $table) {
             $table->text('shipping_fee')->default(NULL);
             $table->text('total')->default(NULL);
         });
@@ -23,7 +23,7 @@ class AlterTableOrderAddShippingFee extends Migration
      */
     public function down()
     {
-        Schema::table('orders', function (Blueprint $table) {
+        Schema::table('order', function (Blueprint $table) {
             $table->dropColumn('shipping_fee');
             $table->dropColumn('total');
         });
