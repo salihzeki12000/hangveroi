@@ -9,9 +9,15 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\OrderNote;
 use App\Models\Product;
+use App\Models\Province;
+use App\Models\District;
 
 class AdminOrdersController extends Controller
 {
+    const MAIN_CITY_ID = 79;
+    const IS_MAIN_CITY = 1;
+    const DISCOUNT_5_PERCENT = 0.05;
+
 	public function getOrders()
 	{
 		$this->data['_header'] =    Html::style('assets/css/plugins/datatables.bootstrap.min.css').
@@ -152,6 +158,7 @@ class AdminOrdersController extends Controller
         $this->data['articleItem'] = $orderItem;
         $this->data['orderItemDetails'] = $orderDetails;
         $this->data['productItems'] = $productItems;
+        $this->data['cities'] = Province::all();
 
         $this->data['_title'] = 'Edit order';
         $this->data['_nav_title'] = 'Edit order of <b>' . $orderItem->cus_name . '</b>' ;
@@ -166,6 +173,49 @@ class AdminOrdersController extends Controller
         $order->cus_email = $request->cus_email;
         $order->cus_phone = $request->cus_phone;
         $order->cus_address = $request->cus_address;
+        $order->city_id = $request->city;
+        $order->district_id = $request->district;
+
+        $orderPrice = str_replace(',', '', $order->total_price);
+
+        $cityItem = Province::find($request->city);
+        $districtItem = District::find($request->district);
+
+        if ($cityItem->id == self::MAIN_CITY_ID) {
+            if ($districtItem->main_city == self::IS_MAIN_CITY) {
+                if ($orderPrice > 100000) {
+                    $feeShip = 0;
+                } else {
+                    $feeShip = 22000;
+                }
+            } else {
+                if ($orderPrice >= 200000) {
+                    $feeShip = 0;
+                } elseif ($orderPrice >= 100000 && $orderPrice < 200000) {
+                    $feeShip = 15000;
+                } else {
+                    $feeShip = 35000;
+                }
+            }
+        } else {
+            if ($districtItem->main_city == self::IS_MAIN_CITY) {
+                if ($orderPrice >= 200000) {
+                    $feeShip = 0;
+                } else {
+                    $feeShip = 30000;
+                }
+            } else {
+                if ($orderPrice >= 200000) {
+                    $feeShip = 0;
+                } else {
+                    $feeShip = 40000;
+                }
+            }
+        }
+
+        $order->shipping_fee = number_format($feeShip);
+        $order->total = number_format($orderPrice + str_replace(',','',$order->shipping_fee));        
+
         $order->save();
 
         $orderNote = new OrderNote();
@@ -189,6 +239,10 @@ class AdminOrdersController extends Controller
         foreach ($orderDetailItems as $orderDetailItem) {
             $arrayProductId[] = $orderDetailItem->product_id;
         }
+
+        $cityItem = Province::find($orderItem->city_id);
+        $districtItem = District::find($orderItem->district_id);
+
         if (in_array($productItem->id, $arrayProductId)) {
             $orderDetail = OrderDetail::where('product_id', $productItem->id)->first();
             $orderDetail->product_qty = $orderDetail->product_qty + $request->qty;
@@ -199,6 +253,41 @@ class AdminOrdersController extends Controller
                 $orderPrice += $item->product_price * $item->product_qty;
                 $orderQty += $item->product_qty;
             }
+            if ($cityItem->id == self::MAIN_CITY_ID) {
+                if ($districtItem->main_city == self::IS_MAIN_CITY) {
+                    if ($orderPrice > 100000) {
+                        $feeShip = 0;
+                    } else {
+                        $feeShip = 22000;
+                    }
+                } else {
+                    if ($orderPrice >= 200000) {
+                        $feeShip = 0;
+                    } elseif ($orderPrice >= 100000 && $orderPrice < 200000) {
+                        $feeShip = 15000;
+                    } else {
+                        $feeShip = 35000;
+                    }
+                }
+            } else {
+                if ($districtItem->main_city == self::IS_MAIN_CITY) {
+                    if ($orderPrice >= 200000) {
+                        $feeShip = 0;
+                    } else {
+                        $feeShip = 30000;
+                    }
+                } else {
+                    if ($orderPrice >= 200000) {
+                        $feeShip = 0;
+                    } else {
+                        $feeShip = 40000;
+                    }
+                }
+            }
+
+            $orderItem->shipping_fee = number_format($feeShip);
+            $orderItem->total = number_format($orderPrice + str_replace(',','',$orderItem->shipping_fee));
+
             $orderItem->total_price = number_format($orderPrice);
             $orderItem->qty = $orderQty;
             $orderItem->save();
@@ -218,6 +307,41 @@ class AdminOrdersController extends Controller
                 $orderPrice += $item->product_price * $item->product_qty;
                 $orderQty += $item->product_qty;
             }
+            if ($cityItem->id == self::MAIN_CITY_ID) {
+                if ($districtItem->main_city == self::IS_MAIN_CITY) {
+                    if ($orderPrice > 100000) {
+                        $feeShip = 0;
+                    } else {
+                        $feeShip = 22000;
+                    }
+                } else {
+                    if ($orderPrice >= 200000) {
+                        $feeShip = 0;
+                    } elseif ($orderPrice >= 100000 && $orderPrice < 200000) {
+                        $feeShip = 15000;
+                    } else {
+                        $feeShip = 35000;
+                    }
+                }
+            } else {
+                if ($districtItem->main_city == self::IS_MAIN_CITY) {
+                    if ($orderPrice >= 200000) {
+                        $feeShip = 0;
+                    } else {
+                        $feeShip = 30000;
+                    }
+                } else {
+                    if ($orderPrice >= 200000) {
+                        $feeShip = 0;
+                    } else {
+                        $feeShip = 40000;
+                    }
+                }
+            }
+
+            $orderItem->shipping_fee = number_format($feeShip);
+            $orderItem->total = number_format($orderPrice + str_replace(',','',$orderItem->shipping_fee));
+
             $orderItem->total_price = number_format($orderPrice);
             $orderItem->qty = $orderQty;
             $orderItem->save();
@@ -237,6 +361,10 @@ class AdminOrdersController extends Controller
         $orderQty = 0;
         $orderId = $orderItem->order_id;
         $order = Order::find($orderId);
+
+        $cityItem = Province::find($order->city_id);
+        $districtItem = District::find($order->district_id);
+
         if ($request->qty != 0) {
             $orderItem->product_qty = $request->qty;
             $orderItem->save();
@@ -246,6 +374,42 @@ class AdminOrdersController extends Controller
                 $orderPrice += $item->product_price * $item->product_qty;
                 $orderQty += $item->product_qty;
             }
+
+            if ($cityItem->id == self::MAIN_CITY_ID) {
+                if ($districtItem->main_city == self::IS_MAIN_CITY) {
+                    if ($orderPrice > 100000) {
+                        $feeShip = 0;
+                    } else {
+                        $feeShip = 22000;
+                    }
+                } else {
+                    if ($orderPrice >= 200000) {
+                        $feeShip = 0;
+                    } elseif ($orderPrice >= 100000 && $orderPrice < 200000) {
+                        $feeShip = 15000;
+                    } else {
+                        $feeShip = 35000;
+                    }
+                }
+            } else {
+                if ($districtItem->main_city == self::IS_MAIN_CITY) {
+                    if ($orderPrice >= 200000) {
+                        $feeShip = 0;
+                    } else {
+                        $feeShip = 30000;
+                    }
+                } else {
+                    if ($orderPrice >= 200000) {
+                        $feeShip = 0;
+                    } else {
+                        $feeShip = 40000;
+                    }
+                }
+            }
+
+            $order->shipping_fee = number_format($feeShip);
+            $order->total = number_format($orderPrice + str_replace(',','',$order->shipping_fee));
+
             $order->total_price = number_format($orderPrice);
             $order->qty = $orderQty;
             $order->save();
@@ -259,6 +423,40 @@ class AdminOrdersController extends Controller
                     $orderPrice += $item->product_price * $item->product_qty;
                     $orderQty += $item->product_qty;
                 }
+
+                if ($cityItem->id == self::MAIN_CITY_ID) {
+                    if ($districtItem->main_city == self::IS_MAIN_CITY) {
+                        if ($orderPrice > 100000) {
+                            $feeShip = 0;
+                        } else {
+                            $feeShip = 22000;
+                        }
+                    } else {
+                        if ($orderPrice >= 200000) {
+                            $feeShip = 0;
+                        } elseif ($orderPrice >= 100000 && $orderPrice < 200000) {
+                            $feeShip = 15000;
+                        } else {
+                            $feeShip = 35000;
+                        }
+                    }
+                } else {
+                    if ($districtItem->main_city == self::IS_MAIN_CITY) {
+                        if ($orderPrice >= 200000) {
+                            $feeShip = 0;
+                        } else {
+                            $feeShip = 30000;
+                        }
+                    } else {
+                        if ($orderPrice >= 200000) {
+                            $feeShip = 0;
+                        } else {
+                            $feeShip = 40000;
+                        }
+                    }
+                }
+                $order->shipping_fee = number_format($feeShip);
+                $order->total = number_format($orderPrice + str_replace(',','',$order->shipping_fee));
                 $order->total_price = number_format($orderPrice);
                 $order->qty = $orderQty;
                 $order->save();

@@ -17,6 +17,17 @@
 	<div class="row">
 		<div class="second-row">
 			<div class="col-xs-12">
+				<div class="panel panel-info border-radius-0">
+					<div class="panel-heading"><b>GIAO HÀNG MIỄN PHÍ</b></div>
+					<div class="panel-body font-size-15">
+						<ol>
+							<li><a href="https://ohangveroi.com">Ohangveroi.com</a> giao hàng miễn phí toàn quốc cho đơn hàng từ <b class="font-size-18">200.000đ</b>.</li>
+							<li>Miễn phí giao hàng nội thành TP HCM cho đơn hàng chỉ từ <b class="font-size-18">100.000đ</b>.</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12">
 				<div class="progress border-radius-0">
 					<div class="progress-bar progress-bar-striped progress-bar-danger active" aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width:33.3%">
 						Giỏ hàng
@@ -99,12 +110,16 @@
 							<div class="alert alert-warning">
 								<h4 class="margin-0">Địa chỉ giao hàng</h4>
 							</div>
+							@php
+							$cityItem = App\Models\Province::find(Session::get('customercity'));
+							$districtItem = App\Models\District::find(Session::get('customerdistrict'));
+							@endphp
 							<h5>{{ Session::get('customername') }}</h5>
 							@if (Session::get('customeremail') != "")
 							<p>{{ Session::get('customeremail') }}</p>
 							@endif
 							<p>{{ Session::get('customerphone') }}</p>
-							<p>{{ Session::get('customeraddress') }}</p>
+							<p>{{ Session::get('customeraddress') . ', ' . $districtItem->type . ' ' . $districtItem->name . ', ' . $cityItem->type . ' ' . $cityItem->name }}</p>
 							<a class="btn btn-default pull-right" href="{{ URL::to('cart/checkout/shipping') }}">Sửa</a>
 						</div>
 					</div>
@@ -130,25 +145,14 @@
 					@endforeach
 					<div class="alert alert-success">
 						Tạm tính: <span class="total_money text-right pull-right">{{ Cart::subtotal() }}đ</span><br>
-						@if (str_replace(",", "", Cart::subtotal()) < 100000)
-						Phí vận chuyển: <span class="total_money text-right pull-right">20,000đ</span><br>
-						@endif
+						Phí vận chuyển: <span class="total_money text-right pull-right">{{ Session::get('shippingFeeFormat') }}đ</span><br>
 						<!--get Customer-->
 						@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
 						Khuyến mãi: <span class="total_money text-right pull-right">- 5%</span>
 						@endif
 						<!--end Get Customer-->
 						<hr>
-						@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
-						@php
-						$total = str_replace(",", "", Cart::subtotal());
-						$totalDown10 = $total * 0.05;
-						$finalTotal = $total - $totalDown10;
-						@endphp
-						Thành tiền: <span class="final_money text-right pull-right">{{ $total < 100000 ? number_format($finalTotal + 20000) : number_format($finalTotal) }}đ</span><br>
-						@else
-						Thành tiền: <span class="final_money text-right pull-right">{{ (str_replace(",", "", Cart::subtotal()) < 100000) ? number_format(str_replace(",", "", Cart::subtotal()) + 20000) : Cart::subtotal() }}đ</span><br>
-						@endif
+						Thành tiền: <span class="final_money text-right pull-right">{{ Session::get('totalWithShippingFormat') }}đ</span><br>
 					</div>
 					<div class="row">
 						<div class="col-sm-12">

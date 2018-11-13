@@ -15,7 +15,6 @@ $(document).ready(function(){
 			},
 			success: function(html)
 			{	
-				console.log(html);
 				$('.cmbDistrict').html(html);
 				$('.cmbDistrict').selectpicker('refresh');
 			}

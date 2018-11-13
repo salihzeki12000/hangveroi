@@ -5,12 +5,12 @@ use Html;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Base;
-use App\Models\City;
-use App\Models\District;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Setting;
 use App\Models\OrderNote;
+use App\Models\Province;
+use App\Models\District;
 use Cart;
 use Redirect;
 use Auth;
@@ -19,7 +19,11 @@ use Mail;
 use URL;
 
 class CartController extends Controller {
-	
+
+	const MAIN_CITY_ID = 79;
+	const IS_MAIN_CITY = 1;
+	const DISCOUNT_5_PERCENT = 0.05;
+
 	public function index()
 	{
 		return view('cart::index');
@@ -76,6 +80,8 @@ class CartController extends Controller {
 			Session::forget('customername');
 			Session::forget('customerphone');
 			Session::forget('customeraddress');
+			Session::forget('customercity');
+			Session::forget('customerdistrict');
 
 			$productItems = Product::orderByRaw('RAND()')->paginate(12);
 
@@ -94,26 +100,31 @@ class CartController extends Controller {
 			if (Auth::check()) {
 				$order_item->user_id = Auth::user()->id;	
 			}
+
+			$citySession = $request->session()->get('customercity');
+			$districtSession = $request->session()->get('customerdistrict');
+
+			$cityItem = Province::find($citySession);
+			$districtItem = District::find($districtSession);
+
 			$order_item->cus_name = $request->session()->get('customername');
 			$order_item->cus_phone = $request->session()->get('customerphone');
 			$order_item->cus_address = $request->session()->get('customeraddress');
 			$order_item->cus_email = $request->session()->get('customeremail');
+			$order_item->city_id = $request->session()->get('customercity');
+			$order_item->district_id = $request->session()->get('customerdistrict');
 			$order_item->note = $request->get('note_order');
 			if ((Auth::check() && Auth::user()->id != 1) && Setting::where('key', 'first_customers')->first()["value"] == 1) {
-				$total = str_replace(",", "", Cart::subtotal());
-				if ($total < 100000)
-				{
-					$total += 20000;
-				}
-				$totalDown10 = $total * 0.05;
-				$finalTotal = $total - $totalDown10;
-				$finalTotal = number_format($finalTotal);
 				$isFirstPromotion = true;
 			} else {
-				$finalTotal = Cart::subtotal();
 				$isFirstPromotion = false;
 			}
-			$order_item->total_price = $finalTotal;
+			$orderTotal = $request->session()->get('totalWithOutShippingFormat');
+			$finalTotal = $request->session()->get('totalWithShippingFormat');
+			$shippingFee = $request->session()->get('shippingFeeFormat');
+			$order_item->total = $finalTotal;
+			$order_item->total_price = $orderTotal;
+			$order_item->shipping_fee = $shippingFee;
 			$order_item->qty = Cart::count();
 			if($order_item->save()) {
 				if ($isFirstPromotion){
@@ -141,11 +152,17 @@ class CartController extends Controller {
 				}
 				$data = array(
 					'carts' => Cart::content(),
-					'cart_total_price' => Cart::subtotal(),
+					'cart_total_price' => Cart::subTotal(),
+					'cart_total_price_final' => $finalTotal,
+					'shipping_fee' => $request->session()->get('shippingFeeFormat'),
 					'cus_name' => $request->session()->get('customername'),
 					'cus_phone' => $request->session()->get('customerphone'),
 					'cus_address' => $request->session()->get('customeraddress'),
 					'cus_email' => $request->session()->get('customeremail'),
+					'cus_city' => $request->session()->get('customercity'),
+					'cus_district' => $request->session()->get('customerdistrict'),
+					'cityItem' => $cityItem,
+					'districtItem' => $districtItem,
 					'order_id' => $order_item->id
 				);
 				// send to Admin
@@ -186,6 +203,15 @@ class CartController extends Controller {
 	public function shippingStep(Request $request)
 	{
 		$this->data['_title'] = 'Thông tin giao hàng';
+		$this->data['cities'] = Province::all();
+
+		if (Auth::check()) {
+			$this->data['currentCity'] = 79;
+			$this->data['currentDistrict'] = 760;
+		} else {
+			$this->data['currentCity'] = 79;
+			$this->data['currentDistrict'] = 760;
+		}
 		return view('cart::shipping')->with($this->data);
 	}
 
@@ -197,6 +223,8 @@ class CartController extends Controller {
 			$request->session()->set('customeraddress', $request->address);
 			$request->session()->set('customerphone', $request->phone);
 			$request->session()->set('customeremail', $request->email);
+			$request->session()->set('customercity', $request->city);
+			$request->session()->set('customerdistrict', $request->district);
 		}
 		return view('cart::list-cart')->with($this->data);
 	}
@@ -218,4 +246,64 @@ class CartController extends Controller {
 		}
 	}
 	
+	public function calculatorFee(Request $request)
+	{
+		$cityItem = Province::find($request->cityId);
+		$districtItem = District::find($request->districtId);
+		$feeShip = 0;
+		$total = 0;
+		$subTotal = str_replace(",", "", Cart::subtotal());
+
+		if ($cityItem->id == self::MAIN_CITY_ID) {
+			if ($districtItem->main_city == self::IS_MAIN_CITY) {
+				if ($subTotal > 100000) {
+					$feeShip = 0;
+				} else {
+					$feeShip = 22000;
+				}
+			} else {
+				if ($subTotal >= 200000) {
+					$feeShip = 0;
+				} elseif ($subTotal >= 100000 && $subTotal < 200000) {
+					$feeShip = 15000;
+				} else {
+					$feeShip = 35000;
+				}
+			}
+		} else {
+			if ($districtItem->main_city == self::IS_MAIN_CITY) {
+				if ($subTotal >= 200000) {
+					$feeShip = 0;
+				} else {
+					$feeShip = 30000;
+				}
+			} else {
+				if ($subTotal >= 200000) {
+					$feeShip = 0;
+				} else {
+					$feeShip = 40000;
+				}
+			}
+		}
+
+		if ((Auth::check() && Auth::user()->id != 1) && Setting::where('key', 'first_customers')->first()["value"] == 1) {
+			$totalDown5 = $subTotal * self::DISCOUNT_5_PERCENT;
+			$subTotal = $subTotal - $totalDown5;
+		}
+
+		$total = $subTotal + $feeShip;
+
+		$request->session()->set('shippingFeeFormat', number_format($feeShip));
+		$request->session()->set('totalWithOutShippingFormat', number_format($subTotal));
+		$request->session()->set('totalWithShippingFormat', number_format($total));
+
+		return response()->json([
+			'total' => Cart::subtotal(),
+			'shippingFee' => $feeShip,
+			'shippingFeeFormat' => number_format($feeShip),
+			'totalWithShipping' => $total,
+			'totalWithShippingFormat' => number_format($total),
+			'error' => false
+		]);
+	}
 }

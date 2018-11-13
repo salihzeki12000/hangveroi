@@ -29,6 +29,17 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-xs-12">
+				<div class="panel panel-info border-radius-0">
+					<div class="panel-heading"><b>GIAO HÀNG MIỄN PHÍ</b></div>
+					<div class="panel-body font-size-15">
+						<ol>
+							<li><a href="https://ohangveroi.com">Ohangveroi.com</a> giao hàng miễn phí toàn quốc cho đơn hàng từ <b class="font-size-18">200.000đ</b>.</li>
+							<li>Miễn phí giao hàng nội thành TP HCM cho đơn hàng chỉ từ <b class="font-size-18">100.000đ</b>.</li>
+						</ol>
+					</div>
+				</div>
+			</div>
 			@if(!Auth::check())
 			<div class="col-md-5 left-position">
 				<div class="wrapbox border-radius-5">
@@ -50,6 +61,28 @@
 						<div class="form-group">
 							<label for="txt_address">Địa chỉ giao hàng</label>
 							<input id="txt_address" class="form-control" type="text" name="address" value="" required>	
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-6">
+									<select class="cmbCity selectpicker form-control border-radius-0" name="city" id="cmbCity" data-token="{{ csrf_token() }}" required>
+										<option value="">Vui lòng chọn tỉnh/thành phố</option>
+										@foreach($cities as $city)
+										<option {{ $city->id == $currentCity ? 'selected' : '' }} value="{{ $city->id }}">{{ $city->type . " " . $city->name }}</option>
+										@endforeach
+									</select>
+								</div>
+								<div class="col-md-6">
+									<select class="cmbDistrict selectpicker form-control border-radius-0" name="district" id="cmbDistrict" data-token="{{ csrf_token() }}" required>
+										@php
+										$districtBelongItems = App\Models\District::where('province_id', $currentCity)->get();
+										@endphp
+										@foreach($districtBelongItems as $district)
+										<option value="{{ $district->id }}">{{ $district->type . " " . $district->name }}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
 						</div>
 						<div class="form-group text-right">
 							<input class="btn btn-danger" name="submit" type="submit" value="Giao hàng địa chỉ này">
@@ -97,6 +130,28 @@
 							<label for="txt_address">Địa chỉ giao hàng</label>
 							<input id="txt_address" class="form-control" type="text" name="address" value="{{ Auth::user()->address ? Auth::user()->address : Session::get('customeraddress') }}" required>	
 						</div>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-6">
+									<select class="cmbCity selectpicker form-control border-radius-0" name="city" id="cmbCity" data-token="{{ csrf_token() }}" required>
+										<option value="">Vui lòng chọn tỉnh/thành phố</option>
+										@foreach($cities as $city)
+										<option {{ $city->id == $currentCity ? 'selected' : '' }} value="{{ $city->id }}">{{ $city->type . " " . $city->name }}</option>
+										@endforeach
+									</select>
+								</div>
+								<div class="col-md-6">
+									<select class="cmbDistrict selectpicker form-control border-radius-0" name="district" id="cmbDistrict" data-token="{{ csrf_token() }}" required>
+										@php
+										$districtBelongItems = App\Models\District::where('province_id', $currentCity)->get();
+										@endphp
+										@foreach($districtBelongItems as $district)
+										<option value="{{ $district->id }}">{{ $district->type . " " . $district->name }}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+						</div>
 						<div class="form-group text-right">
 							<input class="btn btn-danger border-radius-5 font-size-20" name="submit" type="submit" value="Giao hàng địa chỉ này">
 						</div>
@@ -126,31 +181,26 @@
 				@endforeach
 				<div class="alert alert-success border-radius-5">
 					Tạm tính: <span class="total_money text-right pull-right">{{ Cart::subtotal() }}đ</span><br>
-					@if (str_replace(",", "", Cart::subtotal()) < 100000)
-					Phí vận chuyển: <span class="total_money text-right pull-right">20,000đ</span><br>
-					@endif
+					Phí vận chuyển: <span class="total_money shippingFee text-right pull-right">0đ</span><br>
 					<!--get Customer-->
 					@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
 					Khuyến mãi: <span class="total_money text-right pull-right">- 5%</span>
 					@endif
 					<!--end Get Customer-->
 					<hr>
-					@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
-					@php
-					$total = str_replace(",", "", Cart::subtotal());
-					$totalDown10 = $total * 0.05;
-					$finalTotal = $total - $totalDown10;
-					@endphp
-					Thành tiền: <span class="final_money text-right pull-right">{{ $total < 100000 ? number_format($finalTotal + 20000) : number_format($finalTotal) }}đ</span><br>
-					@else
-					Thành tiền: <span class="final_money text-right pull-right">{{ (str_replace(",", "", Cart::subtotal()) < 100000) ? number_format(str_replace(",", "", Cart::subtotal()) + 20000) : Cart::subtotal() }}đ</span><br>
-					@endif
+					Thành tiền: <span class="final_money text-right pull-right">0đ</span><br>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <script>
+	$(document).ready(function() {
+		var city_id = $('.cmbCity').val();
+		var district_id = $('.cmbDistrict').val();
+		var token = "{{ csrf_token() }}";
+		getShippingFee(city_id, district_id, token);
+	});
 	$('.txt-phone').blur(function() {
 		var phone = $(this).val();
 		var token = $(this).data('token');
@@ -171,6 +221,36 @@
 		})			
 		return false;
 	})
+	$('.cmbCity').change(function (){
+		var city_id = $(this).val();
+		var district_id = $('.cmbDistrict').val();
+		var token = $(this).data('token');
+		getShippingFee(city_id, district_id, token);
+	})
+	$('.cmbDistrict').change(function (){
+		var city_id = $('.cmbCity').val();
+		var district_id = $(this).val();
+		var token = $(this).data('token');
+		getShippingFee(city_id, district_id, token);
+	})
+	function getShippingFee(city_id, district_id, token) {
+		$.ajax({
+			url: _base_url + "/cart/checkout/shipping/calculatorfee",
+			type: 'post',
+			data: {
+				cityId: city_id,
+				districtId: district_id,
+				_token: token
+			}
+		})
+		.done(function(result) {
+			if (!result.error) {
+				$('.shippingFee').html(result.shippingFeeFormat + 'đ');
+				$('.final_money').html(result.totalWithShippingFormat + 'đ');
+			}
+		})			
+		return false;
+	}
 	function validate(evt) {
 		var theEvent = evt || window.event;
 		if (theEvent.type === 'paste') {

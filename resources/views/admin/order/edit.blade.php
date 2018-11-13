@@ -42,6 +42,30 @@
 											<td>Địa chỉ</td>
 											<td><input type="text" class="form-control" name="cus_address" value="{{ $articleItem->cus_address }}"></td>
 										</tr>
+										<tr>
+											<td></td>
+											<td>
+												<div class="row">
+													<div class="col-md-6">
+														<select class="cmbCity selectpicker form-control border-radius-0" name="city" id="cmbCity" data-token="{{ csrf_token() }}" required>
+															@foreach($cities as $city)
+															<option {{ $city->id == $articleItem->city_id ? 'selected' : '' }} value="{{ $city->id }}">{{ $city->type . " " . $city->name }}</option>
+															@endforeach
+														</select>
+													</div>
+													<div class="col-md-6">
+														<select class="cmbDistrict selectpicker form-control border-radius-0" name="district" id="cmbDistrict" data-token="{{ csrf_token() }}" required>
+															@php
+															$districtBelongItems = App\Models\District::where('province_id', $articleItem->city_id)->get();
+															@endphp
+															@foreach($districtBelongItems as $district)
+															<option {{ $district->id == $articleItem->district_id ? 'selected' : '' }} value="{{ $district->id }}">{{ $district->type . " " . $district->name }}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+											</td>
+										</tr>
 									</tbody>
 								</table>
 								<div class="form-group" style="margin-top: 20px !important;">
@@ -77,24 +101,22 @@
 										</tr>
 										@endforeach
 										<tr>
+											<td colspan="3" class="text-right"><b>Tổng đơn hàng</b></td>
+											<td class="text-right"><b>{{ $articleItem->total_price . 'đ'}}</b></td>
+										</tr>
+										@if ($articleItem->shipping_fee != 0 || $articleItem->shipping_fee != NULL)
+										<tr>
+											<td colspan="3" class="text-right"><b>Phí vận chuyển</b></td>
+											<td class="text-right"><b>{{ $articleItem->shipping_fee . 'đ'}}</b></td>
+										</tr>
+										@endif
+										<tr>
 											<td colspan="3" class="text-right">
-												<b>Tạm tính</b>
+												<b>Tổng thanh toán</b>
 											</td>
 											<td class="text-right">
-												<b>{{ $articleItem->total_price }} đ</b>
+												<b>{{ $articleItem->total }}đ</b>
 											</td>
-											<td></td>
-										</tr>
-										<tr>
-											<td colspan="3" class="text-right">
-												<b>Phí vận chuyển</b>
-											</td>
-											<td class="text-right"><b>{{ (str_replace(",", "", $articleItem->total_price) < 100000) ? '20,000 ₫' : 'Miễn phí' }}</b></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td colspan="3" class="text-right"><b>Tổng giá trị đơn hàng</b></td>
-											<td class="text-right"><b>{{ (str_replace(",", "", $articleItem->total_price) < 100000) ? number_format(str_replace(",", "", $articleItem->total_price) + 20000)  . ' ₫' : $articleItem->total_price . ' đ'}}</b></td>
 											<td></td>
 										</tr>
 									</tbody>
@@ -129,6 +151,25 @@
 	</div>
 </div>
 <script>
+	$('.cmbCity').change(function() {
+		var token = $(this).data('token');
+		var city_id = $(this).val();
+		var AJAX_POST_URL = _base_url + "district_byID";
+		$.ajax({
+			url: AJAX_POST_URL,
+			type: "post",
+			data: {
+				id: city_id,
+				_token: token
+			},
+			success: function(html)
+			{	
+				$('.cmbDistrict').html(html);
+				$('.cmbDistrict').selectpicker('refresh');
+			}
+		});		
+		return false;	
+	});
 	$('.addMoreProduct').click(function() {
 		var productId = $('#productAddMore').val();
 		var qty = $('#qtyProductAddMore').val();

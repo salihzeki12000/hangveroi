@@ -34,6 +34,17 @@
 				</div>
 			</div> -->
 			<div class="col-xs-12">
+				<div class="panel panel-info border-radius-0">
+					<div class="panel-heading"><b>GIAO HÀNG MIỄN PHÍ</b></div>
+					<div class="panel-body font-size-15">
+						<ol>
+							<li><a href="https://ohangveroi.com">Ohangveroi.com</a> giao hàng miễn phí toàn quốc cho đơn hàng từ <b class="font-size-18">200.000đ</b>.</li>
+							<li>Miễn phí giao hàng nội thành TP HCM cho đơn hàng chỉ từ <b class="font-size-18">100.000đ</b>.</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12">
 				<div class="progress border-radius-5">
 					<div class="progress-bar progress-bar-striped progress-bar-danger active" aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100" role="progressbar" style="width:33.3%">
 						Giỏ hàng
@@ -98,9 +109,6 @@
 			<div class="col-md-3">
 				<div class="alert alert-success border-radius-5">
 					Tạm tính: <span class="total_money text-right pull-right">{{ Cart::subtotal() }}đ</span><br>
-					@if (str_replace(",", "", Cart::subtotal()) < 100000)
-					Phí vận chuyển: <span class="total_money text-right pull-right">20,000đ</span><br>
-					@endif
 					<!--get Customer-->
 					@if ((Auth::check() && Auth::user()->id != 1) && App\Models\Setting::where('key', 'first_customers')->first()["value"] == 1)
 					Khuyến mãi: <span class="total_money text-right pull-right">- 5%</span>
@@ -113,9 +121,9 @@
 					$totalDown10 = $total * 0.05;
 					$finalTotal = $total - $totalDown10;
 					@endphp
-					Thành tiền: <span class="final_money text-right pull-right">{{ $total < 100000 ? number_format($finalTotal + 20000) : number_format($finalTotal) }}đ</span><br>
+					Thành tiền: <span class="final_money text-right pull-right">{{ number_format($finalTotal) }}đ</span><br>
 					@else
-					Thành tiền: <span class="final_money text-right pull-right">{{ (str_replace(",", "", Cart::subtotal()) < 100000) ? number_format(str_replace(",", "", Cart::subtotal()) + 20000) : Cart::subtotal() }}đ</span><br>
+					Thành tiền: <span class="final_money text-right pull-right">{{ number_format(str_replace(",", "", Cart::subtotal())) }}đ</span><br>
 					@endif
 				</div>
 				<a style="width:100%" href="{{ URL::to('cart/checkout/shipping') }}" class="btn btn-danger border-radius-5 font-size-20">Mua hàng</a>

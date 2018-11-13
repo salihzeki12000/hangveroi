@@ -54,7 +54,19 @@
 									</tr>
 									<tr>
 										<td></td>
-										<td>Địa chỉ: {{ $articleItem->cus_address }}</td>
+										<td>Địa chỉ: 
+											@if($articleItem->city_id != NULL)
+											@php
+											$cityItem = App\Models\Province::find($articleItem->city_id);
+											$districtItem = App\Models\District::find($articleItem->district_id);
+											@endphp
+											@endif
+											@if($articleItem->city_id != NULL)
+											{{ $articleItem['cus_address'] . ', ' . $districtItem->type . ' ' . $districtItem->name . ', ' . $cityItem->type . ' ' . $cityItem->name }}
+											@else
+											{{ $articleItem['cus_address'] }}
+											@endif
+										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -81,22 +93,16 @@
 									</tr>
 									@endforeach
 									<tr>
-										<td colspan="3" class="text-right">
-											<b>Tạm tính</b>
-										</td>
-										<td class="text-right">
-											<b>{{ $articleItem->total_price }} đ</b>
-										</td>
+										<td colspan="3" class="text-right"><b>Tổng đơn hàng</b></td>
+										<td class="text-right"><b>{{ $articleItem->total_price . 'đ'}}</b></td>
 									</tr>
 									<tr>
-										<td colspan="3" class="text-right">
-											<b>Phí vận chuyển</b>
-										</td>
-										<td class="text-right"><b>{{ (str_replace(",", "", $articleItem->total_price) < 100000) ? '20,000 ₫' : 'Miễn phí' }}</b></td>
+										<td colspan="3" class="text-right"><b>Phí vận chuyển</b></td>
+										<td class="text-right"><b>{{ $articleItem->shipping_fee . 'đ'}}</b></td>
 									</tr>
 									<tr>
-										<td colspan="3" class="text-right"><b>Tổng giá trị đơn hàng</b></td>
-										<td class="text-right"><b>{{ (str_replace(",", "", $articleItem->total_price) < 100000) ? number_format(str_replace(",", "", $articleItem->total_price) + 20000)  . ' ₫' : $articleItem->total_price . ' đ'}}</b></td>
+										<td colspan="3" class="text-right"><b>Tổng thanh toán</b></td>
+										<td class="text-right"><b>{{ $articleItem->total . 'đ'}}</b></td>
 									</tr>
 								</tbody>
 							</table>

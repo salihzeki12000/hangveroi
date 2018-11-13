@@ -29,7 +29,19 @@
 			</tr>
 			<tr>
 				<td style="padding: 5px;"></td>
-				<td style="padding: 5px;">Địa chỉ: {{ $articleItem->cus_address }}</td>
+				<td style="padding: 5px;">Địa chỉ: 
+					@if($articleItem->city_id != NULL)
+					@php
+					$cityItem = App\Models\Province::find($articleItem->city_id);
+					$districtItem = App\Models\District::find($articleItem->district_id);
+					@endphp
+					@endif
+					@if($articleItem->city_id != NULL)
+					{{ $articleItem['cus_address'] . ', ' . $districtItem->type . ' ' . $districtItem->name . ', ' . $cityItem->type . ' ' . $cityItem->name }}
+					@else
+					{{ $articleItem['cus_address'] }}
+					@endif
+				</td>
 			</tr>
 		</tbody>
 	</table>
@@ -57,7 +69,7 @@
 			@endforeach
 			<tr>
 				<td colspan="3" align="right" style="padding: 5px;">
-					<b>Tạm tính</b>
+					<b>Tổng đơn hàng</b>
 				</td>
 				<td align="right" style="padding: 5px;">
 					<b>{{ $articleItem->total_price }}đ</b>
@@ -77,7 +89,7 @@
 				<td align="right" style="padding: 5px;"><b>-{{ number_format(REQUEST::get('feeShip')/2) }}đ</b></td>
 			</tr>
 			<tr>
-				<td colspan="3" align="right" style="padding: 5px;"><b>Tổng giá trị đơn hàng</b></td>
+				<td colspan="3" align="right" style="padding: 5px;"><b>Tổng đơn hàng</b></td>
 				<td align="right" style="padding: 5px;"><b>{{ number_format(str_replace(",", "", $articleItem->total_price) + (REQUEST::get('feeShip')/2)) }}đ</b></td>
 			</tr>
 			@else
@@ -85,11 +97,11 @@
 				<td colspan="3" align="right" style="padding: 5px;">
 					<b>Phí vận chuyển</b>
 				</td>
-				<td align="right" style="padding: 5px;"><b>{{ (str_replace(",", "", $articleItem->total_price) < 100000) ? '20,000₫' : 'Miễn phí' }}</b></td>
+				<td align="right" style="padding: 5px;"><b>{{ $articleItem->shipping_fee . '₫' }}</b></td>
 			</tr>
 			<tr>
-				<td colspan="3" align="right" style="padding: 5px;"><b>Tổng giá trị đơn hàng</b></td>
-				<td align="right" style="padding: 5px;"><b>{{ (str_replace(",", "", $articleItem->total_price) < 100000) ? number_format(str_replace(",", "", $articleItem->total_price) + 20000)  . '₫' : $articleItem->total_price . 'đ'}}</b></td>
+				<td colspan="3" align="right" style="padding: 5px;"><b>Tổng thanh toán</b></td>
+				<td align="right" style="padding: 5px;"><b>{{ $articleItem->total . 'đ'}}</b></td>
 			</tr>
 			@endif
 		</tbody>

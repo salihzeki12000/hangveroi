@@ -47,7 +47,7 @@ class HomeController extends Controller
 	public function getDistrict(Request $request) 
 	{
 		$id = $request->id;
-		$districtItems = District::where('city_id', $id)->get();
+		$districtItems = District::where('province_id', $id)->get();
 		echo '<select class="selectpicker form-control cmbDistrict" name="district" id="txt_district">';
 		foreach($districtItems as $item) {
 			echo '<option value="'. $item->id .'">' . $item->type . ' ' . $item->name .'</option>';

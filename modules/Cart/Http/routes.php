@@ -8,6 +8,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'cart', 'namespace' => 'Modules
 	Route::get('/checkout/list', 'CartController@cartList');
 	Route::get('/checkout/shipping', 'CartController@shippingStep');
 	Route::post('/checkout/shipping/search-info', 'CartController@searchInfo');
+	Route::post('/checkout/shipping/calculatorfee', 'CartController@calculatorFee');
 	Route::post('/getcheckout', 'CartController@getCheckout');
 	// Route::get('/checkout', 'CartController@getCheckout');
 	Route::get('/checkout/success', 'CartController@success');

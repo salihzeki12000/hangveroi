@@ -61,6 +61,8 @@
 										<th>Purcharer</th>
 										<th>Note</th>
 										<th>Items</th>
+										<th>Sub Total</th>
+										<th>Shipping Fee</th>
 										<th>Total Price</th>
 										<th>Date ordered</th>
 										<th>Status</th>
@@ -72,12 +74,22 @@
 									<tr id="article-{{ $item['id'] }}">
 										<td>{{ $item['id'] }}</td>
 										<td>
+											@if($item->city_id != NULL)
+											@php
+											$cityItem = App\Models\Province::find($item->city_id);
+											$districtItem = App\Models\District::find($item->district_id);
+											@endphp
+											@endif
 											{{ $item['cus_name'] }} <br>
 											@if($item['cus_email'] != "")
 											{{ $item['cus_email'] }} <br>
 											@endif
 											{{ $item['cus_phone'] }} <br>
+											@if($item->city_id != NULL)
+											{{ $item['cus_address'] . ', ' . $districtItem->type . ' ' . $districtItem->name . ', ' . $cityItem->type . ' ' . $cityItem->name }}
+											@else
 											{{ $item['cus_address'] }}
+											@endif
 										</td>
 										<td>{{ $item['note'] }}</td>
 										<td>
@@ -89,6 +101,8 @@
 											@endforeach
 										</td>
 										<td>{{ product_price(str_replace(',', '', $item['total_price'])) }}</td>
+										<td>{{ $item['shipping_fee'] != NULL ? product_price(str_replace(',', '', $item['shipping_fee'])) : 'Not Updated' }}</td>
+										<td>{{ $item['total'] != NULL ? product_price(str_replace(',', '', $item['total'])) : 'Not Updated' }}</td>
 										<td>{{ $item['created_at'] }}</td>
 										<td>
 											@if ($item->status == 'new')
