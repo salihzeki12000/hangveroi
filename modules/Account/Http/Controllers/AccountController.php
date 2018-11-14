@@ -3,7 +3,7 @@
 use Pingpong\Modules\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\City;
+use App\Models\Province;
 use App\Models\District;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -107,8 +107,8 @@ class AccountController extends Controller {
 			Html::style('plugins/bootstrap-select/css/bootstrap-select.min.css').
 			Html::script('plugins/bootstrap-select/js/bootstrap-select.min.js');
 			$this->data['_title'] = 'Đăng kí tài khoản';
-			$this->data['cityItems'] = City::orderBy('id', 'ASC')->get();
-			$this->data['districtItems'] = District::where('city_id', 79)->orderBy('name', 'ASC')->get();
+			$this->data['cityItems'] = Province::orderBy('id', 'ASC')->get();
+			$this->data['districtItems'] = District::where('province_id', 79)->orderBy('name', 'ASC')->get();
 			return view('account::register')->with($this->data);
 		} else {
 			return redirect()->to('/account/login');
