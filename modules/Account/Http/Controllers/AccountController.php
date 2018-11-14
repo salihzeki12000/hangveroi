@@ -103,9 +103,7 @@ class AccountController extends Controller {
 	{
 		if (!Auth::check()) {
 			$this->data['_header'] = 
-			Html::script("https://www.google.com/recaptcha/api.js").
-			Html::style('plugins/bootstrap-select/css/bootstrap-select.min.css').
-			Html::script('plugins/bootstrap-select/js/bootstrap-select.min.js');
+			Html::script("https://www.google.com/recaptcha/api.js");
 			$this->data['_title'] = 'Đăng kí tài khoản';
 			$this->data['cityItems'] = Province::orderBy('id', 'ASC')->get();
 			$this->data['districtItems'] = District::where('province_id', 79)->orderBy('name', 'ASC')->get();
@@ -124,8 +122,8 @@ class AccountController extends Controller {
 		$userItem->type = 3;
 		$userItem->password = Hash::make($inputs['password']);
 		$userItem->phone = $inputs['phone'];
-		// $userItem->city_id = $inputs['city'];
-		// $userItem->district_id = $inputs['district'];
+		$userItem->province_id = $inputs['city'];
+		$userItem->district_id = $inputs['district'];
 		$userItem->address = $inputs['address'];
 		if ($userItem->save()) {
 			$data = array(
@@ -134,18 +132,18 @@ class AccountController extends Controller {
 				'cus_phone' => $userItem->phone,
 				'cus_address' => $userItem->address,
 			);
-			Mail::send('modules.account.emails.register-template', $data, function($message) use ($data)
-			{
-				$message->from('info@ohangveroi.com', 'Ohangveroi.com')
-				->to('thebaoit@gmail.com', 'The Bao')
-				->subject('[Ohangveroi.com]' . $data['cus_name']);
-			});
-			Mail::send('modules.account.emails.register-template-guest', $data, function($message) use ($data)
-			{
-				$message->from('info@ohangveroi.com', 'Ohangveroi.com')
-				->to($data['email'], $data['cus_name'])
-				->subject('[Ohangveroi.com]- Chào mừng thành viên ' . $data['cus_name']);
-			});
+			// Mail::send('modules.account.emails.register-template', $data, function($message) use ($data)
+			// {
+			// 	$message->from('info@ohangveroi.com', 'Ohangveroi.com')
+			// 	->to('thebaoit@gmail.com', 'The Bao')
+			// 	->subject('[Ohangveroi.com]' . $data['cus_name']);
+			// });
+			// Mail::send('modules.account.emails.register-template-guest', $data, function($message) use ($data)
+			// {
+			// 	$message->from('info@ohangveroi.com', 'Ohangveroi.com')
+			// 	->to($data['email'], $data['cus_name'])
+			// 	->subject('[Ohangveroi.com]- Chào mừng thành viên ' . $data['cus_name']);
+			// });
 			return redirect()->to('account/login');
 		} else {
 			return view('account::register');

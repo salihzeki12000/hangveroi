@@ -61,6 +61,27 @@
 						<label for="txt_address">Địa chỉ</label>
 						<textarea id="txt_address" class="form-control" type="text" name="address" required></textarea>	
 					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<select class="form-control cmbCity" name="city" id="cmbCity">
+									<option value="">Chọn tỉnh/thành</option>
+									@foreach($cityItems as $city)
+									<option {{ $city->id == 79 ? 'selected' : '' }} value="{{ $city->id }}">{{ $city->type . ' ' . $city->name }}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<select class="form-control cmbDistrict" name="district" id="cmbDistrict">
+									@foreach($districtItems as $district)
+									<option value="{{ $district->id }}">{{ $district->type . ' ' . $district->name }}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+					</div>
 					<!-- <div class="form-group">
 						<div class="g-recaptcha" data-sitekey="6LcdFQsUAAAAAPUZDklP-5KrPh34Rr868RxBmqGa"></div>
 					</div> -->

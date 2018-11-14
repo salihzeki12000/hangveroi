@@ -41,7 +41,7 @@
 				</div>
 			</div>
 			@if(!Auth::check())
-			<div class="col-md-5 left-position">
+			<div class="col-md-9 left-position">
 				<div class="wrapbox border-radius-5">
 					<form method="post" action="{{ URL::to('cart/getcheckout') }}">
 						{{ csrf_field() }}
@@ -90,24 +90,6 @@
 					</form>
 				</div>
 			</div>
-			<div class="col-md-4 left-position">
-				<div class="wrapbox border-radius-5">
-					<form method="post" action="{{ URL::to('account/login') }}">
-						{{ csrf_field() }}
-						<div class="form-group">
-							<label for="txt_email">Tài khoản</label>
-							<input id="txt_email" class="form-control" type="text" name="email" value="" required>	
-						</div>
-						<div class="form-group">
-							<label for="txt_password">Mật khẩu</label>
-							<input id="txt_password" class="form-control" type="password" name="password" value="" required>	
-						</div>
-						<div class="form-group text-right">
-							<input class="btn btn-danger" name="submit" type="submit" value="Đăng nhập">
-						</div>
-					</form>
-				</div>
-			</div>
 			@else
 			<div class="col-md-9 left-position">
 				<div class="wrapbox border-radius-5">
@@ -146,7 +128,7 @@
 										$districtBelongItems = App\Models\District::where('province_id', $currentCity)->get();
 										@endphp
 										@foreach($districtBelongItems as $district)
-										<option value="{{ $district->id }}">{{ $district->type . " " . $district->name }}</option>
+										<option {{ $district->id == $currentDistrict ? 'selected' : '' }} value="{{ $district->id }}">{{ $district->type . " " . $district->name }}</option>
 										@endforeach
 									</select>
 								</div>

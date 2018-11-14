@@ -206,8 +206,8 @@ class CartController extends Controller {
 		$this->data['cities'] = Province::all();
 
 		if (Auth::check()) {
-			$this->data['currentCity'] = 79;
-			$this->data['currentDistrict'] = 760;
+			$this->data['currentCity'] = Auth::user()->province_id;
+			$this->data['currentDistrict'] = Auth::user()->district_id;
 		} else {
 			$this->data['currentCity'] = 79;
 			$this->data['currentDistrict'] = 760;
